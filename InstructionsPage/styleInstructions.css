@@ -1,0 +1,121 @@
+/*CSS Style File for the instructions page.*/
+
+/*Basic Body Settings*/
+body {
+  padding-top: 10px;
+  /*Page Background Color*/
+  background-color: rgb(240, 240, 240);
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.padding{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/*Settings for varying font sizes.*/
+#bigFont{
+  font-size:50px;
+}
+
+/*Settings for various background colors.*/
+#lightBlue1{
+  background-color: rgb(180, 200, 255);
+}
+
+#lightBlue2{
+  background-color: rgb(200, 180, 255);
+}
+
+#lightYellow{
+  background-color: rgb(255, 255, 150);
+}
+
+/*Highlighting the titles on the About and Projects pages.*/
+.highlight {
+  /*Makes this work on both Mozilla and other browsers.*/
+  -moz-border-radius:10px 10px 10px 10px;
+  border-radius:10px 10px 10px 10px;
+  
+  padding:5px;
+  border:solid 1px #000;
+}
+
+/*Settings for the buttons on the index page.*/
+.btn{
+  color:rgb(50, 50, 50);
+  background-color: rgb(255, 255, 150);
+}
+
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: rgb(255, 166, 77);
+  background-color: rgb(25, 25, 112);
+}
+
+/* --- Navbar Colors --- */
+
+/*Navbar Brand Color*/
+.navbar-default .navbar-brand {
+    color: white;
+
+}
+
+/*Navbar Active Text Color*/
+.navbar-default .navbar-nav > li > a {
+   color: white;
+}
+
+/*Brand Font Hover Color*/
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: silver;
+  background-color: transparent;
+}
+
+/*Font Hover Color*/
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: silver;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active >   
+ a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  /*Active Font*/
+  color: black;
+  /*Active Background*/
+  background-color: silver;
+}
+
+.navbar-default {
+  /*Navbar Color*/
+  background-color: rgb(25, 25, 112);
+  /*Border Color (Barely Visible)*/
+  border-color: black;
+}
+
+/*Jumbotron Settings*/
+.jumbotron {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #eee;
+}
+
+
+/*Starter Template Settings*/
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+/*Image Settings*/
+.img-responsive {
+    margin: 0 auto;
+}
