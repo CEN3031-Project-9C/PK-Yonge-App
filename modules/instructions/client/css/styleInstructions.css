@@ -96,7 +96,6 @@ body {
 }
 .mainmenu .dropdown-menu {
   top: -14em;
-  left: 0px;
   font-size: 13px;
   padding:0;
   background:none;
@@ -180,7 +179,7 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 }
 .subtitle { 
   line-height:.9em;
-  font-size:5.5em;
+  font-size:4em;
   margin-top:0;
   margin-bottom:40px; 
 }
@@ -197,7 +196,11 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
   }
 }
 
-.highlight {
+.margin {
+  margin-bottom:70px;
+}
+
+.highlightBlue {
   /*Makes this work on both Mozilla and other browsers.*/
   -moz-border-radius:10px 10px 10px 10px;
   border-radius:10px 10px 10px 10px;
@@ -206,6 +209,45 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
   /*border:solid 1px #000;*/
   background-color: rgb(41, 126, 255);
   color: white;
+}
+
+.highlightWhite {
+  /*Makes this work on both Mozilla and other browsers.*/
+  -moz-border-radius:10px 10px 10px 10px;
+  border-radius:10px 10px 10px 10px;
+  
+  padding:5px;
+  /*border:solid 1px #000;*/
+  background-color: white;
+  color: black; 
+}
+
+.highlightBlack {
+  /*Makes this work on both Mozilla and other browsers.*/
+  -moz-border-radius:10px 10px 10px 10px;
+  border-radius:10px 10px 10px 10px;
+  
+  padding:5px;
+  /*border:solid 1px #000;*/
+  background-color: black;
+  color: black;
+
+  margin-top:10px;
+  margin-bottom:10px; 
+}
+
+.borderBlue {
+  /*Makes this work on both Mozilla and other browsers.*/
+  -moz-border-radius:5px 5px 5px 5px;
+  border-radius:5px 5px 5px 5px;
+  
+  padding:1px;
+  /*border:solid 1px #000;*/
+  background-color: rgb(41, 126, 255);
+  color: rgb(41, 126, 255);
+
+  margin-top:10px;
+  margin-bottom:10px; 
 }
 
 
