@@ -34,6 +34,7 @@
 				</div>
 					<!-- makeshift login until functional one is made -->
 					<div class="input-group col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
+						<div id="incomplete-login-form" class="alert alert-danger" role="alert">Please complete all fields!</div>
 						<label for="studentid">Student Identification</label>
 						<input type="text" class="form-control" id="studentid" placeholder="Student ID">
 					</div>
@@ -42,12 +43,19 @@
 						<input type="text" class="form-control" id="pw" placeholder="Password">
 					</div>
 					<div class="checkbox col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
-					<label><input type="checkbox">I verify this information is correct</label> 
+					<label><input id="verified-info" type="checkbox">I verify this information is correct</label> 
 					</div>
 					<div class="login col-md-6 col-lg-6 col-md-offset-2 col-ls-offset-2">
-						<button type="login" class="btn btn-default">Log In</button>
+						<button id="login-pk" type="login" class="btn btn-default">Log In</button>
 					</div>
 			</div> 
 		</div>
 	</section>
+
+<!-- Load js libs only when the page is loaded. -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="../js/modernizr.custom.72241.js"></script>
+<script src="../js/login.js"></script>	
+
 </body>
