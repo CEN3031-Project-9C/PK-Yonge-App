@@ -1,5 +1,5 @@
 html {
-	background:#0175CA url(../images/bg.jpg) no-repeat center center fixed; 
+	background:#0175CA url(../img/bg.jpg) no-repeat center center fixed; 
 	min-height:100%;
 	-webkit-background-size: cover;
 	   -moz-background-size: cover;
@@ -27,7 +27,7 @@ body {
 /********************************************************/
 /*                    Navigation bar                    */
 /********************************************************/
-.mainmenu { z-index: 999999; width:100%;  padding: 30px 0 0 0;}
+.mainmenu { z-index: 9; width:100%;  padding: 30px 0 0 0;}
 @media (min-width: 768px) {
 	.mainmenu { position: fixed; }
 }
@@ -107,6 +107,7 @@ body {
 /********************************************************/
 /*             Sections - universal classes             */
 /********************************************************/
+/**
 .section { 
 	z-index: 1;
 	min-height:420px;
@@ -117,7 +118,8 @@ body {
 	padding-bottom:50px; 
 	display:none;
 	top:0;
-} 
+}
+**/
 @media (min-width: 768px) {
 	.section { padding-top:160px;}
 }
@@ -171,6 +173,8 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 /********************************************************/
 /*                   UI - Buttons                       */
 /********************************************************/
+
+/**
 .btn{
 	color:#333;
 	text-shadow: none;
@@ -194,19 +198,21 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 .btn-link:hover, .btn-link:focus, .btn-link:active {
 	color:#fff
 }
+
 .btn-default {
 	background: rgba(255,255,255,.5);
 }
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active {
 	background: rgba(255,255,255,.8);
 }
+
 .btn-primary {
 	background: rgba(255,255,255,.2);
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:active {
 	background: rgba(255,255,255,.5);
 }
-
+**/
 
 
 /********************************************************/
@@ -271,6 +277,8 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 /***********************************************************/
 /*                   Inverted theme                        */
 /***********************************************************/
+
+
 .theme-invert { 	
 	color:#222;
 	color:rgba(0,0,0,.8); 
@@ -278,6 +286,7 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 .theme-invert a { 
 	color:#000;
 }
+/**
 .theme-invert .btn {
 	color:rgba(255,255,255,.8);
 }
@@ -290,6 +299,7 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 .theme-invert .btn-link:hover, .theme-invert .btn-link:focus, .theme-invert .btn-link:active {
 	color:#000
 }
+**/
 .theme-invert .navbar-toggle {
 	background: rgba(0, 0, 0, 0.12);
 }
@@ -309,7 +319,7 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 .theme-invert .tagline { 
 	color:#222222; 
 }
-
+/**
 .theme-invert .btn-default {
 	background: rgba(0,0,0,.4);
 }
@@ -330,7 +340,7 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 	background: rgba(0,0,0,.3);
 	color:#fff;
 }
-
+**/
 .theme-invert .thumbnail {
 	background-color: rgba(255,255,255,.8);
 }
