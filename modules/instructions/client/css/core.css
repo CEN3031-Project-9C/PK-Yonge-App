@@ -1,33 +1,14 @@
-/*CSS Style File for the instructions page.*/
-
-/*Basic Body Settings
-body {
-  background: url(../InstructionsPage/bg.jpg);
-  background-size: cover;
-  height: auto;
+.ng-hide {
+  /* this is just another form of hiding an element */
+  display: block!important;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
 }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.content {
+  margin-top: 50px;
 }
-
-.padding{
-  padding-top: 100px;
-  padding-bottom: 20px;
-}
-
-
-#bigFont{
-  font-size:40px;
-}
-
-
-#royalBlue{
-  background-color: rgb(41, 126, 255);
-}*/
-
 html {
   background:#0175CA url(../images/bg.jpg) no-repeat center center fixed; 
   min-height:100%;
@@ -45,8 +26,7 @@ body {
   line-height: 1.5em;
   font-size:14px;
   font-family: Helvetica, Arial, sans-serif;
-  color:#fff;
-  color:rgba(255,255,255,.8); 
+  color:rgb(0,0,0) !important;
   font-weight: normal;
 }
 
@@ -96,6 +76,7 @@ body {
 }
 .mainmenu .dropdown-menu {
   top: -14em;
+  left: 0px;
   font-size: 13px;
   padding:0;
   background:none;
@@ -140,7 +121,7 @@ body {
   z-index: 1;
   min-height:420px;
   width: 100%; 
-  overflow:auto;
+  overflow:hidden !important;
   height:100%;
   padding-top:100px;
   padding-bottom:50px; 
@@ -170,84 +151,32 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 
 .title,
 .subtitle { 
-  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  font-family: 'Wire One', Helvetica, Arial, sans-serif !important;
   font-weight:normal;
   font-size:7em;
   margin-bottom:15px; 
-  color:#FDF9F4; 
+  color: rgb(0,0,0) !important; 
   line-height:1em;
 }
 .subtitle { 
   line-height:.9em;
-  font-size:4em;
+  font-size:5.5em;
   margin-top:0;
   margin-bottom:40px; 
+  color: rgb(0,0,0) !important; 
 }
 .tagline { 
   font-size:1.4em;
   line-height:1.3em;
   font-weight:normal;
   margin-bottom:75px;
+  color: rgb(0,0,0) !important; 
 }
 
 @media (max-width: 767px) {
   .lead { 
     font-size:1.3em;
   }
-}
-
-.margin {
-  margin-bottom:70px;
-}
-
-.highlightBlue {
-  /*Makes this work on both Mozilla and other browsers.*/
-  -moz-border-radius:10px 10px 10px 10px;
-  border-radius:10px 10px 10px 10px;
-  
-  padding:5px;
-  /*border:solid 1px #000;*/
-  background-color: rgb(41, 126, 255);
-  color: white;
-}
-
-.highlightWhite {
-  /*Makes this work on both Mozilla and other browsers.*/
-  -moz-border-radius:10px 10px 10px 10px;
-  border-radius:10px 10px 10px 10px;
-  
-  padding:5px;
-  /*border:solid 1px #000;*/
-  background-color: white;
-  color: black; 
-}
-
-.highlightBlack {
-  /*Makes this work on both Mozilla and other browsers.*/
-  -moz-border-radius:10px 10px 10px 10px;
-  border-radius:10px 10px 10px 10px;
-  
-  padding:5px;
-  /*border:solid 1px #000;*/
-  background-color: black;
-  color: black;
-
-  margin-top:10px;
-  margin-bottom:10px; 
-}
-
-.borderBlue {
-  /*Makes this work on both Mozilla and other browsers.*/
-  -moz-border-radius:5px 5px 5px 5px;
-  border-radius:5px 5px 5px 5px;
-  
-  padding:1px;
-  /*border:solid 1px #000;*/
-  background-color: rgb(41, 126, 255);
-  color: rgb(41, 126, 255);
-
-  margin-top:10px;
-  margin-bottom:10px; 
 }
 
 
