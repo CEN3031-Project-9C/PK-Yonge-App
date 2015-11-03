@@ -2,13 +2,11 @@
 
 // Configuring the Chat module
 angular.module('choose-test').run(['Menus',
-  /**
-  **  Do we need this function?
-  **/
+  // Adds menu item for this page
   function (Menus) {
     // Set top bar menu items
     Menus.addMenuItem('topbar', {
-      title: 'Choose-Test',
+      title: 'Choose Test',
       state: 'choose-test'
     });
   }
