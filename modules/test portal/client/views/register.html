@@ -1,0 +1,69 @@
+<!-- This document will allow individuals to register their accounts -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="EOC Practice Test Homepage">
+	
+	<title>PK Yonge EOC Exams</title>
+
+    <meta name="author" content="CEN3031 Group 9C">
+    <link rel="icon" href="../images/PKY_Oval-2.jpg">
+	
+	<!-- Bootstrap itself -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://silviomoreto.github.io/bootstrap-select/bootstrap-select.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+	<!-- Custom styles -->
+	<link rel="stylesheet" href="../css/style.css">
+
+	<!-- Fonts -->
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+
+	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+<body class="theme-invert">
+	<section class="section" id="head">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">	
+					<h1 class="title">Please register to continue.</h1>
+				</div>
+				<!-- <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div> -->
+    			<form name="form" ng-submit="vm.register()" role="form">
+					<div class="form-group col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+						<label for="firstname">First Name</label>
+						<input type="text" class="form-control" id="firstname" placeholder="First Name" ng-model="vm.user.firstName" required />
+						<span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">* Required field</span>
+					</div>
+					<div class="form-group col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+						<label for="lastname">Last Name</label>
+						<input type="text" class="form-control" id="lastname" placeholder="Last Name" ng-model="vm.user.lastName" required />
+						<span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">* Required field</span>
+					</div>
+					<div class="form-group col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2" ng-class="{ 'has-error': form.studentid.$dirty && form.studentid.$error.required }">
+						<label for="studentid">Student Identification</label>
+						<input type="text" class="form-control" id="studentid" placeholder="Student ID" ng-model="vm.user.studentid" required />
+						<span ng-show="form.studentid.$dirty && form.studentid.$error.required" class="help-block">* Required field</span>
+					</div>
+					<div class="form-group col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+						<label for="pw">Skyward Password</label>
+						<input type="password" class="form-control" id="pw" placeholder="Password" ng-model="vm.user.password" required />
+						<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">* Required field</span>
+					</div>
+					<div class="checkbox col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
+					<label><input type="checkbox">I verify this information is correct</label> 
+					</div>
+					<div class="form-actions col-md-6 col-lg-6 col-md-offset-2 col-ls-offset-2">
+						<a href="testPortal.html" button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-default">Register</button></a>
+						<a href="testPortal.html" button type="submit" class="btn btn-default">Continue As Guest</button></a>
+						<a href="login.html" button type="submit" class="btn btn-default">Already Registered? Click Here to Login</button></a>
+					</div>
+				</form>
+			</div> 
+		</div>
+	</section>
+</body>

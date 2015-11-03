@@ -1,0 +1,63 @@
+<!-- This document will allow individuals to login -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="EOC Practice Test Homepage">
+	
+	<title>PK Yonge EOC Exams</title>
+
+    <meta name="author" content="CEN3031 Group 9C">
+    <link rel="icon" href="../images/PKY_Oval-2.jpg">
+	
+	<!-- Bootstrap itself -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://silviomoreto.github.io/bootstrap-select/bootstrap-select.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+	<!-- Custom styles -->
+	<link rel="stylesheet" href="../css/style.css">
+
+	<!-- Fonts -->
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+
+	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+<body class="theme-invert">
+	<section class="section" id="head">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">	
+					<h1 class="title">Please log in to continue.</h1>
+				</div>
+				 <!-- <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div> -->
+    			 <form name="form" ng-submit="vm.login()" role="form">
+					<div class="form-group col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2" ng-class="{ 'has-error': form.studentid.$dirty && form.studentid.$error.required }">
+						<label for="studentid">Student Identification</label>
+						<input type="text" class="form-control" id="studentid" placeholder="Student ID" ng-model="studentid" required />
+						<span ng-show="form.studentid.$dirty && form.studentid.$error.required" class="help-block">* Required field</span>
+					</div>
+					<div class="form-group col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+						<label for="pw">Skyward Password</label>
+						<input type="password" class="form-control" id="pw" placeholder="Password" ng-model="password" required />
+						<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">* Required field</span>
+					</div>
+					<div class="form-group col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
+						<label for="testchoice">Test Type</label>
+						<input class="btn btn-primary btn-lg btn-block" type="button" value="Algebra 1">
+						<input class="btn btn-primary btn-lg btn-block" type="button" value="Algebra 2">
+					</div>
+					<div class="checkbox col-md-6 col-lg-6 col-md-offset-2 col-lg-offset-2">
+					<label><input type="checkbox">I verify this information is correct</label> 
+					</div>
+					<div class="form-actions col-md-6 col-lg-6 col-md-offset-2 col-ls-offset-2">
+						<a href="testPortal.html" button type="submit" ng-disabled="form.$invalid" class="btn btn-default">Log In</button></a>
+						<a href="testPortal.html" button type="submit" class="btn btn-default">Log In As Guest</button></a>
+					</div>
+				</form>
+			</div> 
+		</div>
+	</section>
+</body>
