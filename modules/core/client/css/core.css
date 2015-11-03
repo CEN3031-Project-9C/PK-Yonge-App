@@ -10,7 +10,7 @@
   margin-top: 50px;
 }
 html {
-  background:#0175CA url(../images/bg.jpg) no-repeat center center fixed; 
+  background:#0175CA url(../img/bg.jpg) no-repeat center center fixed; 
   min-height:100%;
   -webkit-background-size: cover;
      -moz-background-size: cover;

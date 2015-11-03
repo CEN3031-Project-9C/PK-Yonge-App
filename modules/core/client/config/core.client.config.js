@@ -12,6 +12,14 @@ angular.module('core').run(['Menus',
       roles: ['*']
     });
 
+    // Add the information dropdown item
+    Menus.addMenuItem('topbar', {
+      title: 'Testing',
+      state: 'testing',
+      type: 'button',
+      roles: ['*']
+    });
+
     // Add the dropdown list items
     Menus.addSubMenuItem('topbar', 'information', {
       title: 'About',
@@ -30,6 +38,7 @@ angular.module('core').run(['Menus',
       state: 'contact'
     });
 
+    
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'articles', {

@@ -45,6 +45,20 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         ignoreState: true
       }
     })
+    .state('testing', {
+      url: '/testing',
+      templateUrl: 'modules/choose-test/client/views/choose-test.client.view.html',
+      data: {
+        ignoreState: true
+      }
+    })
+    /*.state('testing', {
+      url: '/testing',
+      templateUrl: 'modules/test_portal/client/views/list-articles.client.view.html',
+      data: {
+        ignoreState: true
+      }
+    })*/
     /*.state('instructions', {
       url: '/instructions',
       templateUrl: 'modules/instructions/client/views/instructions.html',
