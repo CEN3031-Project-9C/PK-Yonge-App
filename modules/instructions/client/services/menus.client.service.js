@@ -170,5 +170,8 @@ angular.module('instructions').service('Menus', [
     this.addMenu('topbar', {
       roles: ['*']
     });
+    this.addMenu('instructionsbar', {
+      roles: ['*']
+    });
   }
 ]);

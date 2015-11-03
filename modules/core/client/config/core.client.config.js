@@ -30,13 +30,6 @@ angular.module('core').run(['Menus',
       state: 'contact'
     });
 
-    // Add the articles dropdown item
-    Menus.addMenuItem('topbar', {
-      title: 'Test Instructions',
-      state: 'instructions',
-      type: 'button',
-      roles: ['*']
-    });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'articles', {

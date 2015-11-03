@@ -35,7 +35,8 @@
   {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
 </head>
 
-<body class="ng-cloak">
+<body ng-controller="InstructionsController">
+  <header ng-hide="'/modules/core/client/views/header.client.view.html'" class="ng-hide navbar navbar-fixed-top navbar-inverse"></header>
   <header ng-include="'/modules/instructions/client/views/instructionsHeader.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
   <section class="content">
     <section class="container">

@@ -4,17 +4,35 @@
 angular.module('instructions').run(['Menus',
   function (Menus) {
 
-    // Add the dropdown list item
-    /*Menus.addSubMenuItem('topbar', 'articles', {
-      title: 'List Articles',
-      state: 'articles.list'
+   // Add the information dropdown item
+    Menus.addMenuItem('topbar', {
+      title: 'Instructions for the Practice EOC',
+      state: 'instructionsDropdown',
+      type: 'dropdown',
+      roles: ['*']
     });
 
-    // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'articles', {
-      title: 'Create Articles',
-      state: 'articles.create',
-      roles: ['user']
-    });*/
+    // Add the dropdown list items
+    Menus.addSubMenuItem('topbar', 'instructionsDropdown', {
+      title: 'Instructions',
+      state: 'instructions'
+    });
+    Menus.addSubMenuItem('topbar', 'instructionsDropdown', {
+      title: 'Accessing the Test',
+      state: 'access'
+    });
+    Menus.addSubMenuItem('topbar', 'instructionsDropdown', {
+      title: 'Signing In',
+      state: 'signIn'
+    });
+    Menus.addSubMenuItem('topbar', 'instructionsDropdown', {
+      title: 'Test Features',
+      state: 'features'
+    });
+    Menus.addSubMenuItem('topbar', 'instructionsDropdown', {
+      title: 'Question Types',
+      state: 'questions'
+    });
+   
   }
 ]);
