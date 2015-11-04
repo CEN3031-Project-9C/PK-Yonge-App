@@ -10,10 +10,10 @@ angular.module('choose-test').config(['$stateProvider',
         data: {
           roles: ['user', 'admin']
         }
-      })
-      .state('choose-test.confirm', {
-        url: '/choose-test/select/:testSubject',
-        templateUrl: 'modules/choose-test/client/views/confirm-test.client.view.html'
       });
+      //.state('choose-test.confirm', {
+      //  url: '/choose-test/select/:testSubject',
+      //  templateUrl: 'modules/choose-test/client/views/confirm-test.client.view.html'
+      //});
   }
 ]);
