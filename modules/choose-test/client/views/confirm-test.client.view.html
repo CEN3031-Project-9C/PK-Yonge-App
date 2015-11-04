@@ -1,0 +1,18 @@
+<!-- The choose-test view -->
+<section id="confirm-test" class="container" ng-controller="ChooseTestController">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>Please Confirm Your Test Selection</h1>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h2>You Are About To Take: {{ test.subject }}</h2>
+			<h3>Is this correct</h3>
+			<a class="btn btn-info btn-lg" href="#confirm-test" role="button">Yes, Continue</a>
+			<a class="btn btn-danger btn-lg" href="#cancel-test" role="button">No, Cancel</a>
+		</div>
+	</div>
+</section>

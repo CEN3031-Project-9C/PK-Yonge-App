@@ -65,7 +65,7 @@ module.exports.initMiddleware = function (app) {
   }));
 
   // Initialize favicon middleware
-  app.use(favicon('./modules/core/client/img/brand/favicon.ico'));
+  app.use(favicon('./modules/core/client/img/brand/PKY.jpg'));
 
   // Environment dependent middleware
   if (process.env.NODE_ENV === 'development') {
