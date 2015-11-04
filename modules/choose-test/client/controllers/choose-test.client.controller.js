@@ -33,7 +33,10 @@ angular.module('choose-test').controller('ChooseTestController', ['$scope', '$st
        });
 
 	   user_session.$save(function (response) {
-	   		// do something?
+
+			// Pass the session ID to test_portal client view   		
+	   		//$scope.passSessionID(user_session._id);
+	   		
        }, function (errorResponse) {
          $scope.error = errorResponse.data.message;
        });
