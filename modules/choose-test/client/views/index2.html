@@ -42,6 +42,46 @@
 	</div>
 </nav>
 
+<!-- Temporary section to display progress to test screen -->
+<div class="active-test-overlay">
+	<div class="container">
+		<div class="row">
+			<div id="test-take-box" class="col-lg-8 col-centered text-center">
+				<div class="row">
+					<div class="col-md-6 ">
+						<h2 class="text-left" id="active-test-subj"></h2>
+					</div>
+					<div class="col-md-6">
+						<h2 class="text-right">Active Test</h2>
+					</div>
+				</div>
+				<p>(Test Content Here)</p>
+				<a id="close-test" href="#">Close Test (for Demo)</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="test-select-overlay">
+	<div class="container">
+		<div class="row">
+			<div id="test-confirm-box" class="col-lg-8 col-centered text-center">
+				<h2>You are about to start</h2>
+				<h3 id="test-subject-msg"></h3>
+				<p>Please confirm your test selection.</p>
+				<div class="row">
+					 <div class="col-md-6 ">
+						 <button class="btn btn-primary btn-lg" href="#" id="confirm-test-selection">Take Test</button>
+					 </div>
+					  <div class="col-md-6">
+						  <button class="btn btn-danger btn-lg" href="#" id="cancel-test-selection">Cancel</button>
+					  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- Main section -->
 <section class="section" id="test-selection">
 	<div class="container">
@@ -51,12 +91,11 @@
 			<div class="row">
 			  <div class="col-md-6">
 				  <h2 class="test-title">Algebra I</h2>
-
-				  <button type="button" class="btn btn-info btn-lg start-test" data-toggle="modal" data-target="#Algebra1">Start Test</button>
+				  <a class="btn btn-info btn-lg start-test" href="#take-test-alg-1" role="button" data-test-subj='Algebra I'>Start Test</a>
 			  </div>
 			  <div class="col-md-6">
 				  <h2 class="test-title">Algebra II</h2>
-				  <button type="button" class="btn btn-info btn-lg start-test" data-toggle="modal" data-target="#Algebra2">Start Test</button>
+				  <a class="btn btn-info btn-lg start-test" href="#take-test-alg-2" role="button" data-test-subj='Algebra II'>Start Test</a>
 			  </div>
 			</div>
 			<h5 class="more-tests-notice">More tests are coming soon.</h5>
@@ -64,68 +103,6 @@
 		</div> 
 	</div>
 </section>
-
-<!-- Modal -->
-<div id="Algebra1" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div id="test-confirm-box" class="col-lg-8 col-centered text-center">
-	        <h2 class="modal-title">You are about to start</h2>
-	      </div>
-	      <div class="modal-body col-lg-8 col-centered text-center">
-	        <h3>Algebra I</h3>
-	       	<p>Please confirm your test selection.</p>
-	      </div>
-
-	      <div class="modal-footer">
-	      	<div class="row">
-	       	<div class="col-sm-5">
-				<button class="btn btn-primary btn-lg" href="#" id="confirm-test-selection">Take Test</button>
-		    </div>
-		    <div class="col-sm-5 ">
-				 <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Cancel</button>
-		    </div>
-	       </div>
-	  	 </div>
-  </div>
-</div>
-</div>
-</div>
-
-<!-- Modal -->
-<div id="Algebra2" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div id="test-confirm-box" class="col-lg-8 col-centered text-center">
-	        <h2 class="modal-title">You are about to start</h2>
-	      </div>
-	      <div class="modal-body col-lg-8 col-centered text-center">
-	        <h3>Algebra II</h3>
-	       	<p>Please confirm your test selection.</p>
-	      </div>
-
-	      <div class="modal-footer">
-	      	<div class="row">
-	       	<div class="col-sm-5">
-				<button class="btn btn-primary btn-lg" href="#" id="confirm-test-selection">Take Test</button>
-		    </div>
-		    <div class="col-sm-5 ">
-				 <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Cancel</button>
-		    </div>
-	       </div>
-	  	 </div>
-  </div>
-</div>
-</div>
-</div>
-
 
 <!-- Load js libs only when the page is loaded. -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

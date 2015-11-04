@@ -17,13 +17,55 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
       url: '/',
       templateUrl: 'modules/core/client/views/home.client.view.html'
     })
-    .state('not-found', {
-      url: '/not-found',
-      templateUrl: 'modules/core/client/views/404.client.view.html',
+    .state('about', {
+      url: '/about',
+      templateUrl: 'modules/core/client/views/about.client.view.html',
       data: {
         ignoreState: true
       }
     })
+    .state('resources', {
+      url: '/resources',
+      templateUrl: 'modules/core/client/views/resources.client.view.html',
+      data: {
+        ignoreState: true
+      }
+    })
+    .state('tests', {
+      url: '/tests',
+      templateUrl: 'modules/core/client/views/tests.client.view.html',
+      data: {
+        ignoreState: true
+      }
+    })
+    .state('contact', {
+      url: '/contact',
+      templateUrl: 'modules/core/client/views/contact.client.view.html',
+      data: {
+        ignoreState: true
+      }
+    })
+    .state('testing', {
+      url: '/testing',
+      templateUrl: 'modules/choose-test/client/views/choose-test.client.view.html',
+      data: {
+        ignoreState: true
+      }
+    })
+    /*.state('testing', {
+      url: '/testing',
+      templateUrl: 'modules/test_portal/client/views/list-articles.client.view.html',
+      data: {
+        ignoreState: true
+      }
+    })*/
+    /*.state('instructions', {
+      url: '/instructions',
+      templateUrl: 'modules/instructions/client/views/instructions.html',
+      data: {
+        ignoreState: true
+      }
+    })*/
     .state('bad-request', {
       url: '/bad-request',
       templateUrl: 'modules/core/client/views/400.client.view.html',
