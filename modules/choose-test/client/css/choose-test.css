@@ -5,11 +5,11 @@ html {
 }*/
 
 section#choose-test h1, section#confirm-test h1 {
-	color: #222;
+	color: #fafafa;
 }
 
 section#choose-test .page-header, section#confirm-test .page-header {
-	border-bottom: 2px solid #999;
+	border-bottom: 2px solid #bebebe;
 }
 
 section#choose-test .test-con {

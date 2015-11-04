@@ -1,0 +1,13 @@
+.question-container .btn {
+	color: #222;
+	font-size: 16px;
+	background-color: #e4e4e4;
+	display: block;
+	width: 200px;
+	margin: 10px 0;
+	text-align: left;
+}
+
+.question-container.long .btn {
+	width: 450px;
+}

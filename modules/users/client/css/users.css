@@ -1,3 +1,17 @@
+#si-header {
+	font-size: 36px;
+	text-transform: uppercase;
+	letter-spacing: 0.2px;
+	padding: 0 auto;
+	margin: 60px auto 0 auto;
+}
+#si-subheader {
+	padding: 0 auto;
+	margin: 0 auto 40px 0;
+}
+.help-block {
+	color: #ddd !important;
+}
 @media (min-width: 992px) {
   .nav-users {
     position: fixed;
