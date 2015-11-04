@@ -1,0 +1,14 @@
+<section ng-controller="QuestionsController" ng-init="find()">
+  <div class="page-header">
+    <h1>Question 3</h1>
+  </div>
+      <h4 class="list-group-item-heading" ng-bind="questions[2].question_body"></h4>
+      <a ui-sref="question4" class="btn btn-default btn-lg" ng-bind="questions[2].answer_choices[0]"></a>
+      </br>
+      <a ui-sref="question4" class="btn btn-default btn-lg" ng-bind="questions[2].answer_choices[1]"></a>
+      </br>
+      <a ui-sref="question4" class="btn btn-default btn-lg" ng-bind="questions[2].answer_choices[2]"></a>
+      </br>
+      <a ui-sref="question4" class="btn btn-default btn-lg" ng-bind="questions[2].answer_choices[3]"></a>
+  </div>
+</section>

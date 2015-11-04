@@ -80,27 +80,49 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         ignoreState: true
       }
     })
-    /*.state('testing', {
-      url: '/testing',
-      templateUrl: 'modules/choose-test/client/views/choose-test.client.view.html',
+    .state('question1', {
+      url: '/question1',
+      templateUrl: 'modules/test_portal/client/views/question1.client.view.html',
       data: {
         ignoreState: true
       }
     })
-    .state('testing', {
-      url: '/testing',
-      templateUrl: 'modules/test_portal/client/views/list-articles.client.view.html',
+    .state('question2', {
+      url: '/question2',
+      templateUrl: 'modules/test_portal/client/views/question2.client.view.html',
       data: {
         ignoreState: true
       }
-    })*/
-    /*.state('instructions', {
-      url: '/instructions',
-      templateUrl: 'modules/instructions/client/views/instructions.html',
+    })
+    .state('question3', {
+      url: '/question3',
+      templateUrl: 'modules/test_portal/client/views/question3.client.view.html',
       data: {
         ignoreState: true
       }
-    })*/
+    })
+    .state('question4', {
+      url: '/question4',
+      templateUrl: 'modules/test_portal/client/views/question4.client.view.html',
+      data: {
+        ignoreState: true
+      }
+    })
+    .state('question5', {
+      url: '/question5',
+      templateUrl: 'modules/test_portal/client/views/question5.client.view.html',
+      data: {
+        ignoreState: true
+      }
+    })
+    .state('end', {
+      url: '/end',
+      templateUrl: 'modules/test_portal/client/views/end.client.view.html',
+      data: {
+        ignoreState: true
+      }
+    })
+
     .state('bad-request', {
       url: '/bad-request',
       templateUrl: 'modules/core/client/views/400.client.view.html',
