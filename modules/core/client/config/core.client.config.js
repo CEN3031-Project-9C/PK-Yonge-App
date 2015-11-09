@@ -12,14 +12,6 @@ angular.module('core').run(['Menus',
       roles: ['*']
     });
 
-    // Add the information dropdown item
-    Menus.addMenuItem('topbar', {
-      title: 'Testing',
-      state: 'testing',
-      type: 'button',
-      roles: ['*']
-    });
-
     // Add the dropdown list items
     Menus.addSubMenuItem('topbar', 'information', {
       title: 'About',
@@ -40,24 +32,33 @@ angular.module('core').run(['Menus',
 
     
 
-    // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'articles', {
-      title: 'Create Articles',
-      state: 'articles.create',
-      roles: ['user']
+    // Add the information dropdown item
+    Menus.addMenuItem('topbar', {
+      title: 'Instructions for the Practice EOC',
+      state: 'instructionsDropdown',
+      type: 'dropdown',
+      roles: ['*']
     });
-
-    // Add the dropdown list item
-    /*Menus.addSubMenuItem('topbar', 'articles', {
-      title: 'List Articles',
-      state: 'articles.list'
+    // Add the dropdown list items
+    Menus.addSubMenuItem('topbar', 'instructionsDropdown', {
+      title: 'Instructions',
+      state: 'instructions'
     });
-
-    // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'articles', {
-      title: 'Create Articles',
-      state: 'articles.create',
-      roles: ['user']
-    });*/
+    Menus.addSubMenuItem('topbar', 'instructionsDropdown', {
+      title: 'Accessing the Test',
+      state: 'access'
+    });
+    Menus.addSubMenuItem('topbar', 'instructionsDropdown', {
+      title: 'Signing In',
+      state: 'signIn'
+    });
+    Menus.addSubMenuItem('topbar', 'instructionsDropdown', {
+      title: 'Test Features',
+      state: 'features'
+    });
+    Menus.addSubMenuItem('topbar', 'instructionsDropdown', {
+      title: 'Question Types',
+      state: 'types'
+    });
   }
 ]);
