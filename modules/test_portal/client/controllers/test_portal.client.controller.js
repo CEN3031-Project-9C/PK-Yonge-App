@@ -1,8 +1,8 @@
 'use strict';
 
 // Articles controller
-angular.module('test_portal').controller('QuestionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Questions',
-  function ($scope, $stateParams, $location, Authentication, Questions) {
+angular.module('test_portal').controller('QuestionsController', ['$scope', '$http', '$sce', '$stateParams', '$location', 'Authentication', 'Questions',
+  function ($scope, $http, $sce, $stateParams, $location, Authentication, Questions) {
     $scope.authentication = Authentication;
 
     // Create new Article
@@ -69,6 +69,51 @@ angular.module('test_portal').controller('QuestionsController', ['$scope', '$sta
     //   });
     // };
 
+    $scope.score = 0;
+    $scope.activeQuestion = -1;
+    $scope.activeQuestionAnswered = 0;
+    $scope.percentage = 0; 
+
+    $http.get('test_data.json').then(function(testData){
+        $scope.myQuestions = testData.data;
+        $scope.totalQuestions = $scope.myQuestions.length;
+    });
+
+
+    $scope.selectAnswer = function(qIndex,aIndex){
+        //below throws a pop up message to print out qIndex and aIndex.
+        //can be possibly use for when there isn't an aIndex(user never choose a answer before they pressed continue) 
+        //alert(qIndex + 'and' + aIndex);
+
+
+        var questionState = $scope.myQuestions[qIndex].questionState;
+
+        //if a question hasn't been answered yet
+        if(questionState != 'answered'){
+            $scope.myQuestions[qIndex].selectedAnswer = aIndex; 
+            //correctAnswer variable set base on the JSON file, which has a variable nmae call 'correct'
+            var correctAnswer = $scope.myQuestions[qIndex].correct;
+            //just set up the right variables, so we can use the corrctAnswer variable later
+            $scope.myQuestions[qIndex].correctAnswer = correctAnswer;
+
+            //test if user selected the correct answer
+            if(aIndex === correctAnswer){
+                $scope.myQuestions[qIndex].correctness = 'correct';
+                $scope.score += 1; //increments the score
+            }else{
+                $scope.myQuestions[qIndex].correctness = 'correct';
+            }
+
+            scope.myQuestions[qIndex].questionState = 'answered'; 
+        }
+    }
+
+    $scope.isSelected = function(qIndex,aIndex){
+        return  scope.myQuestions[qIndex].selectedAnswer === aIndex; 
+    }
+    $scope.isCorrect = function(qIndex,aIndex){
+        return  scope.myQuestions[qIndex].correctAnswer === aIndex; 
+    }
     // Find a list of Articles
     $scope.find = function () {
       $scope.questions = Questions.query(); //Get singular, query is array.
@@ -82,3 +127,25 @@ angular.module('test_portal').controller('QuestionsController', ['$scope', '$sta
     };
   }
 ]);
+
+angular.module('test_portal').controller('DropdownCtrl', function ($scope, $log) {
+  $scope.items = [
+    'The first choice!',
+    'And another choice for you.',
+    'but wait! A third!'
+  ];
+
+  $scope.status = {
+    isopen: false
+  };
+
+  $scope.toggled = function(open) {
+    $log.log('Dropdown is now: ', open);
+  };
+
+  $scope.toggleDropdown = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.status.isopen = !$scope.status.isopen;
+  };
+});

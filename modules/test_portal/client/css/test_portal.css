@@ -11,3 +11,9 @@
 .question-container.long .btn {
 	width: 450px;
 }
+
+.active , .inactive {
+	transition: left 1.5s ease-in-out;
+}
+
+.active{left: 40;}

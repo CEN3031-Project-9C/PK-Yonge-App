@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+	
+	<section ng-controller="QuestionsController" class="question-container long" ng-init="find()">
+			<div class="prograss">
+				<!--
+			  <div ng-controller="DropdownCtrl">
+				<div class="btn-group" uib-dropdown uib-keyboard-nav>
+			        <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" uib-dropdown-toggle>
+			            Dropdown with keyboard navigation <span class="caret"></span>
+			        </button>
+			        <ul class="uib-dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+			            <li role="menuitem"><a href="#">Action</a></li>
+			            <li role="menuitem"><a href="#">Another action</a></li>
+			            <li role="menuitem"><a href="#">Something else here</a></li>
+			            <li class="divider"></li>
+			            <li role="menuitem"><a href="#">Separated link</a></li>
+			        </ul>
+			    </div>
+				-->
+				<!-- instead of just having on and off, make it display the vaule of activeQuestion, else -->
+				<div class ="
+				{{ ($index === activeQuestion) ? 'on' : 'off' }}" 
+				
+				ng-repeat = "myQuestion in myQuestions">
+
+				</div>
+			</div>
+		<div class="tools"></div>
+
+		<div class = "intro {{ (activeQuestion > -1) ? 'inactive', 'active'}}">
+			<h2>Welcome</h2>
+			<p>Click to begin</p>
+			<p class ="btn" ng-click="activeQuestion = 0">Begin</p>
+		</div>
+
+		<!--putting the right question in place using css styling depending if a question if active or not, which I haven't done -->
+		<div class ="question
+			{{ $index === activeQuestion ? 'active' : 'inactive'}}
+			{{ myQuestion.questionState === 'answered' ? 'answered' : 'unanswered'}}" 
+			ng-repeat = "myQuestion in myQuestions">
+			<!--myQuestion -> the item in the array; question -> variable name from json file, and the value is what we assigned  -->
+			<p class="txt">{{myQuestion.question}}</p>
+			<!--ngRepeat thru all the possible answers for the particular question @ index; Answer.text is just how the json file is structured -->
+
+			<!--ng-click activatives a new function in the controller, in which it pass in 2 parameters. 
+			$parent.index->theCurrentQuestionNum ; $index -> the current selection for the set of answers -->
+
+			<!--ng-class set the state of different classes base on the conditional statement passed back from the controller. it is used to provide live feedbacks
+				ng-class="{
+					image:Answer.image 
+						// add an image class if a path exist inside the Answer array of the json object
+					selected: isSelected($parent.$index, $index), 
+					correct:isCorrect($parent.$index, $index)
+				 }"
+
+			 -->
+
+
+			<p class="ans" 
+				
+				ng-click="selectAnswer($parent.$index, $index)"
+				ng-repeat="Answer in myQuestions[$index].answers">
+				{{Answer.text }}
+			</p>
+			
+			<div class ="feedback"></div>
+
+		</div>
+		<div class="results"></div>
+
+	</section>

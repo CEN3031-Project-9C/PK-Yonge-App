@@ -1,7 +1,7 @@
 {
-  "name": "EOC Practice Test",
+  "name": "pkyonge",
   "description": "A web app which allows students to take practice EOC exams.",
-  "version": "0.2",
+  "version": "",
   "meanjs-version": "0.4.1",
   "private": false,
   "author": "Group 9c",
