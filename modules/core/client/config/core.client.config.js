@@ -60,5 +60,12 @@ angular.module('core').run(['Menus',
       title: 'Question Types',
       state: 'types'
     });
+
+     // Add calculator 
+    //Menus.addMenuItem('topbar', {
+      //title: 'Calculator',
+      //state: 'calculator',
+    //});
+
   }
 ]);
