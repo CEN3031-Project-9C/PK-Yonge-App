@@ -1,7 +1,7 @@
 'use strict';
 
-//Articles service used for communicating with the articles REST endpoints
-angular.module('test_portal').factory('Questions', ['$resource',
+// questionsService, a service used for communicating with the questions REST endpoints
+angular.module('test_portal').factory('questionsService', ['$resource',
   function ($resource) {
     return $resource('api/questions/:questionId', { //connection to baack end route
       questionId: '@_id'

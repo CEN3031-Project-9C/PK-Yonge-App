@@ -11,9 +11,5 @@ angular.module('choose-test').config(['$stateProvider',
           roles: ['user', 'admin']
         }
       });
-      //.state('choose-test.confirm', {
-      //  url: '/choose-test/select/:testSubject',
-      //  templateUrl: 'modules/choose-test/client/views/confirm-test.client.view.html'
-      //});
   }
 ]);
