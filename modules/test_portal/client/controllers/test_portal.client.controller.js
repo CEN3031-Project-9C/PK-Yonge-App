@@ -1,14 +1,15 @@
 'use strict';
 
-// Articles controller
+// Questions controller
 angular.module('test_portal').controller('QuestionsController', [
 	'$scope', 
 	'$stateParams', 
 	'$location', 
 	'Authentication', 
-	'questionsService', 
 	'sessionService',
-	function ($scope, $stateParams, $location, Authentication, questionsService, sessionService) {
+	'questionsService', 
+	'questionsByTestIDService',
+	function ($scope, $stateParams, $location, Authentication, sessionService, questionsService, questionsByTestIDService) {
 	  	
 		$scope.authentication = Authentication;
 		
@@ -16,30 +17,32 @@ angular.module('test_portal').controller('QuestionsController', [
 		if (!Authentication.user) {
 			$location.path('/');
 		}
-			
+		
 		// get the session ID and test ID
-		var userSID = sessionService.getSessionID();
-		var testID = sessionService.getTestID();
+		var tempUserSID = sessionService.getSessionID();
+		var tempTestID = sessionService.getTestID();
 		
 		// for front-end display (testing) purposes
-		$scope.userSID = userSID;
-		$scope.testID = testID;
+		$scope.userSID = tempUserSID;
+		$scope.testID = tempTestID;
 		
 		var testContainer = {
-			questions: []	 // we will push each retrieved question (via query) onto this
+			questions: []	 // we will store retrieved questions in this array
 		};
 		
-		// Find a list of questions
-		$scope.find = function () {
-		  	$scope.questions = questionsService.query(); //Get singular, query is array.
+		$scope.loadQuestions = function() {
+			
+			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
+				{testID: $scope.testID},
+				function() {}
+			);
+			
+			// For testing purposes
+			console.log(testContainer.questions);
+
 		};
 		
-		// Find an existing question (based off of questionId)
-		$scope.findOne = function () {
-			$scope.questions = questionsService.get({
-				questionId: $stateParams.questionId
-		  	});
-		};
-		
+		$scope.testQuestions = testContainer.questions;
+
 	}
 ]);

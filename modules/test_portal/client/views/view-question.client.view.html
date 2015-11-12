@@ -1,5 +1,5 @@
 <!-- The view-test view -->
-<section id="choose-test" class="container" ng-controller="QuestionsController">
+<section id="choose-test" class="container" ng-controller="QuestionsController" ng-init="loadQuestions()">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
@@ -15,7 +15,7 @@
 		</div>
 		<div class="col-md-6 test-con">
 			<h2 class="test-title">Title</h2>
-			<p>{{questions}}</p>
+			<p>{{testQuestions}}</p>
 		</div>
 	</div>
 </section>
