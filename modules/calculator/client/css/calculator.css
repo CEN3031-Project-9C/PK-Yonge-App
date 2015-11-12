@@ -6,7 +6,6 @@ html {
 
 section#calculator{
 	color: #fafafa;
-	font-family: "Orbitron", sans-serif;
 }
 
 .calc {
@@ -97,3 +96,4 @@ section#calculator{
       background: -ms-linear-gradient(top, #93ff8b 0%, #82e17a 100%);
       background: linear-gradient(to bottom, #93ff8b 0%, #82e17a 100%);
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0); }
+//

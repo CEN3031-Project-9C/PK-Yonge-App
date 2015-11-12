@@ -1,10 +1,13 @@
 <!-- The calculator view -->
 
-<section id="calculator" class="ng-scope" ng-controller="CalcController" bn-document-keypress="handleKeypress($event)">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type ="text/javascript"></script>
+
+<section id="calculator" ng-controller="CalcController" bn-document-keypress="handleKeypress($event)">
+
 	<div class="clearfix">
-	<form>
+	<form class="ng-pristine ng-valid">
 		<div class="calc">
-			<div ng-bind-html-unsafe="calcInput" class="screen"></div>
+			<div ng-bind="calcInput" class="screen ng-binding">I'm a beautiful Calculator</div>
 			<div class="buttonpad clearfix">
 				<a ng-click="memoryClear()">MC</a>
 				<a ng-click="memoryAdd()">M+</a>
