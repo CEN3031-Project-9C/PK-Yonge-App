@@ -13,6 +13,13 @@ angular.module('test_portal').config(['$stateProvider',
       .state('question.list', {
         url: '',
         templateUrl: 'modules/test_portal/client/views/list-questions.client.view.html'
-      });
+      })
+      .state('view-question', {
+	      url: 'take-test/view-question',
+	      templateUrl: 'modules/test_portal/client/views/view-question.client.view.html',
+	      data: {
+		    roles: ['user', 'admin']
+		  }
+	  });
   }
 ]);

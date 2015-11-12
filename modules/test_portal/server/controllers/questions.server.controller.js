@@ -8,9 +8,8 @@ var path = require('path'),
   Question = mongoose.model('Question'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-/**
- * Create a question
- */
+// Create a question
+/*
 exports.create = function (req, res) {
   var question = new Question(req.body);
   question.user = req.user;
@@ -25,17 +24,15 @@ exports.create = function (req, res) {
     }
   });
 };
+*/
 
-/**
- * Show the current question
- */
+// Show the current question
 exports.read = function (req, res) {
   res.json(req.question);
 };
 
-/**
- * Update a question
- */
+// Update a question
+/*
 exports.update = function (req, res) {
   var question = req.question;
 
@@ -52,10 +49,10 @@ exports.update = function (req, res) {
     }
   });
 };
+*/
 
-/**
- * Delete an question
- */
+// Delete a question
+/*
 exports.delete = function (req, res) {
   var question = req.question;
 
@@ -69,10 +66,9 @@ exports.delete = function (req, res) {
     }
   });
 };
+*/
 
-/**
- * List of Questions
- */
+// List of Questions
 exports.list = function (req, res) {
   Question.find().exec(function (err, questions) {
     if (err) {
@@ -85,9 +81,22 @@ exports.list = function (req, res) {
   });
 };
 
-/**
- * Question middleware
- */
+// Find a question by its Test ID
+exports.allQuestionsWithTestID = function (req, res) {
+
+	Question.find({test_id: req.params.testID}).exec(function (err, questions) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(questions);
+		}
+	});
+	
+};
+
+// Question middleware
 exports.questionByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {

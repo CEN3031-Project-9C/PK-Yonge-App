@@ -1,5 +1,5 @@
 <!-- The choose-test view -->
-<section id="choose-test" class="container" ng-controller="ChooseTestController" ng-init="create()">
+<section id="choose-test" class="container" ng-controller="ChooseTestController">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="page-header">
@@ -10,11 +10,11 @@
 	<div class="row">
 		<div class="col-md-6 test-con">
 			<h2 class="test-title">Algebra I</h2>
-			<a class="btn btn-info btn-lg start-test" ui-sref="question1" role="button" data-test-subj='Algebra I'>Start Test</a>
+			<a class="btn btn-info btn-lg start-test" role="button" ng-click="startTest('A1')">Start Test</a>
 		</div>
 		<div class="col-md-6 test-con">
 			<h2 class="test-title">Algebra II</h2>
-			<a class="btn btn-info btn-lg start-test" ui-sref="question1" role="button" data-test-subj='Algebra II'>Start Test</a>
+			<a class="btn btn-info btn-lg start-test" role="button" ng-click="startTest('A2')">Start Test</a>
 		</div>
 	</div>
 </section>

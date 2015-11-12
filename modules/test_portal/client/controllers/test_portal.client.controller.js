@@ -1,84 +1,48 @@
 'use strict';
 
-// Articles controller
-angular.module('test_portal').controller('QuestionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Questions',
-  function ($scope, $stateParams, $location, Authentication, Questions) {
-    $scope.authentication = Authentication;
+// Questions controller
+angular.module('test_portal').controller('QuestionsController', [
+	'$scope', 
+	'$stateParams', 
+	'$location', 
+	'Authentication', 
+	'sessionService',
+	'questionsService', 
+	'questionsByTestIDService',
+	function ($scope, $stateParams, $location, Authentication, sessionService, questionsService, questionsByTestIDService) {
+	  	
+		$scope.authentication = Authentication;
+		
+		// If user is not signed in then redirect them back home
+		if (!Authentication.user) {
+			$location.path('/');
+		}
+		
+		// get the session ID and test ID
+		var tempUserSID = sessionService.getSessionID();
+		var tempTestID = sessionService.getTestID();
+		
+		// for front-end display (testing) purposes
+		$scope.userSID = tempUserSID;
+		$scope.testID = tempTestID;
+		
+		var testContainer = {
+			questions: []	 // we will store retrieved questions in this array
+		};
+		
+		$scope.loadQuestions = function() {
+			
+			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
+				{testID: $scope.testID},
+				function() {}
+			);
+			
+			// For testing purposes
+			console.log(testContainer.questions);
 
-    // Create new Article
-    // $scope.create = function (isValid) {
-    //   $scope.error = null;
+		};
+		
+		$scope.testQuestions = testContainer.questions;
 
-    //   if (!isValid) {
-    //     $scope.$broadcast('show-errors-check-validity', 'articleForm');
-
-    //     return false;
-    //   }
-
-    //   // Create new Article object
-    //   var article = new Articles({
-    //     title: this.title,
-    //     content: this.content
-    //   });
-
-    //   // Redirect after save
-    //   article.$save(function (response) {
-    //     $location.path('articles/' + response._id);
-
-    //     // Clear form fields
-    //     $scope.title = '';
-    //     $scope.content = '';
-    //   }, function (errorResponse) {
-    //     $scope.error = errorResponse.data.message;
-    //   });
-    // };
-
-    // Remove existing Article
-    // $scope.remove = function (article) {
-    //   if (article) {
-    //     article.$remove();
-
-    //     for (var i in $scope.articles) {
-    //       if ($scope.articles[i] === article) {
-    //         $scope.articles.splice(i, 1);
-    //       }
-    //     }
-    //   } else {
-    //     $scope.article.$remove(function () {
-    //       $location.path('articles');
-    //     });
-    //   }
-    // };
-
-    // // Update existing Article
-    // $scope.update = function (isValid) {
-    //   $scope.error = null;
-
-    //   if (!isValid) {
-    //     $scope.$broadcast('show-errors-check-validity', 'articleForm');
-
-    //     return false;
-    //   }
-
-    //   var article = $scope.article;
-
-    //   article.$update(function () {
-    //     $location.path('articles/' + article._id);
-    //   }, function (errorResponse) {
-    //     $scope.error = errorResponse.data.message;
-    //   });
-    // };
-
-    // Find a list of Articles
-    $scope.find = function () {
-      $scope.questions = Questions.query(); //Get singular, query is array.
-    };
-
-    // Find existing Article
-    $scope.findOne = function () {
-      $scope.questions = Questions.get({
-        questionId: $stateParams.questionId
-      });
-    };
-  }
+	}
 ]);
