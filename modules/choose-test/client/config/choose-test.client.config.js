@@ -1,6 +1,6 @@
 'use strict';
 
-// Configuring the Chat module
+// Configuring the choose-test module
 angular.module('choose-test').run(['Menus',
   // Adds menu item for this page
   function (Menus) {

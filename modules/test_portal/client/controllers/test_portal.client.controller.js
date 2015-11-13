@@ -9,7 +9,8 @@ angular.module('test_portal').controller('QuestionsController', [
 	'sessionService',
 	'questionsService', 
 	'questionsByTestIDService',
-	function ($scope, $stateParams, $location, Authentication, sessionService, questionsService, questionsByTestIDService) {
+	'takeTestService',
+	function ($scope, $stateParams, $location, Authentication, sessionService, questionsService, questionsByTestIDService, takeTestService) {
 	  	
 		$scope.authentication = Authentication;
 		
@@ -17,32 +18,83 @@ angular.module('test_portal').controller('QuestionsController', [
 		if (!Authentication.user) {
 			$location.path('/');
 		}
+				
+		$scope.currentPage = 0;
 		
-		// get the session ID and test ID
-		var tempUserSID = sessionService.getSessionID();
-		var tempTestID = sessionService.getTestID();
+		$scope.formData = {
+			answer: String
+		};
 		
-		// for front-end display (testing) purposes
-		$scope.userSID = tempUserSID;
-		$scope.testID = tempTestID;
+		$scope.numberOfPages = function() {
+			return $scope.testQuestions.questions.length;
+		};
 		
 		var testContainer = {
-			questions: []	 // we will store retrieved questions in this array
+			questions: [],	// we will store retrieved questions in this array
+			answers: []		// we will store the user's answers in this array
 		};
 		
+		$scope.testQuestions = {
+			questions: []
+		};
+				
 		$scope.loadQuestions = function() {
-			
+						
 			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
-				{testID: $scope.testID},
-				function() {}
+				{testID: sessionService.getTestID()},
+				function() {
+
+					takeTestService.setQuestions(testContainer.questions);
+					$scope.testQuestions.questions = testContainer.questions;
+					
+				}
 			);
 			
-			// For testing purposes
-			console.log(testContainer.questions);
-
 		};
 		
-		$scope.testQuestions = testContainer.questions;
+		$scope.saveAnswer = function() {
+			
+			testContainer.answers[$scope.currentPage] = $scope.formData.answer;
+			
+			/*
+			// For testing purposes
+			console.log("testContainer...");
+			console.log(testContainer);
+			console.log("testContainer.answers...");
+			console.log(testContainer.answers);
+			console.log("$scope.formData.answer...");
+			console.log($scope.formData.answer);
+			*/
+			
+		};
+
+		$scope.previousQuestion = function() {
+			
+			$scope.currentPage = $scope.currentPage - 1;	// Update pagination (show requested question)
+		
+			if(testContainer.answers[$scope.currentPage] !== 0) {
+				$scope.formData.answer = testContainer.answers[$scope.currentPage]; // Retrieve the user's answer for this question
+			} else {
+				$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
+			}
+			
+			// To-do, save this answer to the DB on question switch
+		
+		};
+		
+		$scope.nextQuestion = function() {
+			
+			$scope.currentPage = $scope.currentPage + 1;	// Update pagination (show requested question)
+			
+			if(testContainer.answers[$scope.currentPage] !== 0) {
+				$scope.formData.answer = testContainer.answers[$scope.currentPage]; // Retrieve the user's answer for this question
+			} else {
+				$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
+			}
+			
+			// To-do, save this answer to the DB on question switch
+			
+		};
 
 	}
 ]);
