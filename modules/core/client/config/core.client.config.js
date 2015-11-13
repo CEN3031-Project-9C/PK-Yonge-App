@@ -66,6 +66,24 @@ angular.module('core').run(['Menus',
       //title: 'Calculator',
       //state: 'calculator',
     //});
-
+  // Add User Login n Out
+    Menus.addMenuItem('topbar', {
+      title: 'Account',
+      state: 'loginDropDown',
+      type: 'dropdown',
+      roles: ['*']
+    });
+    Menus.addSubMenuItem('topbar', 'loginDropDown', {
+      title: 'Sign-In',
+      state: 'authentication.signin'
+    });
+    Menus.addSubMenuItem('topbar', 'loginDropDown', {
+      title: 'Sign-Out',
+      state: 'signOut'
+    });
+    Menus.addSubMenuItem('topbar', 'loginDropDown', {
+      title: 'Forgot Password',
+      state: 'password.forgot'
+    });
   }
 ]);

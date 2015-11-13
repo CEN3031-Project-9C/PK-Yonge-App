@@ -26,7 +26,14 @@ Calc.directive("bnDocumentKeypress", function($document, $parse) {
    return linkFunction;
 });
 
-Calc.controller("CalcController", function($scope) {
+Calc.controller("CalcController", function($scope,Authentication) {
+  $scope.authentication = Authentication;
+    
+    // If user is not signed in then redirect back home
+    if (!Authentication.user) {
+     $location.path('/');
+    }
+    
   var n;
   $scope.calcInput = '0';
   $scope.memory = 0;
