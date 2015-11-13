@@ -20,6 +20,13 @@ angular.module('test_portal').config(['$stateProvider',
 	      data: {
 		    roles: ['user', 'admin']
 		  }
-	  });
+	  })
+	  .state('take-test', {
+        url: '/take-test',
+        templateUrl: 'modules/test_portal/client/views/take-test.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
+      });
   }
 ]);

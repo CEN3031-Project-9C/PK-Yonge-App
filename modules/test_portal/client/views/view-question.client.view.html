@@ -1,21 +1,27 @@
 <!-- The view-test view -->
-<section id="choose-test" class="container" ng-controller="QuestionsController" ng-init="loadQuestions()">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="page-header">
-				<h1>View Test</h1>
+<section id="take-test" ng-controller="QuestionsController" ng-init="loadQuestions()">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 test-con">
+				<h2 class="test-title">{{testName}}</h2>
+				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
+					{{currentPage+1}}/{{numberOfPages()}}
+				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="currentPage=currentPage+1">Next</button>
+				<div ng-repeat="question in testQuestions.questions | startFrom:currentPage | limitTo:1">
+					<h2 class="question-title">{{question.question_body}}</h2>
+					<form ng-submit="saveAnswer()">
+						<div ng-repeat="answer_choice in question.answer_choices">
+							<div class="radio">
+								<label class="answer-choice">
+									<input type="radio" ng-model="formData.selectedAnswers[$index]" name="answerSelections{{$parent.$index}}" id="answerSelection{{$index}}" value="{{$index}}">
+									{{answer_choice}}
+								</label>
+							</div>
+						</div>
+						<input type="submit" class="btn btn-default" value="Save Answer Choice"></input>
+					</form>
+				</div>
 			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6 test-con">
-			<h2 class="test-title">Title</h2>
-			<p>User's session ID: {{userSID}}</p>
-			<p>User's test ID: {{testID}}</p>
-		</div>
-		<div class="col-md-6 test-con">
-			<h2 class="test-title">Title</h2>
-			<p>{{testQuestions}}</p>
 		</div>
 	</div>
 </section>

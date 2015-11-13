@@ -9,7 +9,8 @@ angular.module('test_portal').controller('QuestionsController', [
 	'sessionService',
 	'questionsService', 
 	'questionsByTestIDService',
-	function ($scope, $stateParams, $location, Authentication, sessionService, questionsService, questionsByTestIDService) {
+	'takeTestService',
+	function ($scope, $stateParams, $location, Authentication, sessionService, questionsService, questionsByTestIDService, takeTestService) {
 	  	
 		$scope.authentication = Authentication;
 		
@@ -18,31 +19,52 @@ angular.module('test_portal').controller('QuestionsController', [
 			$location.path('/');
 		}
 		
-		// get the session ID and test ID
-		var tempUserSID = sessionService.getSessionID();
-		var tempTestID = sessionService.getTestID();
+		$scope.formData = {
+			selectedAnswers: []
+		};
 		
-		// for front-end display (testing) purposes
-		$scope.userSID = tempUserSID;
-		$scope.testID = tempTestID;
+		$scope.currentPage = 0;
+		
+		$scope.numberOfPages = function() {
+			return $scope.testQuestions.questions.length;
+		}
+		
+		//var tempUserSID = sessionService.getSessionID();
+		//var tempTestID = sessionService.getTestID();
 		
 		var testContainer = {
 			questions: []	 // we will store retrieved questions in this array
 		};
 		
-		$scope.loadQuestions = function() {
-			
-			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
-				{testID: $scope.testID},
-				function() {}
-			);
-			
-			// For testing purposes
-			console.log(testContainer.questions);
-
+		$scope.testQuestions = {
+			questions: []
 		};
 		
-		$scope.testQuestions = testContainer.questions;
+		$scope.testContainer = testContainer;
+		
+		$scope.loadQuestions = function() {
+			
+			var tempTestID = sessionService.getTestID();
+			
+			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
+				{testID: sessionService.getTestID()},
+				function() {
+
+					takeTestService.setQuestions(testContainer.questions);
+					$scope.testQuestions.questions = testContainer.questions;
+					
+				}
+			);
+			
+		};
+		
+		$scope.saveAnswer = function() {
+			console.log("$scope.formData ...");
+			console.log($scope.formData);
+			console.log("$scope.formData.answerChoice ...");
+			console.log($scope.formData.answerChoice);
+			alert('chose: '+$scope.formData.answerChoice+'');
+		};
 
 	}
 ]);

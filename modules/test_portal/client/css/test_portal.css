@@ -11,3 +11,7 @@
 .question-container.long .btn {
 	width: 450px;
 }
+
+#take-test .test-con {
+	margin: 0 auto;
+}
