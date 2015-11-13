@@ -78,6 +78,7 @@ angular.module('test_portal').controller('QuestionsController', [
 				$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
 			}
 			
+			// To-do, save this answer to the DB on question switch
 		
 		};
 		
@@ -90,6 +91,8 @@ angular.module('test_portal').controller('QuestionsController', [
 			} else {
 				$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
 			}
+			
+			// To-do, save this answer to the DB on question switch
 			
 		};
 
