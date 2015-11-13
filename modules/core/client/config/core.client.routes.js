@@ -69,7 +69,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
     //})
     .state('signOut', {
       url: '/signOut',
-      templateUrl: '/api/auth/signout',
+      templateUrl: 'api/auth/signout',
       data: {
         ignoreState: true
       }
