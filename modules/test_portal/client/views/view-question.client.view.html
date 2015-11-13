@@ -4,16 +4,16 @@
 		<div class="row">
 			<div class="col-md-12 test-con">
 				<h2 class="test-title">{{testName}}</h2>
-				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
+				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()">Previous</button>
 					{{currentPage+1}}/{{numberOfPages()}}
-				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="currentPage=currentPage+1">Next</button>
+				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="nextQuestion()">Next</button>
 				<div ng-repeat="question in testQuestions.questions | startFrom:currentPage | limitTo:1">
 					<h2 class="question-title">{{question.question_body}}</h2>
 					<form ng-submit="saveAnswer()">
 						<div ng-repeat="answer_choice in question.answer_choices">
 							<div class="radio">
 								<label class="answer-choice">
-									<input type="radio" ng-model="formData.selectedAnswers[$index]" name="answerSelections{{$parent.$index}}" id="answerSelection{{$index}}" value="{{$index}}">
+									<input type="radio" ng-model="formData.answer" name="answerChoice" value="{{$index}}">
 									{{answer_choice}}
 								</label>
 							</div>
