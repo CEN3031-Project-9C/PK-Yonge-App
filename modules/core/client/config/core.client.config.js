@@ -85,5 +85,9 @@ angular.module('core').run(['Menus',
       title: 'Forgot Password',
       state: 'password.forgot'
     });
+     Menus.addSubMenuItem('topbar', 'loginDropDown', {
+      title: 'User Profile Settings',
+      state: 'settings.password'
+    });
   }
 ]);
