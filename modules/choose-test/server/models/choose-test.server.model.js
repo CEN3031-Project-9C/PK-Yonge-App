@@ -30,4 +30,4 @@ var User_sessionSchema = new Schema({
 	}
 });
 
-//mongoose.model('User_session', User_sessionSchema);
+mongoose.model('User_session', User_sessionSchema);
