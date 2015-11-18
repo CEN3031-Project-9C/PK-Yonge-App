@@ -30,7 +30,7 @@
 
   <!-- Fav Icon -->
   <link href="{{url}}{{favicon}}" rel="shortcut icon" type="image/x-icon">
-
+  
   <!-- Application CSS Files -->
   {% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
 </head>
@@ -58,6 +58,8 @@
   <!--Livereload script rendered -->
   <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
   {% endif %}
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type ="text/javascript"></script>
 </body>
 
 </html>

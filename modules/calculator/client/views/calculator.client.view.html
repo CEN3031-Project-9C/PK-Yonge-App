@@ -1,0 +1,54 @@
+<!-- The calculator view -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type ="text/javascript"></script>
+
+<section id="calculator" ng-controller="CalcController" bn-document-keypress="handleKeypress($event)">
+
+	<div class="clearfix">
+	<form class="ng-pristine ng-valid">
+		<div class="calc">
+			<div ng-bind="calcInput" class="screen ng-binding"></div>
+			<div class="buttonpad clearfix">
+				<a ng-click="memoryClear()">MC</a>
+				<a ng-click="memoryAdd()">M+</a>
+				<a ng-click="memorySub()">M-</a>
+				<a ng-click="memoryShow()" id="memoryBtn">MR</a>
+				<a ng-click="clearCalc()">C</a>
+				<a ng-click="changeSign()">&plusmn;</a>
+				<a ng-click="acceptInput('/')">&divide;</a>
+				<a ng-click="acceptInput('*')">&times;</a>
+				<a ng-click="acceptInput(7)">7</a>
+				<a ng-click="acceptInput(8)">8</a>
+				<a ng-click="acceptInput(9)">9</a>
+				<a ng-click="acceptInput('-')">&minus;</a>
+				<a ng-click="acceptInput(4)">4</a>
+				<a ng-click="acceptInput(5)">5</a>
+				<a ng-click="acceptInput(6)">6</a>
+				<a ng-click="acceptInput('+')">&plus;</a>
+				<a ng-click="doMath()"class="equal-sign">=</a>
+				<a ng-click="acceptInput(1)">1</a>
+				<a ng-click="acceptInput(2)">2</a>
+				<a ng-click="acceptInput(3)">3</a>
+				<a class="zero" ng-click="acceptInput(0)">0</a>
+				<a ng-click="acceptInput('.')">.</a>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37350838-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</section>
+
+
+
