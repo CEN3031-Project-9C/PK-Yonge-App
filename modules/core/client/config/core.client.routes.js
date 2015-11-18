@@ -52,6 +52,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         ignoreState: true
       }
     })
+
     .state('access', {
       url: '/instructions/access',
       templateUrl: 'modules/core/client/views/access.client.view.html',
@@ -59,13 +60,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         ignoreState: true
       }
     })
-    .state('signIn', {
-      url: '/instructions/signIn',
-      templateUrl: 'modules/core/client/views/signIn.client.view.html',
-      data: {
-        ignoreState: true
-      }
-    })
+    
     .state('features', {
       url: '/instructions/features',
       templateUrl: 'modules/core/client/views/features.client.view.html',
@@ -80,6 +75,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         ignoreState: true
       }
     })
+     //.state('calculator', {
+       // url: '/calculator',
+        //templateUrl: 'modules/calculator/client/views/calculator.client.view.html',
+        //data: {
+          //ignoreState: true
+          //roles: ['user', 'admin']
+        //}
+      //})
     .state('question1', {
       url: '/question1',
       templateUrl: 'modules/test_portal/client/views/question1.client.view.html',
