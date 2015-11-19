@@ -60,7 +60,13 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         ignoreState: true
       }
     })
-    
+     .state('signIn', {
+      url: '/instructions/signIn',
+      templateUrl: 'modules/core/client/views/signIn.client.view.html',
+      data: {
+        ignoreState: true
+      }
+    })
     .state('features', {
       url: '/instructions/features',
       templateUrl: 'modules/core/client/views/features.client.view.html',

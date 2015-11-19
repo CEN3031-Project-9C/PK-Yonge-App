@@ -35,19 +35,6 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
-
-.ng-hide {
-  /* this is just another form of hiding an element */
-  display: block!important;
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
-}
-
-.content {
-  margin-top: 50px;
-}
-
 html {
   background:#0175CA url(../img/blue-geo-tiles.png) no-repeat center center fixed; 
   min-height:100%;
@@ -56,7 +43,6 @@ html {
        -o-background-size: cover;
           background-size: cover;
 }
-
 body {
   background:transparent;
   min-height:100%;  
@@ -68,7 +54,6 @@ body {
   color: #fefefe !important;
   font-weight: normal;
 }
-
 /* Used to make the Edit inputs initially invisible. */
 #hide {
   display:none;
@@ -77,135 +62,51 @@ body {
 /** Navbar **/
 
 .navbar-inverse {
-	background-image: none;
-	background-color: #1e5f8c;
-	border-bottom: 3px solid #144978;
+  background-image: none;
+  background-color: #1e5f8c;
+  border-bottom: 3px solid #144978;
 }
 
 .navbar-brand, .navbar-nav > li > a {
-	color: #fefefe !important;
-	text-shadow: none !important;
+  color: #fefefe !important;
+  text-shadow: none !important;
 }
 
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-	background-image: none !important;
-	background-color: #2c8ab8 !important;
-	box-shadow: none !important;
+  background-image: none !important;
+  background-color: #2c8ab8 !important;
+  box-shadow: none !important;
 }
 
 /** Button Styling **/
 
 #home-con a.start-test {
-	display: block;
-	width: 360px;
-	background-image: none;
-	background: none;
-	color: #fff;
-	font-size: 18px;
-	font-weight: bold;
-	text-transform: uppercase;
-	letter-spacing: 0.1em;
-	margin: 0 auto;
-	padding: 18px;
-	text-align: center;
-	border: 2px solid #fff;
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-o-border-radius: 3px;
-	transition: background-color 0.3s;
-	-webkit-transition: background-color 0.3s;
-	-moz-transition: background-color 0.3s;
-	-o-transition: background-color 0.3s;
+  display: block;
+  width: 360px;
+  background-image: none;
+  background: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 auto;
+  padding: 18px;
+  text-align: center;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  transition: background-color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
 }
 
 #home-con a.start-test:hover, #home-con a.start-test:active {
-	background-color: #3498db;
+  background-color: #3498db;
 }
-
-/********************************************************/
-/*                    Navigation bar                    */
-/********************************************************/
-.mainmenu { z-index: 999999; width:100%;  padding: 30px 0 0 0;}
-@media (min-width: 768px) {
-  .mainmenu { position: fixed; }
-}
-
-.navbar-toggle {
-  position:relative;
-  float:left;
-  display:block;
-  padding: 9px 10px;
-  background: rgba(22, 110, 184, 0.2);
-  background-image: none;
-  border: 0 none;
-  top:0px; 
-  -webkit-border-radius: 2px;
-     -moz-border-radius: 2px;
-          border-radius: 2px;
-  outline: 0;
-  opacity: 1;
-  -webkit-transition: all .45s;
-     -moz-transition: all .45s;
-          transition: all .45s;
-          float: left;
-}
-.navbar-toggle .icon-bar {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: #fff;
-}
-.navbar-toggle .icon-bar + .icon-bar {
-  margin-top: 4px;
-}
-.open .navbar-toggle { 
-  top:-70px; 
-  opacity: 0;  
-}
-.mainmenu .dropdown-menu {
-  top: -14em;
-  left: 0px;
-  font-size: 13px;
-  padding:0;
-  background:none;
-  border:0 none;
-  border-radius: 2px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  display:block;
-  opacity:0;
-  -webkit-transition: all .45s;
-     -moz-transition: all .45s;
-          transition: all .45s;
-}
-.mainmenu .dropdown-menu .active { 
-  font-weight:bold;
-}
-.mainmenu .open .dropdown-menu { 
-  top:2px;
-  opacity:1;
-}
-.mainmenu .dropdown-menu a { 
-  padding:5px 5px;
-  margin:0;
-  color:white;
-  text-decoration: none;
-  -webkit-border-radius: 2px;
-     -moz-border-radius: 2px;
-          border-radius: 2px;
-}
-.mainmenu .dropdown-menu a:hover { 
-  background:rgba(255,255,255,.1);
-  color:white;
-  padding:5px 8px 5px 12px;
-}
-
-
-
-/********************************************************/
-/*             Sections - universal classes             */
-/********************************************************/
 .section { 
   z-index: 1;
   min-height:420px;
@@ -442,6 +343,3 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 .thumbnail .caption {
   color: inherit;
 }
-
-
-

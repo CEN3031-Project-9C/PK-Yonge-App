@@ -26,7 +26,7 @@ Calc.directive("bnDocumentKeypress", function($document, $parse) {
    return linkFunction;
 });
 
-Calc.controller("CalcController", function($scope,,$location,Authentication) {
+Calc.controller("CalcController", function($scope,$location,Authentication) {
   $scope.authentication = Authentication;
     
     // If user is not signed in then redirect back home
