@@ -7,7 +7,7 @@
 				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span></button>
 					{{currentPage+1}}/{{numberOfPages()}}
 				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="nextQuestion()"><span class="glyphicon glyphicon-arrow-right"></span></button>
-				<button class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span>     Notepad</button>
+				<button class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span>     Notepad</button>
 				<button class="btn {{marked}}" ng-click="mark_unmark()"><span class="glyphicon glyphicon-flag"></span> {{reviewButtonText}}</button>
 
 				<!-- DROP DOWN MENU WITH NOTEPAD/MARK FOR REVIEW/TUTORIAL/STRIKETHOUGH/etc/ --
