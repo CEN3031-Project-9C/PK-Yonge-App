@@ -24,6 +24,9 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.formData = {
 			answer: String
 		};
+
+		$scope.marked = "btn-default";
+		$scope.reviewButtonText = "Mark for Review";
 		
 		$scope.numberOfPages = function() {
 			return $scope.testQuestions.questions.length;
@@ -53,10 +56,6 @@ angular.module('test_portal').controller('QuestionsController', [
 			
 		};
 
-		$scope.markForReview = function() {
-			testContainer.review[$scope.currentPage] = $scope.formData.review;
-		};
-
 		//Next 2 methods are code in the body of BOTH previousQuestion and nextQuestion, extracted to be their own methods
 		//(if you ever were to edit the code, reduces chance of updating code in one place but not where it's duplicated elsewhere)
 		$scope.saveAnswer = function() {
@@ -81,13 +80,15 @@ angular.module('test_portal').controller('QuestionsController', [
 			} else {
 				$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
 			}
-			if(testContainer.review[$scope.currentPage] !== 0) {
-				$scope.formData.review = testContainer.review[$scope.currentPage]; // Retrieve the user's answer for this question
-			} else {
-				$scope.formData.review = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
-			}
 
-			console.log($scope.formData.answer);
+			if (testContainer.review[$scope.currentPage] === "btn-danger")
+			{
+				$scope.marked = "btn-danger";
+				$scope.reviewButtonText = "Unmark";
+			} else {
+				$scope.marked = "btn-default";
+				$scope.reviewButtonText = "Mark for Review";				
+			}
 
 			//insert code here to also reload marking for notepad , once that is set up
 		};
@@ -102,6 +103,21 @@ angular.module('test_portal').controller('QuestionsController', [
 			$scope.saveAnswer();
 			$scope.currentPage = $scope.currentPage + 1;	// Update pagination (show requested question)
 			$scope.reloadSaved();			
+		};
+
+		$scope.mark_unmark = function() {
+			if (testContainer.review[$scope.currentPage] === "btn-default")
+			{
+				testContainer.review[$scope.currentPage] = "btn-danger";
+				$scope.marked = "btn-danger";
+				$scope.reviewButtonText = "Unmark";
+			}
+			else
+			{
+				testContainer.review[$scope.currentPage] = "btn-default";
+				$scope.marked = "btn-default";
+				$scope.reviewButtonText = "Mark for Review";
+			}
 		};
 
 		$scope.submitTest = function() {
