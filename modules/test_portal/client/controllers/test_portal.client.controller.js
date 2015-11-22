@@ -51,9 +51,11 @@ angular.module('test_portal').controller('QuestionsController', [
 			);
 			
 		};
-		
-		$scope.saveAnswer = function() {
-			
+
+		//Next 2 methods are code in the body of BOTH previousQuestion and nextQuestion, extracted to be their own methods
+		//(if you ever were to edit the code, reduces chance of updating code in one place but not where it's duplicated elsewhere)
+		$scope.saveAnswer = function() 
+		{	
 			testContainer.answers[$scope.currentPage] = $scope.formData.answer;
 			
 			/*
@@ -64,36 +66,31 @@ angular.module('test_portal').controller('QuestionsController', [
 			console.log(testContainer.answers);
 			console.log("$scope.formData.answer...");
 			console.log($scope.formData.answer);
-			*/
-			
+			*/	
 		};
-
-		$scope.previousQuestion = function() {
-			$scope.saveAnswer();
-			$scope.currentPage = $scope.currentPage - 1;	// Update pagination (show requested question)
-		
+		$scope.reloadSaved = function()
+		{
 			if(testContainer.answers[$scope.currentPage] !== 0) {
 				$scope.formData.answer = testContainer.answers[$scope.currentPage]; // Retrieve the user's answer for this question
 			} else {
 				$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
 			}
-			
+
 			// To-do, save this answer to the DB on question switch
-		
+
+			//insert code here to also reload things like notepad & marking for review, once those are set up
+		};
+
+		$scope.previousQuestion = function() {
+			$scope.saveAnswer();
+			$scope.currentPage = $scope.currentPage - 1;	// Update pagination (show requested question)	
+			$scope.reloadSaved();
 		};
 		
 		$scope.nextQuestion = function() {
 			$scope.saveAnswer();
 			$scope.currentPage = $scope.currentPage + 1;	// Update pagination (show requested question)
-			
-			if(testContainer.answers[$scope.currentPage] !== 0) {
-				$scope.formData.answer = testContainer.answers[$scope.currentPage]; // Retrieve the user's answer for this question
-			} else {
-				$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
-			}
-			
-			// To-do, save this answer to the DB on question switch
-			
+			$scope.reloadSaved();			
 		};
 
 		$scope.submitTest = function() {
