@@ -69,7 +69,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		};
 
 		$scope.previousQuestion = function() {
-			
+			$scope.saveAnswer();
 			$scope.currentPage = $scope.currentPage - 1;	// Update pagination (show requested question)
 		
 			if(testContainer.answers[$scope.currentPage] !== 0) {
@@ -83,7 +83,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		};
 		
 		$scope.nextQuestion = function() {
-			
+			$scope.saveAnswer();
 			$scope.currentPage = $scope.currentPage + 1;	// Update pagination (show requested question)
 			
 			if(testContainer.answers[$scope.currentPage] !== 0) {
@@ -94,6 +94,11 @@ angular.module('test_portal').controller('QuestionsController', [
 			
 			// To-do, save this answer to the DB on question switch
 			
+		};
+
+		$scope.submitTest = function() {
+			//maybe an "are you sure?" alert
+			//save back to DB
 		};
 
 	}
