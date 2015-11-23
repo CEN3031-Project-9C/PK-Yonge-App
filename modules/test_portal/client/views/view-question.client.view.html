@@ -4,17 +4,28 @@
 		<div class="row">
 			<div class="col-md-12 test-con">
 				<h2 class="test-title">{{testName}}</h2>
-				<!--
-			
-				<a ui-sref="calculator" target="_blank" class="btn btn-default"><i class="fa fa-calculator"></i> <span class="network-name">Calculator</span></a>
-				-->
+		  </div>
+
+		<div class="row">
+			<div class="col-md-5">
+			<!--ng-progressbar directive -->
+				<ng-progressbar type="info" max="{{max_count}}" start="{{timer_running}}" on-stop="stopProgress()">
+				</ng-progressbar> 
+			</div>
+			<span class="label label-success" ng-if="timer_running">Test in Session</span>
+			<span class="label label-danger" ng-if="!timer_running">Test Not in Session</span>
+		</div>
+
 				<a ng-click="openCalcWindow()" class="btn btn-default"><i class="fa fa-calculator"></i> <span class="network-name">Calculator</span></a>
 
 				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span></button>
+
 					{{currentPage+1}}/{{numberOfPages()}}
+
 				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="nextQuestion()"><span class="glyphicon glyphicon-arrow-right"></span></button>
 				<button class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span>Notepad</button>
 				<button class="btn {{marked}}" ng-click="mark_unmark()"><span class="glyphicon glyphicon-flag"></span> {{reviewButtonText}}</button>
+				
 
 				<!-- DROP DOWN MENU WITH NOTEPAD/MARK FOR REVIEW/TUTORIAL/STRIKETHOUGH/etc/ --
 				<button class='btn btn-default'> <span uib-dropdown on-toggle="toggled(open)"> 
@@ -40,9 +51,13 @@
 								</label>
 							</div>
 						</div>
-<!-- 						<input type="submit" class="btn btn-default" value="Save Answer Choice"></input>
-						<p class="save-notice">If you select an answer, you must save it before moving on!</p> -->
-						<button class="btn btn-default" ng-click="submitTest()">SUBMIT TEST</button>
+					<!--
+	 					<input type="submit" class="btn btn-default" value="Save Answer Choice"></input>
+						<p class="save-notice">If you select an answer, you must save it before moving on!</p>
+					 -->
+						<button class="btn btn-success" ng-if="!timer_running" ng-click="startProgress()">Start Test</button>
+			  			<button class="btn btn-warning" ng-if="timer_running" ng-click="stopProgress()">Pause Test</button>
+						<button class="btn btn-default" ng-click="submitTest();stopProgress()">SUBMIT TEST</button>
 					</form>
 				</div>
 			</div>
