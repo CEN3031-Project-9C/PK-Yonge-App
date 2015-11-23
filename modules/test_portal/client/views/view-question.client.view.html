@@ -4,12 +4,28 @@
 		<div class="row">
 			<div class="col-md-12 test-con">
 				<h2 class="test-title">{{testName}}</h2>
-				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()">Previous</button>
+				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span></button>
 					{{currentPage+1}}/{{numberOfPages()}}
-				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="nextQuestion()">Next</button>
+				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="nextQuestion()"><span class="glyphicon glyphicon-arrow-right"></span></button>
+				<button class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span>     Notepad</button>
+				<button class="btn {{marked}}" ng-click="mark_unmark()"><span class="glyphicon glyphicon-flag"></span> {{reviewButtonText}}</button>
+
+				<!-- DROP DOWN MENU WITH NOTEPAD/MARK FOR REVIEW/TUTORIAL/STRIKETHOUGH/etc/ --
+				<button class='btn btn-default'> <span uib-dropdown on-toggle="toggled(open)"> 
+      <a href id="simple-dropdown" uib-dropdown-toggle>
+        <span class="glyphicon glyphicon-align-justify"></span>
+      </a>
+
+      <ul class="notepad uib-dropdown-menu" aria-labelledby="simple-dropdown">
+        <!--<li ng-repeat="choice in items">
+          <a href>{{choice}}</a>- ->
+          <li class="notepad"><!--<span class="glyphicon glyphicon-align-calendar"></span> - -><a href>Notepad</a></li>
+          <li class="markReview"><a href>Mark for Review</a></li>
+      </ul>
+        </span></button> -->
 				<div ng-repeat="question in testQuestions.questions | startFrom:currentPage | limitTo:1">
 					<h2 class="question-title">{{question.question_body}}</h2>
-					<form ng-submit="saveAnswer()">
+					<form>
 						<div ng-repeat="answer_choice in question.answer_choices">
 							<div class="radio">
 								<label class="answer-choice">
@@ -18,8 +34,9 @@
 								</label>
 							</div>
 						</div>
-						<input type="submit" class="btn btn-default" value="Save Answer Choice"></input>
-						<p class="save-notice">If you select an answer, you must save it before moving on!</p>
+<!-- 						<input type="submit" class="btn btn-default" value="Save Answer Choice"></input>
+						<p class="save-notice">If you select an answer, you must save it before moving on!</p> -->
+						<button class="btn btn-default" ng-click="submitTest()">SUBMIT TEST</button>
 					</form>
 				</div>
 			</div>
