@@ -38,25 +38,38 @@ angular.module('test_portal').controller('QuestionsController', [
 			questions: []
 		};
 				
-		$scope.loadQuestions = function() {
-						
+		$scope.loadQuestions = function() {			
 			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
 				{testID: sessionService.getTestID()},
 				function() {
 
 					takeTestService.setQuestions(testContainer.questions);
-					$scope.testQuestions.questions = testContainer.questions;
-					
+					$scope.testQuestions.questions = testContainer.questions;	
 				}
 			);
-			
 		};
 
 		//Next 2 methods are from code duplicated in the body of BOTH previousQuestion and nextQuestion, extracted to be their own methods
 		//(if you ever were to edit the code, reduces chance of updating code in one place but missing where it's duplicated elsewhere)
 		$scope.saveAnswer = function() 
-		{			
-			testContainer.answers[$scope.currentPage] = $scope.formData.answer;						
+		{					
+			testContainer.answers[$scope.currentPage] = $scope.formData.answer;		
+			if (testContainer.answers[$scope.currentPage] === undefined) //if the answer is empty, check if they want to proceed
+			{
+				var proceed = confirm("You haven't saved an answer to this question! Are you sure you want to proceed?");
+				if (proceed === true) 
+				{
+					return true; //They want to continue
+				} 
+				else 
+				{
+					return false; //They want to cancel & go back
+				}
+			}
+			else //If the answer's not empty, proceed.
+			{
+				return true;
+			}					
 			// For testing purposes
 			/*
 			console.log("testContainer...");
@@ -94,15 +107,19 @@ angular.module('test_portal').controller('QuestionsController', [
 		};
 
 		$scope.previousQuestion = function() {
-			$scope.saveAnswer();
-			$scope.currentPage = $scope.currentPage - 1;	// Update pagination (show requested question)	
-			$scope.reloadSaved();
+			if ($scope.saveAnswer())
+			{
+				$scope.currentPage = $scope.currentPage - 1;	// Update pagination (show requested question)	
+				$scope.reloadSaved();
+			}
 		};
 		
 		$scope.nextQuestion = function() {
-			$scope.saveAnswer();
-			$scope.currentPage = $scope.currentPage+1;	// Update pagination (show requested question)
-			$scope.reloadSaved();			
+			if ($scope.saveAnswer())
+			{
+				$scope.currentPage = $scope.currentPage + 1;	// Update pagination (show requested question)	
+				$scope.reloadSaved();
+			}			
 		};
 
 		$scope.checkUnanswered = function() {
@@ -146,6 +163,8 @@ angular.module('test_portal').controller('QuestionsController', [
 			{
 				// do test-ending things(save back to DB?)
 				console.log("submitted test");
+
+				//SWITCH TO POST-TEST MODULE
 			}
 			else
 			{
