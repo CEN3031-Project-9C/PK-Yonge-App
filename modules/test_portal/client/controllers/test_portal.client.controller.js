@@ -125,6 +125,8 @@ angular.module('test_portal').controller('QuestionsController', [
 			//check to see if any answers[] positions are empty & let them know they have unanswered questions
 			//save back to DB
 		};
-
+		$scope.openCalcWindow = function(){
+			var myWindow = window.open("calculator", "calcWindow", "scrollbars=yes, resizable=yes, top=200, left=700, width=425, height=450");
+		};
 	}
 ]);

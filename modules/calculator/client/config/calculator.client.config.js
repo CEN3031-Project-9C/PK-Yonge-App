@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 // Configuring the calculator module
 angular.module('calculator').run(['Menus',
   // Adds menu item for this page
@@ -11,3 +11,4 @@ angular.module('calculator').run(['Menus',
     });
   }
 ]);
+*/
