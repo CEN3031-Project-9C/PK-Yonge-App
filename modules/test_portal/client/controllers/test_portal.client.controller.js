@@ -22,7 +22,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.currentPage = 0;
 		
 		$scope.formData = {
-			answer: String
+			answer: undefined
 		};
 		
 		$scope.numberOfPages = function() {
@@ -31,7 +31,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		
 		var testContainer = {
 			questions: [],	// we will store retrieved questions in this array
-			answers: []		// we will store the user's answers in this array
+			answers: []	// we will store the user's answers in this array
 		};
 		
 		$scope.testQuestions = {
@@ -56,21 +56,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		//(if you ever were to edit the code, reduces chance of updating code in one place but missing where it's duplicated elsewhere)
 		$scope.saveAnswer = function() 
 		{			
-			//TEST CODE:
-			if (testContainer.answers[$scope.currentPage] === undefined)
-			{
-				console.log("before save: undefined in saveAnswer");
-			}
-
-			//actual body of the method
-			testContainer.answers[$scope.currentPage] = $scope.formData.answer;
-			
-			//TEST CODE:
-			if (testContainer.answers[$scope.currentPage] === undefined)
-			{
-				console.log("after save: undefined in saveAnswer");
-			}
-			
+			testContainer.answers[$scope.currentPage] = $scope.formData.answer;						
 			// For testing purposes
 			/*
 			console.log("testContainer...");
@@ -83,15 +69,19 @@ angular.module('test_portal').controller('QuestionsController', [
 		};
 		$scope.reloadSaved = function()
 		{
-			if(testContainer.answers[$scope.currentPage] !== 0) { //************I think it goes in here every time. (if they haven't saved an answer, I think it's undefined rather than 0)
-				console.log("not equal to 0");
-				$scope.formData.answer = testContainer.answers[$scope.currentPage]; // Retrieve the user's answer for this question
-			} 
-			else{ //*************************
-				console.log("RELOADSAVED ELSE"); 
-				$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
-			}
-			/*test to see if it's undefined when no answer has been filled out
+
+			$scope.formData.answer = testContainer.answers[$scope.currentPage];
+
+			//^Previously this statement was in the below "if," but I don't think it needs to be. value will just be "undefined" if nothing has been entered.
+			/*
+			 if(testContainer.answers[$scope.currentPage] !== 0) { //************I think it goes in here every time. (if they haven't saved an answer, I believe it's undefined rather than 0)
+			 	$scope.formData.answer = testContainer.answers[$scope.currentPage]; // Retrieve the user's answer for this question
+			 } 
+			 else{ //never enters
+			 	$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
+			 }
+
+			/*test to show that it's undefined when no answer has been filled out
 			if(testContainer.answers[$scope.currentPage] === undefined)
 			{
 				console.log("undefined at " + ($scope.currentPage+1));
@@ -111,7 +101,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		
 		$scope.nextQuestion = function() {
 			$scope.saveAnswer();
-			$scope.currentPage = $scope.currentPage + 1;	// Update pagination (show requested question)
+			$scope.currentPage = $scope.currentPage+1;	// Update pagination (show requested question)
 			$scope.reloadSaved();			
 		};
 
@@ -166,18 +156,3 @@ angular.module('test_portal').controller('QuestionsController', [
 
 	}
 ]);
-
-/* 
-CURRENT PROBLEM: I don't know how to check whether or not testContainer.answers[0] is empty or not, because
-it's not working the same way the second question does.
-
-Both testContainer.answers[0] and testContainer.answers[1] start out as undefined...
-and the second question behaves like I'd expect it to: it remains undefined even if you go back & forth between questions,
-until you select an answer choice.
-
-but with the first question, it changes to something other than "undefined" within the body of saveAnswer(), even if you don't pick any answer choice. 
-Before you execute the line inside that method, it's undefined; then afterwards, it's not.
-
-Makes problems because ===undefined is what I am currently using to check whether or not an answer is empty to warn user about it.
-And because I can't figure out what the new value of testContainer.answers[0] IS... I've tried 0 and "" and null and it is not any of those. lol
-*/
