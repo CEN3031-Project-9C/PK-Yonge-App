@@ -17,7 +17,7 @@ var text = [
   link,
   '\n',
   'Thanks,',
-  'The Team'
+  'The PK Yonge EOC Web Services Team'
 ].join('\n');
 
 mg.loadModels();
