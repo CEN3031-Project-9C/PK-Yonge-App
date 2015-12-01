@@ -98,6 +98,7 @@ angular.module('test_portal').controller('ModalDemoCtrl', function ($scope, $mod
 
 });
 
+<<<<<<< HEAD
 */
 /*
 angular.module('test_portal').controller('ModalInstanceCtrl', function ($scope,$modal, $log) {
@@ -127,6 +128,25 @@ angular.module('test_portal').controller('ModalInstanceCtrl', function ($scope,$
 
 });
 */
+
+angular.module('test_portal')
+	.directive('draggable', function () {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attrs) {
+			element.draggable({
+				cursor: "move",
+				stop: function (event, ui) {
+					scope[attrs.xpos] = ui.position.left;
+          scope[attrs.ypos] = ui.position.top;
+          scope.$apply();
+				}
+			});
+		}
+	};
+});
+
+
 // Questions controller
 angular.module('test_portal').controller('QuestionsController', [
 	'$scope', 
@@ -154,8 +174,19 @@ angular.module('test_portal').controller('QuestionsController', [
 			answer: String
 		};
 
+		$scope.Notepad = {
+			message: String
+		};
+
 		$scope.marked = "btn-default";
 		$scope.reviewButtonText = "Mark for Review";
+		$scope.divwidth = 400;
+  		$scope.divheight = 300;
+  		$scope.show = true;
+  		$scope.divtop = 80;
+  		$scope.divleft = 50;
+  		$scope.divtop2 = 180;
+  		$scope.divleft2 = 150;
 		
 		$scope.numberOfPages = function() {
 			return $scope.testQuestions.questions.length;
@@ -164,7 +195,8 @@ angular.module('test_portal').controller('QuestionsController', [
 		var testContainer = {
 			questions: [],	// we will store retrieved questions in this array
 			answers: [],	// we will store the user's answers in this array
-			review: []		// we will store whether or not questions are marked for review in this array
+			review: [],		// we will store whether or not questions are marked for review in this array
+			notes: []		// we will store the notes for the selected question in this array
 		};
 		
 		$scope.testQuestions = {
@@ -219,16 +251,20 @@ angular.module('test_portal').controller('QuestionsController', [
 				$scope.reviewButtonText = "Mark for Review";				
 			}
 
+			$scope.Notepad.message = testContainer.notes[$scope.currentPage];
+
 			//insert code here to also reload marking for notepad , once that is set up
 		};
 
 		$scope.previousQuestion = function() {
+			$scope.showNotes = false;
 			$scope.saveAnswer();
 			$scope.currentPage = $scope.currentPage - 1;	// Update pagination (show requested question)	
 			$scope.reloadSaved();
 		};
 		
 		$scope.nextQuestion = function() {
+			$scope.showNotes = false;
 			$scope.saveAnswer();
 			$scope.currentPage = $scope.currentPage + 1;	// Update pagination (show requested question)
 			$scope.reloadSaved();			
@@ -269,7 +305,6 @@ angular.module('test_portal').controller('QuestionsController', [
 		    $scope.timer_running = false;
 		};
 
-
 		//modal stuff
 		$scope.animationsEnabled = true;
 		$scope.open = function (size) {
@@ -298,5 +333,22 @@ angular.module('test_portal').controller('QuestionsController', [
 	    $modal.dismiss('cancel');
 	    //$modal.('hide');
 	  };
+=======
+		$scope.showNotes = false;
+		$scope.showTextArea = function(){
+			$scope.Notepad.message = testContainer.notes[$scope.currentPage];
+
+			$scope.showNotes = true;
+		};
+
+		$scope.cancelNotes = function(){
+			$scope.showNotes = false;
+		};
+
+		$scope.saveNotes = function(){
+			testContainer.notes[$scope.currentPage] = $scope.Notepad.message;
+			$scope.showNotes = false;
+		};
+>>>>>>> 5c891a459d91a14b0dd8db8ab3bd0885459e0507
 	}
 ]);
