@@ -24,11 +24,18 @@ angular.module('test_portal')
 						$scope.stop();
 						$scope.onStop();
 					}
+					if($scope.startAt > 0 && $scope.startAt < $scope.max){
+						$scope.resume();
+					}
 					$scope.percent_complete = Number(100 * $scope.current / $scope.max);
 				};
-
+				$scope.resume = function() {
+					$scope.startAt = $scope.current;
+					console.log($scope.current);
+				};
 				$scope.stop = function() {
 					$timeout.cancel($scope.mytimeout);
+					console.log($scope.current);
 				};
         	}],
 
@@ -38,26 +45,101 @@ angular.module('test_portal')
 					console.log('observe start change');
 					if(value === 'true') {
 						scope.startAt = 0;
+						//scope.startAt = scope.current;
 						scope.mytimeout = $timeout(scope.onTimeout,1000);
 					}else if(value ==='false') {
+						//scope.resume();
 						scope.stop();
 					}	
 				});
 			}
 		};
 	});
+/*
+angular.module('test_portal').controller('ModalDemoCtrl', function ($scope, $modal, $log) {
 
+  $scope.animationsEnabled = true;
+  $scope.timer_running = false;
+  $scope.max_count = 100;
+
+ 	$scope.startProgress = function() {
+		$scope.timer_running = true;
+	};
+
+	$scope.stopProgress = function(){
+		$scope.timer_running = false;
+		    //pop up modal to pause the test...
+	};
+
+  $scope.open = function (size) {
+
+    var modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+        items: function () {
+          return $scope.items;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $scope.toggleAnimation = function () {
+    $scope.animationsEnabled = !$scope.animationsEnabled;
+  };
+
+});
+
+*/
+/*
+angular.module('test_portal').controller('ModalInstanceCtrl', function ($scope,$modal, $log) {
+  
+  $scope.open = function (size) {
+
+  	$scope.animationsEnabled = true;
+    var modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'myModalContent.html',
+      //controller: 'ModalInstanceCtrl',
+      size: size,
+      
+    });
+
+   };
+
+  $scope.ok = function () {
+  	$scope.stopProgress();
+    $modal.close();
+  };
+
+  $scope.cancel = function () {
+  	$scope.startProgress();
+    $modal.dismiss('');
+  };
+
+});
+*/
 // Questions controller
 angular.module('test_portal').controller('QuestionsController', [
 	'$scope', 
 	'$stateParams', 
-	'$location', 
+	'$location',
+	'$modal',
+	'$log', 
 	'Authentication', 
 	'sessionService',
 	'questionsService', 
 	'questionsByTestIDService',
 	'takeTestService',
-	function ($scope, $stateParams, $location, Authentication, sessionService, questionsService, questionsByTestIDService, takeTestService) {
+	function ($scope, $stateParams, $location, $modal, $log, Authentication, sessionService, questionsService, questionsByTestIDService, takeTestService) {
 	  	
 		$scope.authentication = Authentication;
 		
@@ -185,7 +267,36 @@ angular.module('test_portal').controller('QuestionsController', [
 
 		$scope.stopProgress = function(){
 		    $scope.timer_running = false;
-		    //pop up modal to pause the test...
 		};
+
+
+		//modal stuff
+		$scope.animationsEnabled = true;
+		$scope.open = function (size) {
+
+		  	$scope.animationsEnabled = true;
+		    //var modalInstance = 
+		    $modal.open({
+		      animation: $scope.animationsEnabled,
+		      templateUrl: 'myModalContent.html',
+		      //controller: 'ModalInstanceCtrl',
+		      size: size,
+		      
+		    });
+
+	   };
+
+	  $scope.ok = function () {
+	  	$scope.submitTest();
+	  	$scope.stopProgress();
+	    
+	  };
+
+	  $scope.cancel = function () {
+	  	$scope.startProgress();
+	    $modal.close();
+	    $modal.dismiss('cancel');
+	    //$modal.('hide');
+	  };
 	}
 ]);

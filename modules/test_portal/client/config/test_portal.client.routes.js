@@ -27,6 +27,13 @@ angular.module('test_portal').config(['$stateProvider',
         data: {
           roles: ['user', 'admin']
         }
-      });
+      })
+    .state('markForReview', {
+        url: 'markForReview-questions',
+        templateUrl: 'modules/test_portal/client/views/markForReview.client.view.html',
+        data: {
+        roles: ['user', 'admin']
+      }
+    });
   }
 ]);

@@ -1,5 +1,5 @@
 <!-- The view-test view -->
-<section id="take-test" ng-controller="QuestionsController" ng-init="loadQuestions()">
+<section id="markForReview" ng-controller="QuestionsController" ng-init="loadQuestions()">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12 test-con">
@@ -29,7 +29,7 @@
 				          <a ng-click="jumpTo(question.question_number)">{{question.question_body}}</a>
 				        </li>
 			            <li class="divider"></li>
-			            <li role="menuitem"><a ui-sref="markForReview">Review Mark for Review Questions</a></li>
+			            <li role="menuitem"><ui-sref="markForReview">Marked for Review Questions</a></li>
 			        </ul>
 			    </div>
 
@@ -51,10 +51,10 @@
           <li class="markReview"><a href>Mark for Review</a></li>
       </ul>
         </span></button> -->
-				<div ng-repeat="question in testQuestions.questions | startFrom:currentPage | limitTo:1">
+				<div ng-repeat="question in testContainer.review | startFrom:currentPage | limitTo:1">
 					<h2 class="question-title">{{question.question_body}}</h2>
 					<form>
-						<div ng-repeat="answer_choice in question.answer_choices">
+						<div ng-repeat="answer_choice in testContainer.answers">
 							<div class="radio">
 								<label class="answer-choice">
 									<input type="radio" ng-model="formData.answer" name="answerChoice" value="{{$index}}">
