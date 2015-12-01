@@ -333,7 +333,6 @@ angular.module('test_portal').controller('QuestionsController', [
 	    $modal.dismiss('cancel');
 	    //$modal.('hide');
 	  };
-=======
 		$scope.showNotes = false;
 		$scope.showTextArea = function(){
 			$scope.Notepad.message = testContainer.notes[$scope.currentPage];
@@ -349,6 +348,5 @@ angular.module('test_portal').controller('QuestionsController', [
 			testContainer.notes[$scope.currentPage] = $scope.Notepad.message;
 			$scope.showNotes = false;
 		};
->>>>>>> 5c891a459d91a14b0dd8db8ab3bd0885459e0507
 	}
 ]);
