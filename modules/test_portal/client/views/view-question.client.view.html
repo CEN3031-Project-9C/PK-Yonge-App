@@ -23,7 +23,7 @@
 					{{currentPage+1}}/{{numberOfPages()}}
 
 				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="nextQuestion()"><span class="glyphicon glyphicon-arrow-right"></span></button>
-				<button class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span>Notepad</button>
+				<button class="btn btn-default" ng-click="showTextArea()"><span class="glyphicon glyphicon-pencil"></span> Notepad</button>
 				<button class="btn {{marked}}" ng-click="mark_unmark()"><span class="glyphicon glyphicon-flag"></span> {{reviewButtonText}}</button>
 				
 
@@ -58,6 +58,30 @@
 						<button class="btn btn-success" ng-if="!timer_running" ng-click="startProgress()">Start Test</button>
 			  			<button class="btn btn-warning" ng-if="timer_running" ng-click="stopProgress()">Pause Test</button>
 						<button class="btn btn-default" ng-click="submitTest();stopProgress()">SUBMIT TEST</button>
+						<div ng-show="showNotes" class='question_notes' ng-style="{left: divleft, top: divtop, width: divwidth, height: divheight}" draggable xpos="divleft" ypos="divtop">
+							<div class='question_notes2'>
+								<h2>Notepad</h2>
+									<div class='question_notes3'>
+									<textarea ng-model='Notepad.message' name="noteArea" cols="40" rows="10">{{message}}</textarea>
+									</div>
+								<div class='notepad_footer'>
+									<span class='button-group'>
+										<span class='notepad_cancel1'>
+											<span class='notepad_cancel2'>
+										<button class="btn btn-default notepad_cancel_button" ng-click='cancelNotes()'>Cancel</button>
+											</span>
+										</span>
+
+										<span class='notepad_save1'>
+											<span class='notepad_cancel2'>
+										<button  class="btn btn-default notepad_save_button" ng-click='saveNotes()'>Save & Close</button>
+											</span>
+										</span>
+									</span>
+								</div>
+								<div class="underlay"></div>
+							</div>
+						</div>
 					</form>
 				</div>
 			</div>
