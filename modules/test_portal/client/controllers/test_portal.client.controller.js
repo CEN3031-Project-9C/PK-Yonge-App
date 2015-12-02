@@ -270,6 +270,13 @@ angular.module('test_portal').controller('QuestionsController', [
 			$scope.reloadSaved();			
 		};
 
+		$scope.jumpTo = function(num){
+			$scope.showNotes = false;
+			$scope.saveAnswer();
+			$scope.currentPage = num;
+			$scope.reloadSaved();
+		};
+
 		$scope.mark_unmark = function() {
 			if (testContainer.review[$scope.currentPage] === "btn-default")
 			{
