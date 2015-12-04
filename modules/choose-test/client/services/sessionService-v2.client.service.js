@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('choose-test').factory('sessionService-v2', function() {
+angular.module('choose-test').factory('sessionServiceV2', function() {
 	
   var sessionContainer = {
 	  _id: 0,
 	  test_id: "",
-    time: 0,
-    complete: false,
+    timer: 0,
+    completed: false,
     review: [],
     user_answer: [],
     user_notepad: [],
@@ -33,24 +33,24 @@ angular.module('choose-test').factory('sessionService-v2', function() {
 
   //TIME
   sessionContainer.setTime = function(theID) {
-    sessionContainer.tID = theID;
+    sessionContainer.timer = theID;
   };
   
   sessionContainer.getTime = function() {
-    return sessionContainer.tID;
+    return sessionContainer.timer;
   };
 
   //COMPLETE
   sessionContainer.setComplete = function(theID) {
-    sessionContainer.tID = theID;
+    sessionContainer.completed = theID;
   };
   
   sessionContainer.getComplete = function() {
-    return sessionContainer.tID;
+    return sessionContainer.completed;
   };
 
   //REVIEW
-  sessionContainer.setReview = function(newarray[]) {
+  sessionContainer.setReview = function(newarray) {
     sessionContainer.review = newarray;
   };
   
@@ -59,7 +59,7 @@ angular.module('choose-test').factory('sessionService-v2', function() {
   };
 
    //USER_ANSWER
-  sessionContainer.setUserAnswer = function(newarray[]) {
+  sessionContainer.setUserAnswer = function(newarray) {
     sessionContainer.user_answer = newarray;
   };
   
@@ -68,7 +68,7 @@ angular.module('choose-test').factory('sessionService-v2', function() {
   };
 
    //REVIEW
-  sessionContainer.setUserNotepad = function(newarray[]) {
+  sessionContainer.setUserNotepad = function(newarray) {
     sessionContainer.user_notepad = newarray;
   };
   

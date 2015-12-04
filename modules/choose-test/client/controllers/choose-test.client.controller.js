@@ -9,8 +9,8 @@ angular.module('choose-test').controller(
 	'$location', 
 	'Authentication', 
 	'User_sessions', 
-	'sessionService',
-	function ($scope, $state, $stateParams, $location, Authentication, User_sessions, sessionService) {
+	'sessionServiceV2',
+	function ($scope, $state, $stateParams, $location, Authentication, User_sessions, sessionServiceV2) {
 		$scope.authentication = Authentication;
 		
 		// If user is not signed in then redirect back home
@@ -44,8 +44,8 @@ angular.module('choose-test').controller(
 			
 			var user_session = new User_sessions({		// Create new Session object
 			   test_id: testID,							// Set test ID to the test ID
-			   time: 0, 								// Elapsed time (int)
-			   complete: false, 						// Test state (boolean)
+			   timer: 0, 								// Elapsed time (int)
+			   completed: false, 						// Test state (boolean)
 			   user_notepad: userStringTemp, 			// Create empty string array
 			   user_answer: userStringTemp, 			// Create empty string array
 			   review: userBoolTemp 					// Create empty boolean array
@@ -53,8 +53,8 @@ angular.module('choose-test').controller(
 			
 			user_session.$save(function (response) {
 			
-				sessionService.setSessionID(user_session._id);	// Make session ID available to other services/controllers
-				sessionService.setTestID(testID);	// Make the test ID available to other services/controllers
+				sessionServiceV2.setSessionID(user_session._id);	// Make session ID available to other services/controllers
+				sessionServiceV2.setTestID(testID);	// Make the test ID available to other services/controllers
 				$state.go('view-question');	// Change state to question View
 
 			}, function (errorResponse) {
