@@ -44,10 +44,8 @@
 			        </button>
 			        <ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
 			             <li ng-repeat="question in testQuestions.questions">
-				          <a ng-click="jumpTo($index)">{{$index + 1 }}</a>
+				          <a ng-click="jumpTo($index)">{{$index + 1 }} <span class="glyphicon glyphicon-flag" ng-if="check($index)"></span></a>
 				        </li>
-			            <li class="divider"></li>
-			            <li role="menuitem"><a ui-sref="markForReview">Review Mark for Review Questions</a></li>
 			        </ul>
 			    </div>
 

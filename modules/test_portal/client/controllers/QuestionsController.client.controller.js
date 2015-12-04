@@ -55,9 +55,20 @@ angular.module('test_portal').controller('QuestionsController', [
 		};
 		
 		$scope.testQuestions = {
-			questions: []
+			questions: [],
 		};
-				
+		
+		$scope.check = function(index) {
+			if (testContainer.review[index])
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		};
+
 		$scope.loadQuestions = function() {
 						
 			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
@@ -97,7 +108,7 @@ angular.module('test_portal').controller('QuestionsController', [
 				$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
 			}
 
-			if (testContainer.review[$scope.currentPage] === "btn-danger")
+			if (testContainer.review[$scope.currentPage])
 			{
 				$scope.marked = "btn-danger";
 				$scope.reviewButtonText = "Unmark";
@@ -133,15 +144,15 @@ angular.module('test_portal').controller('QuestionsController', [
 		};
 
 		$scope.mark_unmark = function() {
-			if (testContainer.review[$scope.currentPage] === "btn-default")
+			if (!testContainer.review[$scope.currentPage])
 			{
-				testContainer.review[$scope.currentPage] = "btn-danger";
+				testContainer.review[$scope.currentPage] = true;
 				$scope.marked = "btn-danger";
 				$scope.reviewButtonText = "Unmark";
 			}
 			else
 			{
-				testContainer.review[$scope.currentPage] = "btn-default";
+				testContainer.review[$scope.currentPage] = false;
 				$scope.marked = "btn-default";
 				$scope.reviewButtonText = "Mark for Review";
 			}
