@@ -1,7 +1,7 @@
 'use strict';
 
-
-angular.module('test_portal').directive('ngProgressbar', function($timeout) {
+angular.module('test_portal')
+	.directive('ngProgressbar', function($timeout) {
 	return {
 
 		restrict : 'E',

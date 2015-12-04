@@ -18,6 +18,24 @@
 
 				<a ng-click="openCalcWindow()" class="btn btn-default"><i class="fa fa-calculator"></i> <span class="network-name">Calculator</span></a>
 
+
+				<!--<div>-->
+				    <script type="text/ng-template" id="formulaModal.html">
+				        <div class="modal-header">
+				            <h3 class="modal-title">Formula Sheet</h3>
+				        </div>
+				        <div class="modal-body">
+				            <ul>
+				                <div>
+				                <iframe class="pdfSize" align="center" src="modules/core/client/img/formulaSheet.png"></iframe>
+				                </div>
+				            </ul>
+				        </div>
+				    </script>
+					
+				    <button class="btn btn-default" ng-click="openFormula('lg')"><i class="fa fa-list-ol"></i>Formula Sheet</button>
+				<!--</div> -->
+
 				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span></button>
 
 				 <div class="btn-group" dropdown keyboard-nav>
@@ -99,9 +117,9 @@
 						<button class="btn btn-default" ng-click="submitTest();stopProgress()">SUBMIT TEST</button>
 					</div>
 
-						<div ng-show="showNotes" class='question_notes' ng-style="{left: divleft, top: divtop, width: divwidth, height: divheight}" draggable xpos="divleft" ypos="divtop">
+						<div ng-show="showNotes" class='question_notes' id='dxy'> <!-- ng-style="{left: divleft, top: divtop, width: divwidth, height: divheight}" draggable xpos="divleft" ypos="divtop"> -->
 							<div class='question_notes2'>
-								<h2>Notepad</h2>
+								<h2 class='notepad_header'>Notepad</h2>
 									<div class='question_notes3'>
 									<textarea ng-model='Notepad.message' name="noteArea" cols="40" rows="10">{{message}}</textarea>
 									</div>

@@ -3,6 +3,8 @@
 // Questions controller
 angular.module('test_portal').controller('QuestionsController', [
 	'$scope', 
+	'$window', 
+	'$document',
 	'$stateParams', 
 	'$location',
 	'$modal',
@@ -12,7 +14,7 @@ angular.module('test_portal').controller('QuestionsController', [
 	'questionsService', 
 	'questionsByTestIDService',
 	'takeTestService',
-	function ($scope, $stateParams, $location, $modal, $log, Authentication, sessionServiceV2, questionsService, questionsByTestIDService, takeTestService) {
+	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, sessionServiceV2, questionsService, questionsByTestIDService, takeTestService) {
 	  	
 		$scope.authentication = Authentication;
 		
@@ -62,8 +64,8 @@ angular.module('test_portal').controller('QuestionsController', [
 				{testID: sessionServiceV2.getTestID()},
 				function() {
 
-					takeTestService.setQuestions(testContainer.questions);
-					$scope.testQuestions.questions = testContainer.questions;
+					takeTestService.setQuestions(testContainer.questions);		// Save the questions locally
+					$scope.testQuestions.questions = testContainer.questions;	// Make the questions available to the front-end
 					
 				}
 			);
@@ -203,6 +205,19 @@ angular.module('test_portal').controller('QuestionsController', [
 	    $modal.dismiss('cancel');
 	    //$modal.('hide');
 	  };
+
+      $scope.openFormula = function (size) {
+
+	    $scope.animationsEnabled = true;
+
+		    $modal.open({
+		      animation: $scope.animationsEnabled,
+		      templateUrl: 'formulaModal.html',
+		      size: size,
+		    });
+
+	   };
+
 		$scope.showNotes = false;
 		$scope.showTextArea = function(){
 			$scope.Notepad.message = testContainer.notes[$scope.currentPage];
@@ -222,5 +237,49 @@ angular.module('test_portal').controller('QuestionsController', [
 
 			//console.log("My Notes: " + sessionServiceV2.getUserNotepad());
 		};
+
+
+		 
+
+		$scope.addListeners = function (){
+			alert("Hello6");
+		    //$document.getElementById('dxy').addEventListener('mousedown', mouseDown, false);
+		    //var ele = angular.element('#dxy');
+		   var ele=  angular.element( document.querySelector( '#dxy' ) );
+		    alert("Hello");
+		    ele.addEventListener('onmousedown', mouseDown, false);
+		    alert("Hello4");
+		    $window.addEventListener('mouseup', mouseUp);
+		    alert("Hello5");
+
+		};
+
+		//$scope.mouseUp = function ()
+		 function mouseUp()
+		{
+			alert("Hello1");
+		    $window.removeEventListener('mousemove', divMove, true);
+		}
+
+		//$scope.mouseDown = function (e){
+			 function mouseDown(e){
+		alert("Hello2");
+		  $window.addEventListener('mousemove', divMove, true);
+		}
+
+		//$scope.divMove = function (e){
+			  function divMove(e){
+			alert("Hello3");
+		    //var div = $document.getElementById('dxy');
+		    var div = angular.element('#dxy');
+		  //div.style.position = 'absolute';
+		  //div.style.top = e.clientY + 'px';
+		  //div.style.left = e.clientX + 'px';
+		  div.css("position", 'absolute');
+		  div.css("top", e.clientY + 'px');
+		  div.css("left", e.clientX + 'px');
+			}
+
+
 	}
 ]);
