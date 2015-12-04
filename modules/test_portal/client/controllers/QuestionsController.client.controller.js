@@ -26,7 +26,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.currentPage = 0;
 		
 		$scope.formData = {
-			answer: String
+			answer: undefined
 		};
 
 		$scope.Notepad = {
@@ -87,8 +87,25 @@ angular.module('test_portal').controller('QuestionsController', [
 		//(if you ever were to edit the code, reduces chance of updating code in one place but not where it's duplicated elsewhere)
 		$scope.saveAnswer = function() {
 			testContainer.answers[$scope.currentPage] = $scope.formData.answer;
+			sessionServiceV2.setUserAnswer(testContainer.answers);	
+			if (testContainer.answers[$scope.currentPage] === undefined) //if the answer is empty, check if they want to proceed
+			{
+				var proceed = confirm("You haven't saved an answer to this question! Are you sure you want to proceed?");
+				if (proceed === true) 
+				{
+					return true; //They want to continue
+				} 
+				else 
+				{
+					return false; //They want to cancel & go back
+				}
+			}
+			else //If the answer's not empty, proceed.
+			{
+				return true;
+			}	
 
-			sessionServiceV2.setUserAnswer(testContainer.answers);
+
 			/*
 			// For testing purposes
 			console.log("testContainer...");
@@ -105,11 +122,16 @@ angular.module('test_portal').controller('QuestionsController', [
 		};
 		$scope.reloadSaved = function()
 		{
-			if(testContainer.answers[$scope.currentPage] !== 0) {
-				$scope.formData.answer = testContainer.answers[$scope.currentPage]; // Retrieve the user's answer for this question
-			} else {
-				$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
-			}
+			$scope.formData.answer = testContainer.answers[$scope.currentPage];
+
+			//^Previously this statement was in the below "if," but I don't think it needs to be. value will just be "undefined" if nothing has been entered.
+			/*
+			 if(testContainer.answers[$scope.currentPage] !== 0) { //************I think it goes in here every time. (if they haven't saved an answer, I believe it's undefined rather than 0)
+			 	$scope.formData.answer = testContainer.answers[$scope.currentPage]; // Retrieve the user's answer for this question
+			 } 
+			 else{ //never enters
+			 	$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
+			 }*/
 
 			if (testContainer.review[$scope.currentPage])
 			{
@@ -126,17 +148,21 @@ angular.module('test_portal').controller('QuestionsController', [
 		};
 
 		$scope.previousQuestion = function() {
-			$scope.showNotes = false;
-			$scope.saveAnswer();
-			$scope.currentPage = $scope.currentPage - 1;	// Update pagination (show requested question)	
-			$scope.reloadSaved();
+			if ($scope.saveAnswer())
+			{
+				$scope.showNotes = false;
+				$scope.currentPage = $scope.currentPage - 1;	// Update pagination (show requested question)	
+				$scope.reloadSaved();
+			}
 		};
 		
 		$scope.nextQuestion = function() {
-			$scope.showNotes = false;
-			$scope.saveAnswer();
-			$scope.currentPage = $scope.currentPage + 1;	// Update pagination (show requested question)
-			$scope.reloadSaved();			
+			if ($scope.saveAnswer())
+			{
+				$scope.showNotes = false;
+				$scope.currentPage = $scope.currentPage + 1;	// Update pagination (show requested question)
+				$scope.reloadSaved();	
+			}		
 		};
 
 		$scope.jumpTo = function(num){
@@ -165,10 +191,55 @@ angular.module('test_portal').controller('QuestionsController', [
 			//console.log("My Review: " + sessionServiceV2.getReview());
 		};
 
+
+		$scope.checkUnanswered = function() {
+			var unanswered = ""; //String to represent all of the unanswered questions so they can be reported to the user.
+			for (var i = 0; i < $scope.testQuestions.questions.length; i++)
+			{
+				if (testContainer.answers[i] === undefined)
+				{
+					unanswered += (i+1);
+					if (i !== $scope.testQuestions.questions.length-1)
+					{
+						unanswered += ", ";
+					}
+				}
+			}
+			if (unanswered !== "") //If the string is not empty, then they DO have unanswered questions.
+			{ //Display confirmation box letting them know which questions they haven't answered and making them choose whether or not to proceed
+				var proceed = confirm("You have yet to select an answer for the following questions: \n" + unanswered + ". \n Are you sure you want to submit?");
+				if (proceed === true) 
+				{
+					return true; //They want to submit anyways.
+				} 
+				else 
+				{
+					return false; //They want to cancel & go back to their test.
+				}
+			}
+			else
+			{
+				return true; //If the string WAS empty, then they don't need the confirmation box. proceed regardless
+			}
+		};
 		$scope.submitTest = function() {
-			//maybe an "are you sure?" alert
-			//check to see if any answers[] positions are empty & let them know they have unanswered questions
-			//save back to DB
+			$scope.saveAnswer(); //If the user has selected an answer for that question, we want it to be stored.
+			
+			var proceed = $scope.checkUnanswered(); //Check whether they have unanswered questions.
+			////Returns true if they had no unanswered questions, or if they DID have unanswered questions but chose to continue
+
+			if (proceed === true) 
+			{
+				// do test-ending things(save back to DB?)
+				console.log("submitted test");
+
+				//SWITCH TO POST-TEST MODULE
+			}
+			else
+			{
+				console.log("cancel & go back to test");
+				//continue with test
+			}
 		};
 		$scope.openCalcWindow = function(){
 			var myWindow = window.open("calculator", "calcWindow", "resizable=0, location=no,menubar=no,status=no,top=200, left=700, width=425, height=450");
