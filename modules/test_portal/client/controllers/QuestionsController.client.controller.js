@@ -10,11 +10,11 @@ angular.module('test_portal').controller('QuestionsController', [
 	'$modal',
 	'$log', 
 	'Authentication', 
-	'sessionService',
+	'sessionServiceV2',
 	'questionsService', 
 	'questionsByTestIDService',
 	'takeTestService',
-	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, sessionService, questionsService, questionsByTestIDService, takeTestService) {
+	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, sessionServiceV2, questionsService, questionsByTestIDService, takeTestService) {
 	  	
 		$scope.authentication = Authentication;
 		
@@ -72,7 +72,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.loadQuestions = function() {
 						
 			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
-				{testID: sessionService.getTestID()},
+				{testID: sessionServiceV2.getTestID()},
 				function() {
 
 					takeTestService.setQuestions(testContainer.questions);		// Save the questions locally
@@ -87,7 +87,8 @@ angular.module('test_portal').controller('QuestionsController', [
 		//(if you ever were to edit the code, reduces chance of updating code in one place but not where it's duplicated elsewhere)
 		$scope.saveAnswer = function() {
 			testContainer.answers[$scope.currentPage] = $scope.formData.answer;
-			
+
+			sessionServiceV2.setUserAnswer(testContainer.answers);
 			/*
 			// For testing purposes
 			console.log("testContainer...");
@@ -97,6 +98,8 @@ angular.module('test_portal').controller('QuestionsController', [
 			console.log("$scope.formData.answer...");
 			console.log($scope.formData.answer);
 			*/
+
+			//console.log("My answers: " + sessionServiceV2.getUserAnswer());
 
 			// To-do, save this answer to the DB on question switch
 		};
@@ -156,6 +159,10 @@ angular.module('test_portal').controller('QuestionsController', [
 				$scope.marked = "btn-default";
 				$scope.reviewButtonText = "Mark for Review";
 			}
+
+			sessionServiceV2.setReview(testContainer.review);
+
+			//console.log("My Review: " + sessionServiceV2.getReview());
 		};
 
 		$scope.submitTest = function() {
@@ -198,6 +205,9 @@ angular.module('test_portal').controller('QuestionsController', [
 	  	$scope.submitTest();
 	  	$scope.stopProgress();
 	    
+	    sessionServiceV2.setComplete(testContainer.complete);
+
+	    //console.log("Completed: " + sessionServiceV2.getComplete());
 	  };
 
 	  $scope.cancel = function () {
@@ -233,6 +243,10 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.saveNotes = function(){
 			testContainer.notes[$scope.currentPage] = $scope.Notepad.message;
 			$scope.showNotes = false;
+
+			sessionServiceV2.setUserNotepad(testContainer.notes);
+
+			//console.log("My Notes: " + sessionServiceV2.getUserNotepad());
 		};
 
 
