@@ -9,7 +9,7 @@ The group working on this project consists of:
 - Cody Fitzpatrick [@CodyFitzpatrick](https://github.com/CodyFitzpatrick)
 - Nicola Frachesen [@Nicola37](https://github.com/Nicola37)
 - Guilain Huyghes-Despointes [@ghDespointes](https://github.com/ghDespointes)
-- Sara Lichtenstein [@sarahlich](https://github.com/saralich)
+- Sara Lichtenstein [@saralich](https://github.com/saralich)
 - Terry Philippe [@tjphilippe](https://github.com/tjphilippe)
 - Xiaoxi Zheng [@XiaoxiZheng](https://github.com/XiaoxiZheng)
 
