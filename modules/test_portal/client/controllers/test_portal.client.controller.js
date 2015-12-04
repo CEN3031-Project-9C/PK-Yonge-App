@@ -150,6 +150,8 @@ angular.module('test_portal')
 // Questions controller
 angular.module('test_portal').controller('QuestionsController', [
 	'$scope', 
+	'$window', 
+	'$document',
 	'$stateParams', 
 	'$location',
 	'$modal',
@@ -159,7 +161,7 @@ angular.module('test_portal').controller('QuestionsController', [
 	'questionsService', 
 	'questionsByTestIDService',
 	'takeTestService',
-	function ($scope, $stateParams, $location, $modal, $log, Authentication, sessionService, questionsService, questionsByTestIDService, takeTestService) {
+	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, sessionService, questionsService, questionsByTestIDService, takeTestService) {
 	  	
 		$scope.authentication = Authentication;
 		
@@ -355,5 +357,49 @@ angular.module('test_portal').controller('QuestionsController', [
 			testContainer.notes[$scope.currentPage] = $scope.Notepad.message;
 			$scope.showNotes = false;
 		};
+
+
+		 
+
+		$scope.addListeners = function (){
+			alert("Hello6");
+		    //$document.getElementById('dxy').addEventListener('mousedown', mouseDown, false);
+		    //var ele = angular.element('#dxy');
+		   var ele=  angular.element( document.querySelector( '#dxy' ) );
+		    alert("Hello");
+		    ele.addEventListener('onmousedown', mouseDown, false);
+		    alert("Hello4");
+		    $window.addEventListener('mouseup', mouseUp);
+		    alert("Hello5");
+
+		};
+
+		//$scope.mouseUp = function ()
+		 function mouseUp()
+		{
+			alert("Hello1");
+		    $window.removeEventListener('mousemove', divMove, true);
+		}
+
+		//$scope.mouseDown = function (e){
+			 function mouseDown(e){
+		alert("Hello2");
+		  $window.addEventListener('mousemove', divMove, true);
+		}
+
+		//$scope.divMove = function (e){
+			  function divMove(e){
+			alert("Hello3");
+		    //var div = $document.getElementById('dxy');
+		    var div = angular.element('#dxy');
+		  //div.style.position = 'absolute';
+		  //div.style.top = e.clientY + 'px';
+		  //div.style.left = e.clientX + 'px';
+		  div.css("position", 'absolute');
+		  div.css("top", e.clientY + 'px');
+		  div.css("left", e.clientX + 'px');
+			}
+
+
 	}
 ]);
