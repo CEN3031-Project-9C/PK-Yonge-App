@@ -148,6 +148,8 @@ angular.module('test_portal').controller('QuestionsController', [
 			}
 
 			sessionServiceV2.setReview(testContainer.review);
+
+			//console.log("My Review: " + sessionServiceV2.getReview());
 		};
 
 		$scope.submitTest = function() {
@@ -191,6 +193,8 @@ angular.module('test_portal').controller('QuestionsController', [
 	  	$scope.stopProgress();
 	    
 	    sessionServiceV2.setComplete(testContainer.complete);
+
+	    //console.log("Completed: " + sessionServiceV2.getComplete());
 	  };
 
 	  $scope.cancel = function () {
@@ -215,6 +219,8 @@ angular.module('test_portal').controller('QuestionsController', [
 			$scope.showNotes = false;
 
 			sessionServiceV2.setUserNotepad(testContainer.notes);
+
+			//console.log("My Notes: " + sessionServiceV2.getUserNotepad());
 		};
 	}
 ]);
