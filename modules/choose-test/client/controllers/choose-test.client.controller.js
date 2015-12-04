@@ -8,8 +8,8 @@ angular.module('choose-test').controller(
 	'$stateParams', 
 	'$location', 
 	'Authentication', 
-	'User_sessions', 
-	'sessionService',
+	'User_sessions', 	// Include "User_sessions" factory
+	'sessionService',	// Include "sessionService" factory
 	function ($scope, $state, $stateParams, $location, Authentication, User_sessions, sessionService) {
 		$scope.authentication = Authentication;
 		
