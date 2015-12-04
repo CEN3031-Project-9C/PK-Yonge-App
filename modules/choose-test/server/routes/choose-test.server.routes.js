@@ -3,20 +3,19 @@
 /**
  * Module dependencies.
  */
-var user_sessions = require('../controllers/choose-test.server.controller');
+var rest = require('../controllers/choose-test.server.controller');
 
 module.exports = function (app) {
   // Sessions collection routes
   app.route('/api/user_session/')
-    .get(user_sessions.list)
-    .post(user_sessions.create);
+    .get(rest.list)
+    .post(rest.create);
 
-  // Single article routes
+  // Single user session routes
   app.route('/api/user_session/:user_sessionId')
-    .get(user_sessions.read);
+    .get(rest.read);
   //  .put(sessions.update)
-  //.delete(sessions.delete);
 
   // Finish by binding the article middleware
-  app.param('user_sessionId', user_sessions.user_sessionByID);
+  app.param('user_sessionId', rest.user_sessionByID);
 };
