@@ -268,3 +268,18 @@ word-spacing: normal;
 -webkit-writing-mode: horizontal-tb !important;
 text-decoration: none;
 }
+
+.modal-header{
+	color: #000;
+}
+
+.modal-body{
+	color: #000;
+}
+
+.pdfSize{
+	width: 610px;
+	height: 600px;
+	display: table;
+    margin: 0 auto;
+}

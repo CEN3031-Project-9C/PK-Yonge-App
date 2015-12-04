@@ -195,6 +195,19 @@ angular.module('test_portal').controller('QuestionsController', [
 	    $modal.dismiss('cancel');
 	    //$modal.('hide');
 	  };
+
+      $scope.openFormula = function (size) {
+
+	    $scope.animationsEnabled = true;
+
+		    $modal.open({
+		      animation: $scope.animationsEnabled,
+		      templateUrl: 'formulaModal.html',
+		      size: size,
+		    });
+
+	   };
+
 		$scope.showNotes = false;
 		$scope.showTextArea = function(){
 			$scope.Notepad.message = testContainer.notes[$scope.currentPage];

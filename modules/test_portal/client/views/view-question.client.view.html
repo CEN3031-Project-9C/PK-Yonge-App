@@ -18,6 +18,24 @@
 
 				<a ng-click="openCalcWindow()" class="btn btn-default"><i class="fa fa-calculator"></i> <span class="network-name">Calculator</span></a>
 
+
+				<!--<div>-->
+				    <script type="text/ng-template" id="formulaModal.html">
+				        <div class="modal-header">
+				            <h3 class="modal-title">Formula Sheet</h3>
+				        </div>
+				        <div class="modal-body">
+				            <ul>
+				                <div>
+				                <iframe class="pdfSize" align="center" src="modules/core/client/img/formulaSheet.png"></iframe>
+				                </div>
+				            </ul>
+				        </div>
+				    </script>
+					
+				    <button class="btn btn-default" ng-click="openFormula('lg')">Formula Sheet</button>
+				<!--</div> -->
+
 				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span></button>
 
 				 <div class="btn-group" dropdown keyboard-nav>
