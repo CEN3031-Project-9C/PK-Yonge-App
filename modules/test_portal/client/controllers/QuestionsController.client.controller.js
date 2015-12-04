@@ -22,7 +22,8 @@ angular.module('test_portal').controller('QuestionsController', [
 		if (!Authentication.user) {
 			$location.path('/');
 		}
-				
+
+//Setting up variables				
 		$scope.currentPage = 0;
 		
 		$scope.formData = {
@@ -57,18 +58,8 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.testQuestions = {
 			questions: [],
 		};
-		
-		$scope.check = function(index) {
-			if (testContainer.review[index])
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		};
 
+//Dealing with question load/display
 		$scope.loadQuestions = function() {
 						
 			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
@@ -83,6 +74,12 @@ angular.module('test_portal').controller('QuestionsController', [
 			
 		};
 
+		$scope.getType = function(index) //Returns the question type
+		{
+			return testContainer.questions[index].question_type;
+		};
+
+//Methods for navigation
 		//Next 2 methods are code in the body of BOTH previousQuestion and nextQuestion, extracted to be their own methods
 		//(if you ever were to edit the code, reduces chance of updating code in one place but not where it's duplicated elsewhere)
 		$scope.saveAnswer = function() {
@@ -124,15 +121,6 @@ angular.module('test_portal').controller('QuestionsController', [
 		{
 			$scope.formData.answer = testContainer.answers[$scope.currentPage];
 
-			//^Previously this statement was in the below "if," but I don't think it needs to be. value will just be "undefined" if nothing has been entered.
-			/*
-			 if(testContainer.answers[$scope.currentPage] !== 0) { //************I think it goes in here every time. (if they haven't saved an answer, I believe it's undefined rather than 0)
-			 	$scope.formData.answer = testContainer.answers[$scope.currentPage]; // Retrieve the user's answer for this question
-			 } 
-			 else{ //never enters
-			 	$scope.formData.answer = "";	// Leave selection blank if user has not chosen (and saved) an answer yet
-			 }*/
-
 			if (testContainer.review[$scope.currentPage])
 			{
 				$scope.marked = "btn-danger";
@@ -143,8 +131,6 @@ angular.module('test_portal').controller('QuestionsController', [
 			}
 
 			$scope.Notepad.message = testContainer.notes[$scope.currentPage];
-
-			//insert code here to also reload marking for notepad , once that is set up
 		};
 
 		$scope.previousQuestion = function() {
@@ -171,7 +157,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			$scope.currentPage = num;
 			$scope.reloadSaved();
 		};
-
+//Marking for review
 		$scope.mark_unmark = function() {
 			if (!testContainer.review[$scope.currentPage])
 			{
@@ -191,7 +177,18 @@ angular.module('test_portal').controller('QuestionsController', [
 			//console.log("My Review: " + sessionServiceV2.getReview());
 		};
 
+		$scope.checkForReview = function(index) {
+			if (testContainer.review[index])
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		};
 
+//Submission-related methods
 		$scope.checkUnanswered = function() {
 			var unanswered = ""; //String to represent all of the unanswered questions so they can be reported to the user.
 			for (var i = 0; i < $scope.testQuestions.questions.length; i++)
@@ -231,16 +228,16 @@ angular.module('test_portal').controller('QuestionsController', [
 			if (proceed === true) 
 			{
 				// do test-ending things(save back to DB?)
-				console.log("submitted test");
 
 				//SWITCH TO POST-TEST MODULE
 			}
 			else
 			{
-				console.log("cancel & go back to test");
 				//continue with test
 			}
 		};
+
+//Extra tools (calculator, timer, etc)
 		$scope.openCalcWindow = function(){
 			var myWindow = window.open("calculator", "calcWindow", "resizable=0, location=no,menubar=no,status=no,top=200, left=700, width=425, height=450");
 		};
@@ -272,6 +269,7 @@ angular.module('test_portal').controller('QuestionsController', [
 
 	   };
 
+//Modal selection options:
 	  $scope.ok = function () {
 	  	$scope.submitTest();
 	  	$scope.stopProgress();
@@ -322,7 +320,7 @@ angular.module('test_portal').controller('QuestionsController', [
 
 
 		 
-
+//Work in progress: making the notepad moveable
 		$scope.addListeners = function (){
 			alert("Hello6");
 		    //$document.getElementById('dxy').addEventListener('mousedown', mouseDown, false);
