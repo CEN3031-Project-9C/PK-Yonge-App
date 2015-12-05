@@ -5,9 +5,9 @@
  */
  
 var path = require('path'),
-  mongoose = require('mongoose'),
-  User_sessions = mongoose.model('User_session'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+  	mongoose = require('mongoose'),
+  	User_sessions = mongoose.model('User_session'),
+  	errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
  * Create a user_session
@@ -37,28 +37,26 @@ exports.read = function (req, res) {
 /**
  * Update a user_session
  */
-/*
 exports.update = function (req, res) {
-  var user_session = req.user_session;
+  	var user_session = req.user_session;
 
-  //user_session.tests_id = req.body.tests_id;
+  	//user_session.tests_id = req.body.tests_id;
 	user_session.time = req.body.time;
 	user_session.complete = req.body.complete;
 	user_session.user_notepad = req.body.user_notepad;
 	user_session.user_answer = req.body.user_answer;
 	user_session.review = req.body.review;
 
-  user_session.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(user_session);
-    }
-  });
+	user_session.save(function (err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(user_session);
+		}
+	});
 };
-*/
 
 /**
  * Delete a user_session
@@ -94,9 +92,8 @@ exports.list = function (req, res) {
   });
 };
 
-/**
- * user_Sessions middleware (middleware = functions which are passed control during execution of asynchronous functions)
- */
+
+// Middleware to handle requests containing a user_sessionId parameter
 exports.user_sessionByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -105,17 +102,17 @@ exports.user_sessionByID = function (req, res, next, id) {
     });
   }
 
-/*
-  user_Sessions.findById(id).populate('user', 'displayName').exec(function (err, user_session) { //Populate finds objectId and replaces it with actual info.
+  User_sessions.findById(id).exec(function (err, user_session) { //Populate finds objectId and replaces it with actual info.
     if (err) {
       return next(err);
     } else if (!user_session) {
       return res.status(404).send({
-        message: 'No user_session with that identifier has been found'
+        message: 'No user_session with that ID has been found'
       });
     }
     req.user_session = user_session;
     next();
   });
-*/
+  
+  
 };

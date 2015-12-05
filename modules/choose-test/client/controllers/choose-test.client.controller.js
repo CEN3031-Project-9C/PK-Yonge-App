@@ -32,7 +32,7 @@ angular.module('choose-test').controller(
 			if(testSelection === "A1") {
 				testID = Math.random() < 0.5 ? "561d18b353e79828251379f8" : "561d1a21ffee344c272568d4"; // Randomly choose b/w test 1 and test 2 for Alg 1
 			} else if(testSelection === "A2") {
-				testID = "561d199f41c840c42134a825";
+				testID = "561d199f41c840c42134a825";	// Use the only test for Alg 2
 			} else {
 				return;
 			}

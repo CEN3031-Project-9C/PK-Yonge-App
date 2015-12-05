@@ -13,10 +13,10 @@ var User_sessionSchema = new Schema({
 	test_id: {
 		type: Schema.ObjectId
 	},
-	timer: {
+	time: {
 		type: Number
 	},
-	completed: {
+	complete: {
 		type: Boolean
 	},
 	user_notepad: {

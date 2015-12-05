@@ -8,11 +8,12 @@ angular.module('test_portal').controller('QuestionsController', [
 	'$modal',
 	'$log', 
 	'Authentication', 
+	'User_sessions',
 	'sessionServiceV2',
 	'questionsService', 
 	'questionsByTestIDService',
 	'takeTestService',
-	function ($scope, $stateParams, $location, $modal, $log, Authentication, sessionServiceV2, questionsService, questionsByTestIDService, takeTestService) {
+	function ($scope, $stateParams, $location, $modal, $log, Authentication, User_sessions, sessionServiceV2, questionsService, questionsByTestIDService, takeTestService) {
 	  	
 		$scope.authentication = Authentication;
 		
@@ -90,8 +91,8 @@ angular.module('test_portal').controller('QuestionsController', [
 
 			// To-do, save this answer to the DB on question switch
 		};
-		$scope.reloadSaved = function()
-		{
+		
+		$scope.reloadSaved = function() {
 			if(testContainer.answers[$scope.currentPage] !== 0) {
 				$scope.formData.answer = testContainer.answers[$scope.currentPage]; // Retrieve the user's answer for this question
 			} else {
@@ -110,6 +111,66 @@ angular.module('test_portal').controller('QuestionsController', [
 			$scope.Notepad.message = testContainer.notes[$scope.currentPage];
 
 			//insert code here to also reload marking for notepad , once that is set up
+		};
+		
+		$scope.saveTestSession = function(isValid) {
+			
+			console.log('saving test session');
+			console.log('user_answer:');
+			console.log(sessionServiceV2.getUserAnswer());
+			
+/*
+			$scope.error = null;
+			
+			User_sessions.update({_id: sessionServiceV2.getSessionID() }, {
+				$set: {
+					time: sessionServiceV2.getTime(),
+					complete: sessionServiceV2.getComplete(),
+					user_notepad: sessionServiceV2.getUserNotepad(),
+					user_answer: sessionServiceV2.getUserAnswer(),
+					review: sessionServiceV2.getReview()
+				}
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+*/
+			
+			// Get all the user's answers, notes, and review flags
+			var temp_session = new User_sessions({
+				_id: sessionServiceV2.getSessionID(),
+				time: sessionServiceV2.getTime(),
+				complete: sessionServiceV2.getComplete(),
+				user_notepad: sessionServiceV2.getUserNotepad(),
+				user_answer: ["2", "4", "", "x"],	// hardcode value for testing
+				//user_answer: sessionServiceV2.getUserAnswer(),
+				review: sessionServiceV2.getReview()
+			});
+
+			
+			$scope.error = null;
+			
+/*
+			if (!isValid) {
+				//$scope.$broadcast('show-errors-check-validity', 'articleForm');
+				console.log('isn\'t valid...');
+				return false;
+			}
+*/
+			
+			temp_session.$update(function (response) {
+				
+				console.log('in $save');
+				
+				$location.path('/poopieface/' + temp_session._id);
+				//$location.path('/user_session/' + temp_session._id); // why not include "/api"?
+				
+			}, function(errorResponse) {
+				
+				$scope.error = errorResponse.data.message;
+				
+			});
+
+
 		};
 
 		$scope.previousQuestion = function() {
@@ -157,6 +218,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			//check to see if any answers[] positions are empty & let them know they have unanswered questions
 			//save back to DB
 		};
+		
 		$scope.openCalcWindow = function(){
 			var myWindow = window.open("calculator", "calcWindow", "resizable=0, location=no,menubar=no,status=no,top=200, left=700, width=425, height=450");
 		};
@@ -168,7 +230,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			$scope.timer_running = true;
 		 };
 
-		$scope.stopProgress = function(){
+		$scope.stopProgress = function() {
 		    $scope.timer_running = false;
 		};
 
@@ -188,39 +250,40 @@ angular.module('test_portal').controller('QuestionsController', [
 
 	   };
 
-	  $scope.ok = function () {
-	  	$scope.submitTest();
-	  	$scope.stopProgress();
-	    
-	    sessionServiceV2.setComplete(testContainer.complete);
-
-	    //console.log("Completed: " + sessionServiceV2.getComplete());
-	  };
-
-	  $scope.cancel = function () {
-	  	$scope.startProgress();
-	    $modal.close();
-	    $modal.dismiss('cancel');
-	    //$modal.('hide');
-	  };
+		$scope.ok = function () {
+			$scope.submitTest();
+			$scope.stopProgress();
+			
+			sessionServiceV2.setComplete(testContainer.complete);
+			
+			//console.log("Completed: " + sessionServiceV2.getComplete());
+		};
+		
+		$scope.cancel = function () {
+			$scope.startProgress();
+			$modal.close();
+			$modal.dismiss('cancel');
+			//$modal.('hide');
+		};
+		
 		$scope.showNotes = false;
+		
 		$scope.showTextArea = function(){
 			$scope.Notepad.message = testContainer.notes[$scope.currentPage];
-
 			$scope.showNotes = true;
 		};
-
+		
 		$scope.cancelNotes = function(){
 			$scope.showNotes = false;
 		};
-
+		
 		$scope.saveNotes = function(){
 			testContainer.notes[$scope.currentPage] = $scope.Notepad.message;
 			$scope.showNotes = false;
-
+		
 			sessionServiceV2.setUserNotepad(testContainer.notes);
-
-			//console.log("My Notes: " + sessionServiceV2.getUserNotepad());
+		
+		//console.log("My Notes: " + sessionServiceV2.getUserNotepad());
 		};
 	}
 ]);
