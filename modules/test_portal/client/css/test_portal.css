@@ -283,3 +283,7 @@ text-decoration: none;
 	display: table;
     margin: 0 auto;
 }
+
+.fill{
+	color: black;
+}

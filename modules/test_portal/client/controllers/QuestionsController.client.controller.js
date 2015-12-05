@@ -27,7 +27,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.currentPage = 0;
 		
 		$scope.formData = {
-			answer: undefined
+			answer: []
 		};
 
 		$scope.Notepad = {
