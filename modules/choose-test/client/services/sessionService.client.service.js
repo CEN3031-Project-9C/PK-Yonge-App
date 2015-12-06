@@ -1,5 +1,5 @@
 'use strict';
-
+//original session service, modfied in v2
 angular.module('choose-test').factory('sessionService', function() {
 	
   var sessionContainer = {

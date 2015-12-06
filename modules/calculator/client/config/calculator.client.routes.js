@@ -1,6 +1,7 @@
 'use strict';
 
 // Configure the 'calculator' module routes
+//credit to Tom Porter
 
 angular.module('calculator').config(['$stateProvider',
   function ($stateProvider) {

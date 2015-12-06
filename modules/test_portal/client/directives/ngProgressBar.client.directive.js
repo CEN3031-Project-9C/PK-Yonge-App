@@ -1,5 +1,5 @@
 'use strict';
-
+//progress bar on top of test, tracks time
 angular.module('test_portal')
 	.directive('ngProgressbar', function($timeout) {
 	return {

@@ -1,11 +1,11 @@
 'use strict';
-
+//into the test portal
 angular.module('test_portal').factory('takeTestService', function() {
-	
+	//initialize questions
 	var questionContainer = {
 		questions: []
 	};
-	
+	//populates array with questions
 	questionContainer.setQuestions = function(arrayOfQuestions) {
 		if(arrayOfQuestions !== null) {
 			questionContainer.questions = arrayOfQuestions;
@@ -14,7 +14,7 @@ angular.module('test_portal').factory('takeTestService', function() {
 			return;
 		}
 	};
-	
+	//keeps track of amount of questions, doesn't allow index above 
 	questionContainer.updateQuestions = function(index, singleQuestion) {
 		if(index <= questionContainer.questions.length) {
 			questionContainer.questions[index] = singleQuestion;

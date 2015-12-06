@@ -1,5 +1,5 @@
 'use strict';
-
+//yay menus
 angular.module('core.admin').run(['Menus',
   function (Menus) {
     Menus.addMenuItem('topbar', {

@@ -3,7 +3,7 @@
 /*global $:false */
 /* eslint no-eval: 0 */
 //angular.module('calculator').directive("bnDocumentKeypress", function($document, $parse) {
-
+//credit to Tom Porter
 var Calc;
 
 Calc = angular.module('calculator');

@@ -1,5 +1,5 @@
 'use strict';
-
+//verifying password
 angular.module('users')
   .directive('passwordVerify', function() {
     return {
