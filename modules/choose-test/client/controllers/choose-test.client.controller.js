@@ -8,9 +8,9 @@ angular.module('choose-test').controller(
 	'$stateParams', 
 	'$location', 
 	'Authentication', 
-	'User_sessions', 
-	'sessionServiceV2',
-	function ($scope, $state, $stateParams, $location, Authentication, User_sessions, sessionServiceV2) {
+	'User_Sessions', 
+	'sessionServiceV3',
+	function ($scope, $state, $stateParams, $location, Authentication, User_Sessions, sessionServiceV3) {
 		$scope.authentication = Authentication;
 		
 		// If user is not signed in then redirect back home
@@ -42,25 +42,72 @@ angular.module('choose-test').controller(
 			   userBoolTemp.push(false);
 			}
 			
-			var user_session = new User_sessions({		// Create new Session object
+			var user_session = new User_Sessions({		// Create new Session object
 			   test_id: testID,							// Set test ID to the test ID
-			   timer: 0, 								// Elapsed time (int)
-			   completed: false, 						// Test state (boolean)
+			   time: 0, 								// Elapsed time (int)
+			   complete: false, 						// Test state (boolean)
 			   user_notepad: userStringTemp, 			// Create empty string array
 			   user_answer: userStringTemp, 			// Create empty string array
 			   review: userBoolTemp 					// Create empty boolean array
 			});
 			
-			user_session.$save(function (response) {
+			/*
+			console.log("user_session object (of type User_Sessions) Prior to .$save");
+			console.log(user_session);
+			*/
 			
-				sessionServiceV2.setSessionID(user_session._id);	// Make session ID available to other services/controllers
-				sessionServiceV2.setTestID(testID);	// Make the test ID available to other services/controllers
+			user_session.$save(function (response) {
+				
+				console.log("success portion...");
+				
+				//sessionServiceV3.setSessionObject(user_session); // Cannot assign object reference at this point for some reason
+						
 				$state.go('view-question');	// Change state to question View
 
 			}, function (errorResponse) {
+				console.log("error portion...");
 				$scope.error = errorResponse.data.message;
 			});
 		
+			/*
+			console.log("sessionContainer.session following initial assignment");
+			console.log(sessionServiceV3.getSessionObject());
+
+			user_session.complete = true;
+			user_session.user_notepad = ["nothing", "something else"];
+
+			console.log("user_session object (of type User_Sessions) post notepad and complete update");
+			console.log(user_session);
+
+			user_session.user_notepad.push("My 3rd note!");
+		
+			console.log("user_session object (of type User_Sessions) post second notepad update");
+			console.log(user_session);
+		
+			sessionServiceV3.setSessionObject(user_session);
+			console.log("sessionContainer.session following re-assignment");
+			console.log(sessionServiceV3.getSessionObject());
+			*/
+			
+			//console.log("setting notepad in user_session...");
+			//user_session.user_notepad = ["hello", "this is a test...", "AGAIN."];
+			
+			//console.log("setting notepad in sessionServiceV3...");
+			//sessionServiceV3.setSessionNotepad(["hello", "again", "this is a test"]);
+			
+			//console.log("user_session contents:");
+			//console.log(user_session);
+			
+			//console.log("setting review flags in sessionServiceV3...");
+			//sessionServiceV3.setReviewFlags([true, false, false, true, true, true, true]);
+			
+			sessionServiceV3.setSessionObject(user_session);
+			console.log(sessionServiceV3.getSessionObject());
+			
+			sessionServiceV3.setUserNotepad(["4", "number four", "Fore!"]);
+			
+			sessionServiceV3.setUserAnswers(["Answer 1", "Is this right?", "Hmm..."]);
+			
 		};
 		
 	}

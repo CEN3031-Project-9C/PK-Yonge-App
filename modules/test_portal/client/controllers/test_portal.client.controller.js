@@ -8,12 +8,12 @@ angular.module('test_portal').controller('QuestionsController', [
 	'$modal',
 	'$log', 
 	'Authentication', 
-	'User_sessions',
-	'sessionServiceV2',
+	'User_SessionsTP',
+	'sessionServiceV3',
 	'questionsService', 
 	'questionsByTestIDService',
 	'takeTestService',
-	function ($scope, $stateParams, $location, $modal, $log, Authentication, User_sessions, sessionServiceV2, questionsService, questionsByTestIDService, takeTestService) {
+	function ($scope, $stateParams, $location, $modal, $log, Authentication, User_SessionsTP, sessionServiceV3, questionsService, questionsByTestIDService, takeTestService) {
 	  	
 		$scope.authentication = Authentication;
 		
@@ -60,7 +60,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.loadQuestions = function() {
 						
 			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
-				{testID: sessionServiceV2.getTestID()},
+				{testID: sessionServiceV3.getTestID()},
 				function() {
 
 					takeTestService.setQuestions(testContainer.questions);
@@ -76,7 +76,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.saveAnswer = function() {
 			testContainer.answers[$scope.currentPage] = $scope.formData.answer;
 
-			sessionServiceV2.setUserAnswer(testContainer.answers);
+			sessionServiceV3.setUserAnswers(testContainer.answers);
 			/*
 			// For testing purposes
 			console.log("testContainer...");
@@ -87,7 +87,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			console.log($scope.formData.answer);
 			*/
 
-			//console.log("My answers: " + sessionServiceV2.getUserAnswer());
+			//console.log("My answers: " + sessionServiceV3.getUserAnswers());
 
 			// To-do, save this answer to the DB on question switch
 		};
@@ -115,40 +115,62 @@ angular.module('test_portal').controller('QuestionsController', [
 		
 		$scope.saveTestSession = function() {
 			
+			var temp_session = new User_SessionsTP(sessionServiceV3.getSessionObject());
+			
+			temp_session.userNotepad = ["note 1", "note two", "note threeeee"];
+			
+			console.log("var temp_session:");
+			console.log(temp_session);
+			
+			/*
+			sessionServiceV3.setUserAnswers(["1", "two", "go", "100% yay"]);
+			console.log(sessionServiceV3.getSessionObject());
+			
+			sessionServiceV3.getSessionObject().$update(function (response) {
+				
+				console.log('Currently "$update"-ing');
+								
+			}, function(errorResponse) {
+				
+				$scope.error = errorResponse.data.message;
+				
+			});
+			*/
+/*
 			console.log('Now in "$scope.saveTestSesion function"');
 			console.log('"user_answer" array:');
-			console.log(sessionServiceV2.getUserAnswer());
+			console.log(sessionServiceV3.getUserAnswers());
 			
-/*
+
 			$scope.error = null;
 			
-			User_sessions.update({_id: sessionServiceV2.getSessionID() }, {
+			User_sessions.update({_id: sessionServiceV3.getSessionID() }, {
 				$set: {
-					time: sessionServiceV2.getTime(),
-					complete: sessionServiceV2.getComplete(),
-					user_notepad: sessionServiceV2.getUserNotepad(),
-					user_answer: sessionServiceV2.getUserAnswer(),
-					review: sessionServiceV2.getReview()
+					time: sessionServiceV3.getTime(),
+					complete: sessionServiceV3.getComplete(),
+					user_notepad: sessionServiceV3.getUserNotepad(),
+					user_answer: sessionServiceV3.getUserAnswers(),
+					review: sessionServiceV3.getReviewFlags()
 				}
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
-*/
+
 			
 			// Get all the user's answers, notes, and review flags
 			var temp_session = new User_sessions({
-				_id: sessionServiceV2.getSessionID(),
-				time: sessionServiceV2.getTime(),
-				complete: sessionServiceV2.getComplete(),
-				user_notepad: sessionServiceV2.getUserNotepad(),
+				_id: sessionServiceV3.getSessionID(),
+				time: sessionServiceV3.getTime(),
+				complete: sessionServiceV3.getComplete(),
+				user_notepad: sessionServiceV3.getUserNotepad(),
 				user_answer: ["2", "4", "", "x"],	// hardcode value for testing
-				//user_answer: sessionServiceV2.getUserAnswer(),
-				review: sessionServiceV2.getReview()
+				//user_answer: sessionServiceV3.getUserAnswers(),
+				review: sessionServiceV3.getReviewFlags()
 			});
 
 			
 			$scope.error = null;
-			
+			*/
 			temp_session.$update(function (response) {
 				
 				console.log('Currently "temp_session.$update"-ing');
@@ -158,6 +180,7 @@ angular.module('test_portal').controller('QuestionsController', [
 				$scope.error = errorResponse.data.message;
 				
 			});
+
 
 
 		};
@@ -197,9 +220,9 @@ angular.module('test_portal').controller('QuestionsController', [
 				$scope.reviewButtonText = "Mark for Review";
 			}
 
-			sessionServiceV2.setReview(testContainer.review);
+			sessionServiceV3.setReviewFlags(testContainer.review);
 
-			//console.log("My Review: " + sessionServiceV2.getReview());
+			//console.log("My Review: " + sessionServiceV3.getReviewFlags());
 		};
 
 		$scope.submitTest = function() {
@@ -243,9 +266,9 @@ angular.module('test_portal').controller('QuestionsController', [
 			$scope.submitTest();
 			$scope.stopProgress();
 			
-			sessionServiceV2.setComplete(testContainer.complete);
+			sessionServiceV3.setComplete(testContainer.complete);
 			
-			//console.log("Completed: " + sessionServiceV2.getComplete());
+			//console.log("Completed: " + sessionServiceV3.getComplete());
 		};
 		
 		$scope.cancel = function () {
@@ -270,9 +293,9 @@ angular.module('test_portal').controller('QuestionsController', [
 			testContainer.notes[$scope.currentPage] = $scope.Notepad.message;
 			$scope.showNotes = false;
 		
-			sessionServiceV2.setUserNotepad(testContainer.notes);
+			sessionServiceV3.setUserNotepad(testContainer.notes);
 		
-		//console.log("My Notes: " + sessionServiceV2.getUserNotepad());
+		//console.log("My Notes: " + sessionServiceV3.getUserNotepad());
 		};
 	}
 ]);
