@@ -10,11 +10,15 @@ angular.module('review-test').controller('ReviewController', [
 	'$modal',
 	'$log', 
 	'Authentication', 
+
+	'User_sessions', // Include "User_sessions" model
+	'sessionServiceV2', // Include "sessionService" factory
+
 	'sessionService',
 	'questionsService', 
 	'questionsByTestIDService',
 	'takeTestService',
-	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, sessionService, questionsService, questionsByTestIDService, takeTestService) {
+	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, User_sessions, sessionServiceV2, sessionService, questionsService, questionsByTestIDService, takeTestService) {
 	  	
 		$scope.authentication = Authentication;
 		
