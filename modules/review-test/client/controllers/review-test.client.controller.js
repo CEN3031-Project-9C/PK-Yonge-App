@@ -27,10 +27,5 @@ angular.module('review-test').controller('ReviewController', [
 			$location.path('/');
 		}
 
-
-		$scope.find = function () {
-      $scope.previous_test = Previous_test.query();
-    };
-
 	}
 ]);
