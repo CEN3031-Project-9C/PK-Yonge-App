@@ -68,7 +68,5 @@ angular.module('review-test').controller('ReviewController', [
 
     }
 ]);
-=======
 	}
 ]);
->>>>>>> 173697210a97ad801b8d8ba56efdb76b1fbc58c4
