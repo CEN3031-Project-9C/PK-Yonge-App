@@ -14,7 +14,7 @@ angular.module('review-test').config(['$stateProvider',
         }
       })
       .state('view-specific-test', {
-        url: '/grade',
+        url: '/view-specific-grade',
         templateUrl: 'modules/review-test/client/views/review-specific-test.client.view.html',
         data: {
           roles: ['user', 'admin']
