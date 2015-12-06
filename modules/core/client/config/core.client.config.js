@@ -3,6 +3,12 @@
 // Configuring the Articles module
 angular.module('core').run(['Menus',
   function (Menus) {
+       // Add the information dropdown item
+    Menus.addMenuItem('topbar', {
+      title: 'Review Past Exams',
+      state: 'review-test',
+      
+    });
 
     // Add the information dropdown item
     Menus.addMenuItem('topbar', {

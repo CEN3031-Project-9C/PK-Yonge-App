@@ -81,49 +81,6 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         ignoreState: true
       }
     })
-     //.state('calculator', {
-       // url: '/calculator',
-        //templateUrl: 'modules/calculator/client/views/calculator.client.view.html',
-        //data: {
-          //ignoreState: true
-          //roles: ['user', 'admin']
-        //}
-      //})
-    .state('question1', {
-      url: '/question1',
-      templateUrl: 'modules/test_portal/client/views/question1.client.view.html',
-      data: {
-        ignoreState: true
-      }
-    })
-    .state('question2', {
-      url: '/question2',
-      templateUrl: 'modules/test_portal/client/views/question2.client.view.html',
-      data: {
-        ignoreState: true
-      }
-    })
-    .state('question3', {
-      url: '/question3',
-      templateUrl: 'modules/test_portal/client/views/question3.client.view.html',
-      data: {
-        ignoreState: true
-      }
-    })
-    .state('question4', {
-      url: '/question4',
-      templateUrl: 'modules/test_portal/client/views/question4.client.view.html',
-      data: {
-        ignoreState: true
-      }
-    })
-    .state('question5', {
-      url: '/question5',
-      templateUrl: 'modules/test_portal/client/views/question5.client.view.html',
-      data: {
-        ignoreState: true
-      }
-    })
     .state('end', {
       url: '/end',
       templateUrl: 'modules/test_portal/client/views/end.client.view.html',

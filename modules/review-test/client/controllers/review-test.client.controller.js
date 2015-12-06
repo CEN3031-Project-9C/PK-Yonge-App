@@ -24,7 +24,6 @@ angular.module('review-test').controller('ReviewController', [
 			$location.path('/');
 		}
 
-
 		var user_sessionContainer = {
 			user_sessions: [],	// we will store retrieved sessions in this array
 			// answers: [],	// we will store the user's answers in this array
@@ -69,3 +68,7 @@ angular.module('review-test').controller('ReviewController', [
 
     }
 ]);
+=======
+	}
+]);
+>>>>>>> 173697210a97ad801b8d8ba56efdb76b1fbc58c4
