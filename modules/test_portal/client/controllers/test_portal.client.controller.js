@@ -113,10 +113,10 @@ angular.module('test_portal').controller('QuestionsController', [
 			//insert code here to also reload marking for notepad , once that is set up
 		};
 		
-		$scope.saveTestSession = function(isValid) {
+		$scope.saveTestSession = function() {
 			
-			console.log('saving test session');
-			console.log('user_answer:');
+			console.log('Now in "$scope.saveTestSesion function"');
+			console.log('"user_answer" array:');
 			console.log(sessionServiceV2.getUserAnswer());
 			
 /*
@@ -149,21 +149,10 @@ angular.module('test_portal').controller('QuestionsController', [
 			
 			$scope.error = null;
 			
-/*
-			if (!isValid) {
-				//$scope.$broadcast('show-errors-check-validity', 'articleForm');
-				console.log('isn\'t valid...');
-				return false;
-			}
-*/
-			
 			temp_session.$update(function (response) {
 				
-				console.log('in $save');
-				
-				$location.path('/poopieface/' + temp_session._id);
-				//$location.path('/user_session/' + temp_session._id); // why not include "/api"?
-				
+				console.log('Currently "temp_session.$update"-ing');
+								
 			}, function(errorResponse) {
 				
 				$scope.error = errorResponse.data.message;
