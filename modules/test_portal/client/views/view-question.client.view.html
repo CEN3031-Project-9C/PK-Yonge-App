@@ -87,7 +87,7 @@
 						<div ng-repeat="answer_choice in question.answer_choices">
 							<div class="checkbox">
 								<label class="answer-choice">
-									<input type="checkbox" ng-model="formData.answer[answer_choice]" name="answerChoice" value="{{$index}}">  <!-- **********************I DON'T KNOW HOW TO SAVE THESE ANSWERS ********************-->
+									<input type="checkbox" ng-model="formData.answer[$index]" name="answerChoice" value="{{$index}}">
 									{{answer_choice}}
 								</input>
 								</label>
@@ -101,7 +101,7 @@
 							<div class="text">
 								<label class="answer-choice">
 									{{answer_choice}}
-									<input type="text" ng-model="formData.answer[answer_choice]" class="fill" name="answerChoice" value="{{$index}}">  <!-- **********************I DON'T KNOW HOW TO SAVE THESE ANSWERS ********************-->
+									<input type="text" ng-model="formData.answer[$index]" class="fill" name="answerChoice" value="{{$index}}">
 								</label>
 							</div>
 						</div>

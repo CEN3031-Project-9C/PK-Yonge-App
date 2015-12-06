@@ -84,7 +84,10 @@ angular.module('test_portal').controller('QuestionsController', [
 		//(if you ever were to edit the code, reduces chance of updating code in one place but not where it's duplicated elsewhere)
 		$scope.saveAnswer = function() {
 			testContainer.answers[$scope.currentPage] = $scope.formData.answer;
-			sessionServiceV2.setUserAnswer(testContainer.answers);	
+			sessionServiceV2.setUserAnswer(testContainer.answers);
+
+		    var testingStuff = [];
+
 			if (testContainer.answers[$scope.currentPage] === undefined) //if the answer is empty, check if they want to proceed
 			{
 				var proceed = confirm("You haven't saved an answer to this question! Are you sure you want to proceed?");
@@ -96,6 +99,25 @@ angular.module('test_portal').controller('QuestionsController', [
 				{
 					return false; //They want to cancel & go back
 				}
+			}
+			else if ($scope.getType($scope.currentPage) === "check" || $scope.getType($scope.currentPage) === "fill")
+			{
+				if (testContainer.answers[$scope.currentPage].length == 0)//If the array of answers is empty, ask
+				{
+					var proceedMultiple = confirm("You haven't put any answers for this question! Are you sure you want to proceed?");
+					if (proceedMultiple === true) 
+					{
+						return true; //They want to continue
+					} 
+					else 
+					{
+						return false; //They want to cancel & go back
+					}
+			    }
+			    else//If the array of answers isn't empty, proceed.
+			    {
+			    	return true;
+			    }
 			}
 			else //If the answer's not empty, proceed.
 			{
@@ -193,6 +215,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			var unanswered = ""; //String to represent all of the unanswered questions so they can be reported to the user.
 			for (var i = 0; i < $scope.testQuestions.questions.length; i++)
 			{
+
 				if (testContainer.answers[i] === undefined)
 				{
 					unanswered += (i+1);
