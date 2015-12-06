@@ -12,7 +12,6 @@ angular.module('choose-test').controller(
 	'sessionServiceV2', // Include "sessionService" factory
 	function ($scope, $state, $stateParams, $location, Authentication, User_sessions, sessionServiceV2) {
 		$scope.authentication = Authentication;
-		
 		// If user is not signed in then redirect back home
 		if (!Authentication.user) {
 			$location.path('/');
@@ -20,13 +19,12 @@ angular.module('choose-test').controller(
 		
 		// Function called when user selects a test subject (from /choose-test page)
 		$scope.startTest = function (testSelection) {
-		
 			$scope.error = null;
-			
 			var numberOfQuestions = 10,
 				   userStringTemp = [],
 				   userBoolTemp = [],
-				   testID = "";	
+				   testID = "",
+				   userID = Authentication.user._id;	
 			
 			// Assign test ID based off the user's test selection
 			if(testSelection === "A1") {
@@ -43,20 +41,22 @@ angular.module('choose-test').controller(
 			}
 			
 			var user_session = new User_sessions({		// Create new Session object
+			   user_id: userID,
 			   test_id: testID,							// Set test ID to the test ID
 			   timer: 0, 								// Elapsed time (int)
 			   completed: false, 						// Test state (boolean)
 			   user_notepad: userStringTemp, 			// Create empty string array
 			   user_answer: userStringTemp, 			// Create empty string array
-			   review: userBoolTemp 					// Create empty boolean array
+			   review: userBoolTemp,					// Create empty boolean array
+			   correct: userBoolTemp
 			});
 			
 			user_session.$save(function (response) {
 			
 				sessionServiceV2.setSessionID(user_session._id);	// Make session ID available to other services/controllers
 				sessionServiceV2.setTestID(testID);	// Make the test ID available to other services/controllers
+				sessionServiceV2.setUserID(userID);
 				$state.go('view-question');	// Change state to question View
-
 			}, function (errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
