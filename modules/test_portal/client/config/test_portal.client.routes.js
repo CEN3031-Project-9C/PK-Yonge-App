@@ -28,12 +28,12 @@ angular.module('test_portal').config(['$stateProvider',
           roles: ['user', 'admin']
         }
       })
-    .state('markForReview', {
-        url: 'markForReview-questions',
-        templateUrl: 'modules/test_portal/client/views/markForReview.client.view.html',
+    .state('finished-test', {
+        url: '/grade',
+        templateUrl: 'modules/test_portal/client/views/end.client.view.html',
         data: {
-        roles: ['user', 'admin']
-      }
-    });
+          roles: ['user', 'admin']
+        }
+      });
   }
 ]);

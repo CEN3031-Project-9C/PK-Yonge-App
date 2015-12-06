@@ -11,10 +11,10 @@ module.exports = function (app) {
     .get(user_sessions.list)
     .post(user_sessions.create);
 
-  // Single article routes
+  // Single user session routes
   app.route('/api/user_session/:user_sessionId')
     .get(user_sessions.read)
-	.put(user_sessions.update);
+	  .put(user_sessions.update);
   //.delete(sessions.delete);
 
  // app.route('/api/user_session:user_sessionId')
