@@ -160,7 +160,6 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
   font-size:1.4em;
   font-weight: bold;
   line-height:1.3em;
-  font-weight:normal;
   margin-bottom:60px;
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -195,21 +194,26 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 }
 
 .btn-link {
+  color:rgb(255, 255, 255);
   color:rgba(255,255,255,.8);
 }
 .btn-link:hover, .btn-link:focus, .btn-link:active {
   color:#fff
 }
 .btn-default {
+  background: rgb(255,255,255);
   background: rgba(255,255,255,.5);
 }
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active {
+  background: rgb(255,255,255);
   background: rgba(255,255,255,.8);
 }
 .btn-primary {
+  background: rgb(255,255,255);
   background: rgba(255,255,255,.2);
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:active {
+  background: rgb(255,255,255);
   background: rgba(255,255,255,.5);
 }
 
@@ -219,6 +223,7 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 /*                 UI - Thumbnails                      */
 /********************************************************/
 .thumbnail {
+  background-color: rgb(255,255,255);
   background-color: rgba(255,255,255,.2);
   border: 0 none;
   padding:10px;
@@ -279,24 +284,26 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 /***********************************************************/
 .theme-invert {   
   color:#222;
-  color:rgba(0,0,0,.8); 
  }
 .theme-invert a { 
   color:#000;
 }
 .theme-invert .btn {
+  color:rgb(255,255,255);
   color:rgba(255,255,255,.8);
 }
 .theme-invert .btn:hover {
   color:#fff;
 }
 .theme-invert .btn-link {
+  color:rgb(0,0,0);
   color:rgba(0,0,0,.8);
 }
 .theme-invert .btn-link:hover, .theme-invert .btn-link:focus, .theme-invert .btn-link:active {
   color:#000
 }
 .theme-invert .navbar-toggle {
+  background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.12);
 }
 .theme-invert .navbar-toggle .icon-bar {
@@ -306,6 +313,7 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
   color:#000;
 }
 .theme-invert .mainmenu .dropdown-menu a:hover { 
+  background:rgb(0,0,0);
   background:rgba(0,0,0,.1);
   color:#000;
 }
@@ -317,27 +325,32 @@ a:hover, a:active { color:#fff; text-decoration: underline; }
 }
 
 .theme-invert .btn-default {
+  background: rgb(0,0,0);
   background: rgba(0,0,0,.4);
 }
 .theme-invert .btn-default:hover,
 .theme-invert .btn-default:focus,
 .theme-invert .btn-default:active,
 .theme-invert .btn-default.active {
+  background: rgb(0,0,0);
   background: rgba(0,0,0,.6);
   color:#fff;
 }
 .theme-invert .btn-primary {
+  background: rgb(0,0,0);
   background: rgba(0,0,0,.2);
 }
 .theme-invert .btn-primary:hover,
 .theme-invert .btn-primary:focus,
 .theme-invert .btn-primary:active,
 .theme-invert .btn-primary.active {
+  background: rgb(0,0,0);
   background: rgba(0,0,0,.3);
   color:#fff;
 }
 
 .theme-invert .thumbnail {
+  background-color: rgb(0,0,0);
   background-color: rgba(255,255,255,.8);
 }
 .thumbnail .caption {

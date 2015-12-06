@@ -22,6 +22,7 @@ angular.module('test_portal')
 				if($scope.startAt >= $scope.max) {
 					$scope.stop();
 					$scope.onStop();
+					confirm("Time is up! On the actual test you would have to stop now.");
 				}
 				if($scope.startAt > 0 && $scope.startAt < $scope.max){
 					$scope.resume();
@@ -30,11 +31,11 @@ angular.module('test_portal')
 			};
 			$scope.resume = function() {
 				$scope.startAt = $scope.current;
-				console.log($scope.current);
+				//console.log($scope.current);
 			};
 			$scope.stop = function() {
 				$timeout.cancel($scope.mytimeout);
-				console.log($scope.current);
+				//console.log($scope.current);
 			};
     	}],
 

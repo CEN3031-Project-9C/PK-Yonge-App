@@ -102,7 +102,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			}
 			else if ($scope.getType($scope.currentPage) === "check" || $scope.getType($scope.currentPage) === "fill")
 			{
-				if (testContainer.answers[$scope.currentPage].length == 0)//If the array of answers is empty, ask
+				if (testContainer.answers[$scope.currentPage].length === 0)//If the array of answers is empty, ask
 				{
 					var proceedMultiple = confirm("You haven't put any answers for this question! Are you sure you want to proceed?");
 					if (proceedMultiple === true) 
@@ -253,6 +253,7 @@ angular.module('test_portal').controller('QuestionsController', [
 				// do test-ending things(save back to DB?)
 
 				//SWITCH TO POST-TEST MODULE
+				window.location = '/grade';
 			}
 			else
 			{
@@ -265,16 +266,17 @@ angular.module('test_portal').controller('QuestionsController', [
 			var myWindow = window.open("calculator", "calcWindow", "resizable=0, location=no,menubar=no,status=no,top=200, left=700, width=425, height=450");
 		};
 
-		$scope.timer_running = false;
-		$scope.max_count = 100;
+		$scope.timer_running = true;
+		$scope.max_count = 10800;
 
+        /*
 		$scope.startProgress = function() {
 			$scope.timer_running = true;
 		 };
 
 		$scope.stopProgress = function(){
 		    $scope.timer_running = false;
-		};
+		};*/
 
 		//modal stuff
 		$scope.animationsEnabled = true;

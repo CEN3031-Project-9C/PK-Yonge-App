@@ -26,7 +26,6 @@ textarea[name=noteArea] {
     resize: none;
     color: black;
     overflow: auto;
-    margin: 0px;
     box-sizing: border-box;
     border: solid 1px #ccc;
     font-size: .9em;
@@ -222,20 +221,17 @@ max-width: 50%;
 overflow: hidden;
 border-width: 1px 0;
 border-style: solid;
-border-color: #808080;
 background: url(../../../../assets/skins/sam/sprite.png) repeat-x 0 0;
 margin: auto .25em;
 vertical-align: text-bottom;
 text-align: right;
 }
 .notepad_save2{
-	border-color: #304369
+	border-color: #304369;
 	display: block;
 float: left;
 border: none !important;
 line-height: inherit;
-padding: 0px;
-margin-right: 0px;
 border-width: 0 1px;
 border-style: solid;
 margin: 0 -1px;
@@ -244,7 +240,6 @@ text-decoration: none;
 text-align: right;
 }
 .notepad_save_button{
-	color: inherit;
 	border: none;
 display: block;
 margin: 0px;
@@ -261,8 +256,6 @@ vertical-align: baseline;
 align-items: flex-start;
 text-align: center;
 font-variant: normal;
-letter-spacing: normal;
-word-spacing: normal;
 letter-spacing: normal;
 word-spacing: normal;
 -webkit-writing-mode: horizontal-tb !important;

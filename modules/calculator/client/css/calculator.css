@@ -64,7 +64,6 @@ section#calculator{
     .buttonpad a.zero {
       width: 186px; }
     .buttonpad a:hover {
-      background: #f2f2f2;
       border-color: black;
       background: #e5e5e5;
       background: -moz-linear-gradient(top, #e5e5e5 0%, #c8c8c8 100%);

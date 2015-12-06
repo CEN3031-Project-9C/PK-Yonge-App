@@ -127,11 +127,12 @@
 					    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
 					-->
 						
+					  <!--
 					    <button class="btn btn-success" ng-if="!timer_running" ng-click="startProgress()">Start Test</button>
 					    <button class="btn btn-warning" ng-if="timer_running" ng-click="stopProgress();open('lg')">Pause Test</button>
-						
+						-->
 					    
-						<a ui-sref="finished-test" button class="btn btn-default" ng-click="submitTest();stopProgress()">SUBMIT TEST</button></a>
+						<a button class="btn btn-default" ng-click="submitTest();stopProgress()">SUBMIT TEST</button></a>
 					</div>
 
 						<div ng-show="showNotes" class='question_notes' id='dxy'> <!-- ng-style="{left: divleft, top: divtop, width: divwidth, height: divheight}" draggable xpos="divleft" ypos="divtop"> -->
