@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var questions = require('../controllers/questions.server.controller');
-//var user_sessions = require('../controllers/choose-test.server.controller');
+var user_sessions = require('../controllers/choose-test.server.controller');
 
 
 module.exports = function (app) {
@@ -23,12 +23,12 @@ module.exports = function (app) {
 	app.route('/api/questionsByTestID/:testID')
 		.get(questions.allQuestionsWithTestID);
 	
-	//app.route('/api/user_session/:user_sessionId')
-	//	.get(user_sessions.read)
-	//	.put(user_sessions.update);
+	app.route('/api/user_session/:user_sessionId')
+		.get(user_sessions.read)
+		.put(user_sessions.update);
 	
 	// Finish by binding middleware
 	app.param('questionId', questions.questionByID);
-	//app.param('user_sessionId', user_sessions.userSessionById);
+	app.param('user_sessionId', user_sessions.userSessionById);
 	
 };

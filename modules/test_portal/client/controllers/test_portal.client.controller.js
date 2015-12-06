@@ -117,7 +117,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			
 			var temp_session = new User_SessionsTP(sessionServiceV3.getSessionObject());
 			
-			temp_session.userNotepad = ["note 1", "note two", "note threeeee"];
+			temp_session.user_notepad = ["note 1", "note two", "note threeeee"];
 			
 			console.log("var temp_session:");
 			console.log(temp_session);
