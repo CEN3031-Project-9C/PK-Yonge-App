@@ -37,7 +37,7 @@ angular.module('review-test').controller('ReviewController', [
 
 		//Dealing with question load/display
 		$scope.loadSessions = function() {
-						
+			console.log("IN LOAD SESSIONS");
 			user_sessionContainer.user_sessions = user_sessionsByUserIDService.query( // Use query() instead of get() because result will be an array
 				{userID: sessionServiceV2.getUserID()},
 				function() {
@@ -48,25 +48,14 @@ angular.module('review-test').controller('ReviewController', [
 					//^^^^^^^^^^^^^^^^^^^^^^^^^CHANGE THIS LINE TO BE THE NAMES OF THE TESTS ASSOCIATED WITH SESSIONS
 				}
 			);
-			
+			console.log("user_sessionContainer sessions: " + user_sessionContainer.user_sessions);
 		};
 
 		$scope.loadTests = function() {
 						
-			user_sessionContainer.user_sessions = user_sessionsByUserIDService.query( // Use query() instead of get() because result will be an array
-				{userID: sessionServiceV2.getUserID()},
-				function() {
-
-					reviewTestService.setUser_sessions(user_sessionContainer.user_sessions);		// Save the questions locally
-					
-					$scope.oldTests.tests = user_sessionContainer.user_sessions;	// Make the questions available to the front-end
-					//^^^^^^^^^^^^^^^^^^^^^^^^^CHANGE THIS LINE TO BE THE NAMES OF THE TESTS ASSOCIATED WITH SESSIONS
-				}
-			);
+			console.log("IN LOAD TESTS");
 			
 		};
 
     }
-]);
-	}
 ]);

@@ -61,7 +61,6 @@ angular.module('test_portal').controller('QuestionsController', [
 
 //Dealing with question load/display
 		$scope.loadQuestions = function() {
-						
 			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
 				{testID: sessionServiceV2.getTestID()},
 				function() {
