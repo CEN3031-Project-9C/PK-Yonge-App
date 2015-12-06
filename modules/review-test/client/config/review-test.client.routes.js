@@ -9,7 +9,9 @@ angular.module('review-test').config(['$stateProvider',
         abstract: true,
         url: '/examHistory',
         template: 'modules/post-test/client/views/post-test.client.view'
-
+         data: {
+          roles: ['user', 'admin']
+        }
       })
       .state('view-past-test', {
         url: '/pastExam',
