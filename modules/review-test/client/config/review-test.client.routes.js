@@ -1,21 +1,21 @@
 'use strict';
 
 // Setting up route
+
 angular.module('review-test').config(['$stateProvider',
   function ($stateProvider) {
     //state routing
     $stateProvider
-      .state('view-tests.list', {
-        abstract: true,
+      .state('review-test', {
         url: '/examHistory',
-        template: 'modules/post-test/client/views/review-test.client.view',
+        templateUrl: 'modules/review-test/client/views/review-test.client.view.html',
          data: {
           roles: ['user', 'admin']
         }
       })
       .state('view-specific-test', {
         url: '/grade',
-        templateUrl: 'modules/review-specific-test.client.view.html',
+        templateUrl: 'modules/review-test/client/views/review-specific-test.client.view.html',
         data: {
           roles: ['user', 'admin']
         }

@@ -252,7 +252,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			{
 				// do test-ending things(save back to DB?)
 
-				//SWITCH TO POST-TEST MODULE
+				//SWITCH TO Review-TEST MODULE
 				window.location = '/grade';
 			}
 			else
