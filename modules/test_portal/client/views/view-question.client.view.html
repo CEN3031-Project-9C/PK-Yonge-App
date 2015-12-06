@@ -4,12 +4,74 @@
 		<div class="row">
 			<div class="col-md-12 test-con">
 				<h2 class="test-title">{{testName}}</h2>
-				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()">Previous</button>
-					{{currentPage+1}}/{{numberOfPages()}}
-				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="nextQuestion()">Next</button>
+		  </div>
+
+		<div class="row" >
+			<div class="col-md-5">
+			<!--ng-progressbar directive -->
+				<ng-progressbar type="info" max="{{max_count}}" start="{{timer_running}}" on-stop="stopProgress()">
+				</ng-progressbar> 
+			</div>
+			<span class="label label-success" ng-if="timer_running">Test in Session</span>
+			<span class="label label-danger" ng-if="!timer_running">Test Not in Session</span>
+		</div>
+
+				<a ng-click="openCalcWindow()" class="btn btn-default"><i class="fa fa-calculator"></i> <span class="network-name">Calculator</span></a>
+
+
+				<!--<div>-->
+				    <script type="text/ng-template" id="formulaModal.html">
+				        <div class="modal-header">
+				            <h3 class="modal-title">Formula Sheet</h3>
+				        </div>
+				        <div class="modal-body">
+				            <ul>
+				                <div>
+				                <iframe class="pdfSize" align="center" src="modules/core/client/img/formulaSheet.png"></iframe>
+				                </div>
+				            </ul>
+				        </div>
+				    </script>
+					
+				    <button class="btn btn-default" ng-click="openFormula('lg')"><i class="fa fa-list-ol"></i>Formula Sheet</button>
+				<!--</div> -->
+
+				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span></button>
+
+				 <div class="btn-group" dropdown keyboard-nav>
+			        <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" dropdown-toggle>
+			            {{currentPage+1}}/{{numberOfPages()}} <span class="caret"></span>
+			        </button>
+			        <ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+			             <li ng-repeat="question in testQuestions.questions">
+				          <a ng-click="jumpTo($index)">{{$index + 1 }} <span class="glyphicon glyphicon-flag" ng-if="checkForReview($index)"></span></a>
+				        </li>
+			        </ul>
+			    </div>
+
+				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="nextQuestion()"><span class="glyphicon glyphicon-arrow-right"></span></button>
+				<button class="btn btn-default" ng-click="showTextArea()"><span class="glyphicon glyphicon-pencil"></span> Notepad</button>
+				<button class="btn {{marked}}" ng-click="mark_unmark()"><span class="glyphicon glyphicon-flag"></span> {{reviewButtonText}}</button>
+				
+
+				<!-- DROP DOWN MENU WITH NOTEPAD/MARK FOR REVIEW/TUTORIAL/STRIKETHOUGH/etc/ --
+				<button class='btn btn-default'> <span uib-dropdown on-toggle="toggled(open)"> 
+      <a href id="simple-dropdown" uib-dropdown-toggle>
+        <span class="glyphicon glyphicon-align-justify"></span>
+      </a>
+
+      <ul class="notepad uib-dropdown-menu" aria-labelledby="simple-dropdown">
+        <!--<li ng-repeat="choice in items">
+          <a href>{{choice}}</a>- ->
+          <li class="notepad"><!--<span class="glyphicon glyphicon-align-calendar"></span> - -><a href>Notepad</a></li>
+          <li class="markReview"><a href>Mark for Review</a></li>
+      </ul>
+        </span></button> -->
 				<div ng-repeat="question in testQuestions.questions | startFrom:currentPage | limitTo:1">
 					<h2 class="question-title">{{question.question_body}}</h2>
-					<form ng-submit="saveAnswer()">
+
+					<!--If the current question is multiple choice, use this form for answers:-->
+					<form ng-if="getType(currentPage)==='multiple_choice'"> 
 						<div ng-repeat="answer_choice in question.answer_choices">
 							<div class="radio">
 								<label class="answer-choice">
@@ -18,8 +80,85 @@
 								</label>
 							</div>
 						</div>
-						<input type="submit" class="btn btn-default" value="Save Answer Choice"></input>
-						<p class="save-notice">If you select an answer, you must save it before moving on!</p>
+					</form>
+
+					<!--If the current question is checkboxes, use this form for answers:-->
+					<form ng-if="getType(currentPage)==='check'">
+						<div ng-repeat="answer_choice in question.answer_choices">
+							<div class="checkbox">
+								<label class="answer-choice">
+									<input type="checkbox" ng-model="formData.answer[$index]" name="answerChoice" value="{{$index}}">
+									{{answer_choice}}
+								</input>
+								</label>
+							</div>
+						</div>
+					</form>
+
+					<!--If the current question is fill, use this form for answers:-->
+					<form ng-if="getType(currentPage)==='fill'">
+						<div ng-repeat="answer_choice in question.answer_choices">
+							<div class="text">
+								<label class="answer-choice">
+									{{answer_choice}}
+									<input type="text" ng-model="formData.answer[$index]" class="fill" name="answerChoice" value="{{$index}}">
+								</label>
+							</div>
+						</div>
+					</form>
+
+					<div>
+					    <script type="text/ng-template" id="myModalContent.html">
+					        <div class="modal-header">
+					            <h3 class="modal-title">Your Test is Paused!</h3>
+					        </div>
+					        <div class="modal-body">
+					            <ul>
+					                <h3>Your Test is Paused!</h3>
+					            </ul>
+					        </div>
+					        <div class="modal-footer">
+					            <a ui-sref="finished-test" button class="btn btn-warning" ng-click="submitTest();stopProgress">SUBMIT TEST NOW</button></a>
+					            <button class="btn btn-primary" id="cancel" ng-click="cancel()">Resume Test</button>
+					        </div>
+					    </script>
+
+					    <!--
+					    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
+					-->
+						
+					  <!--
+					    <button class="btn btn-success" ng-if="!timer_running" ng-click="startProgress()">Start Test</button>
+					    <button class="btn btn-warning" ng-if="timer_running" ng-click="stopProgress();open('lg')">Pause Test</button>
+						-->
+					    
+						<a button class="btn btn-default" ng-click="submitTest();stopProgress()">SUBMIT TEST</button></a>
+					</div>
+
+						<div ng-show="showNotes" class='question_notes' id='dxy'> <!-- ng-style="{left: divleft, top: divtop, width: divwidth, height: divheight}" draggable xpos="divleft" ypos="divtop"> -->
+							<div class='question_notes2'>
+								<h2 class='notepad_header'>Notepad</h2>
+									<div class='question_notes3'>
+									<textarea ng-model='Notepad.message' name="noteArea" cols="40" rows="10">{{message}}</textarea>
+									</div>
+								<div class='notepad_footer'>
+									<span class='button-group'>
+										<span class='notepad_cancel1'>
+											<span class='notepad_cancel2'>
+										<button class="btn btn-default notepad_cancel_button" ng-click='cancelNotes()'>Cancel</button>
+											</span>
+										</span>
+
+										<span class='notepad_save1'>
+											<span class='notepad_cancel2'>
+										<button  class="btn btn-default notepad_save_button" ng-click='saveNotes()'>Save & Close</button>
+											</span>
+										</span>
+									</span>
+								</div>
+								<div class="underlay"></div>
+							</div>
+						</div>
 					</form>
 				</div>
 			</div>

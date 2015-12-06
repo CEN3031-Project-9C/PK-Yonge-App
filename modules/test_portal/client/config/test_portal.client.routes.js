@@ -27,6 +27,13 @@ angular.module('test_portal').config(['$stateProvider',
         data: {
           roles: ['user', 'admin']
         }
+      })
+    .state('finished-test', {
+        url: '/grade',
+        templateUrl: 'modules/test_portal/client/views/end.client.view.html',
+        data: {
+          roles: ['user', 'admin']
+        }
       });
   }
 ]);
