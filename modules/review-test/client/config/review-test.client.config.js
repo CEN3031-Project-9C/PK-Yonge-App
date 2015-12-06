@@ -1,7 +1,7 @@
 'use strict';
 
 // Configuring the Articles module
-angular.module('post-test').run(['Menus',
+angular.module('review-test').run(['Menus',
   function (Menus) {
 
   }

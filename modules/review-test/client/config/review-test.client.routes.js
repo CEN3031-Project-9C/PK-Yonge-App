@@ -1,7 +1,7 @@
 'use strict';
 
 // Setting up route
-angular.module('post-test').config(['$stateProvider',
+angular.module('review-test').config(['$stateProvider',
   function ($stateProvider) {
     // Articles state routing
     $stateProvider
