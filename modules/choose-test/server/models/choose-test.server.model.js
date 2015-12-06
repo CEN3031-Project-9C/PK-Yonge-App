@@ -10,6 +10,9 @@ var mongoose = require('mongoose'),
  * Session Schema
  */
 var User_sessionSchema = new Schema({
+	user_id: {
+		type: Schema.ObjectId
+	},
 	test_id: {
 		type: Schema.ObjectId
 	},
@@ -26,6 +29,9 @@ var User_sessionSchema = new Schema({
 		type: [String]
 	},
 	review: {
+		type: [Boolean]
+	},
+	correct: {
 		type: [Boolean]
 	}
 });
