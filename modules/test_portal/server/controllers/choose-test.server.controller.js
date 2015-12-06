@@ -59,6 +59,25 @@ exports.update = function (req, res) {
 };
 
 /**
+ * Delete a user_session
+ */
+/*
+exports.delete = function (req, res) {
+  var user_session = req.user_session;
+
+  user_session.remove(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(user_session);
+    }
+  });
+};
+*/
+
+/**
  * List of user_Sessions
  */
 exports.list = function (req, res) {
