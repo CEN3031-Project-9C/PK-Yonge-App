@@ -1,217 +1,269 @@
-'use strict';
+// 'use strict';
 
-(function () {
-  // Articles Controller Spec
-  describe('User_session Controller Tests', function () {
-    // Initialize global variables
-    var User_SessionsController,
-      scope,
-      $httpBackend,
-      $stateParams,
-      $location,
-      Authentication,
-      User_sessions,
-      mockSession;
+// (function () {
+//   // Articles Controller Spec
+//   describe('User_Session Controller Tests', function () {
+//     // Initialize global variables
+//     var User_SessionsController,
+//       scope,
+//       $httpBackend,
+//       $stateParams,
+//       $location,
+//       Authentication,
+//       User_Sessions,
+//       mockSession;
 
-    // The $resource service augments the response object with methods for updating and deleting the resource.
-    // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
-    // the responses exactly. To solve the problem, we define a new toEqualData Jasmine matcher.
-    // When the toEqualData matcher compares two objects, it takes only object properties into
-    // account and ignores methods.
-    beforeEach(function () {
-      jasmine.addMatchers({
-        toEqualData: function (util, customEqualityTesters) {
-          return {
-            compare: function (actual, expected) {
-              return {
-                pass: angular.equals(actual, expected)
-              };
-            }
-          };
-        }
-      });
-    });
+//     // The $resource service augments the response object with methods for updating and deleting the resource.
+//     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
+//     // the responses exactly. To solve the problem, we define a new toEqualData Jasmine matcher.
+//     // When the toEqualData matcher compares two objects, it takes only object properties into
+//     // account and ignores methods.
+//     beforeEach(function () {
+//       jasmine.addMatchers({
+//         toEqualData: function (util, customEqualityTesters) {
+//           return {
+//             compare: function (actual, expected) {
+//               return {
+//                 pass: angular.equals(actual, expected)
+//               };
+//             }
+//           };
+//         }
+//       });
+//     });
 
-    // Then we can start by loading the main application module
-    beforeEach(module(ApplicationConfiguration.applicationModuleName));
+//     // Then we can start by loading the main application module
+//     beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
-    // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
-    // This allows us to inject a service but then attach it to a variable
-    // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_, _Authentication_, _User_sessions_) {
-      // Set a new global scope
-      scope = $rootScope.$new();
+//     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
+//     // This allows us to inject a service but then attach it to a variable
+//     // with the same name as the service.
+//     beforeEach(inject(function ($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_, _Authentication_, _User_Sessions_) {
+//       // Set a new global scope
+//       scope = $rootScope.$new();
 
-      // Point global variables to injected services
-      $stateParams = _$stateParams_;
-      $httpBackend = _$httpBackend_;
-      $location = _$location_;
-      Authentication = _Authentication_;
-      User_sessions = _User_sessions_;
+//       // Point global variables to injected services
+//       $stateParams = _$stateParams_;
+//       $httpBackend = _$httpBackend_;
+//       $location = _$location_;
+//       Authentication = _Authentication_;
+//       User_Sessions = _User_Sessions_;
 
-      // create mock article
-      mockSession = new User_sessions({
-        test_id: '525a8422f6d0f87f0e407a33',
-        time: 300,
-        complete: false,
-        user_notepad: String[10],
-        user_answer: String[10],
-        review: Boolean[10]
-      });
+//       // create mock article
+//       mockSession = new User_Sessions({
+//         user_id: Authentication.user_id,
+//         test_id: '525a8422f6d0f87f0e407a33',
+//         time: 300,
+//         complete: false,
+//         user_notepad: String[10],
+//         user_answer: String[10],
+//         review: Boolean[10]
+//       });
 
-      // Mock logged in user
-      Authentication.user = {
-        roles: ['user']
-      };
+//       // Mock logged in user
+//       Authentication.user = {
+//         roles: ['user']
+//       };
 
-      // Initialize the Articles controller.
-      User_SessionsController = $controller('User_SessionsController', {
-        $scope: scope
-      });
-    }));
+//       // Initialize the Articles controller.
+//       User_SessionsController = $controller('ChooseTestController', {
+//         $scope: scope
+//       });
+//     }));
 
-    it('$scope.find() should create an array with at least one article object fetched from XHR', inject(function (User_sessions) {
-      // Create a sample articles array that includes the new article
-      var sampleSessions = [mockSession];
+//     describe('$scope.startTest()', function () {
+//       var sampleSessionPostData;
 
-      // Set GET response
-      $httpBackend.expectGET('api/user_sessions').respond(sampleSessions);
+//       beforeEach(function () {
+//         // Create a sample article object
+//         sampleSessionPostData = new User_Sessions({
+//           user_id: Authentication.user_id,
+//           test_id: '525a8422f6d0f87f0e407a33',
+//           time: 300,
+//           complete: false,
+//           user_notepad: String[10],
+//           user_answer: String[10],
+//           review: Boolean[10]
+//         });
 
-      // Run controller functionality
-      scope.find();
-      $httpBackend.flush();
+//         // Fixture mock form input values
+//         scope.title = 'An Article about MEAN';
+//         scope.content = 'MEAN rocks!';
 
-      // Test scope value
-      expect(scope.user_sessions).toEqualData(sampleSessions);
-    }));
+//         spyOn($location, 'path');
+//       });
 
-    it('$scope.findOne() should create an array with one article object fetched from XHR using a articleId URL parameter', inject(function (Articles) {
-      // Set the URL parameter
-      $stateParams.user_sessionId = mockSession._id;
+//     //    it('should send a POST request with the form input values and then locate to new object URL', inject(function (Articles) {
+//     //       //Set POST response
+//     //     $httpBackend.expectPOST('api/user_session', sampleSessionPostData).respond(mockSession);
 
-      // Set GET response
-      $httpBackend.expectGET(/api\/user_sessions\/([0-9a-fA-F]{24})$/).respond(mockSession);
+//     //     // Run controller functionality
+//     //     scope.startTest(true);
+//     //     $httpBackend.flush();
 
-      // Run controller functionality
-      scope.findOne();
-      $httpBackend.flush();
+//     //     // Test form inputs are reset
+//     //     expect(scope.title).toEqual('');
+//     //     expect(scope.content).toEqual('');
 
-      // Test scope value
-      expect(scope.user_session).toEqualData(mockSession);
-    }));
+//     //     // Test URL redirection after the article was created
+//     //     expect($location.path.calls.mostRecent().args[0]).toBe('user_sessions/' + mockSession._id);
+//     //   }));
 
-    describe('$scope.create()', function () {
-      var sampleSessionPostData;
+//     //   it('should set scope.error if save error', function () {
+//     //     var errorMessage = 'this is an error message';
+//     //     $httpBackend.expectPOST('api/user_session', sampleSessionPostData).respond(400, {
+//     //       message: errorMessage
+//     //     });
 
-      beforeEach(function () {
-        // Create a sample article object
-        sampleSessionPostData = new User_sessions({
-          test_id: '525a8422f6d0f87f0e407a33',
-          time: 300,
-          complete: false,
-          user_notepad: String[10],
-          user_answer: String[10],
-          review: Boolean[10]
-        });
+//     //     scope.create("A1");
+//     //     $httpBackend.flush();
 
-        // Fixture mock form input values
-        scope.title = 'An Article about MEAN';
-        scope.content = 'MEAN rocks!';
+//     //     expect(scope.error).toBe(errorMessage);
+//     //   });
+//     // });
 
-        spyOn($location, 'path');
-      });
+//     // it('$scope.find() should create an array with at least one article object fetched from XHR', inject(function (User_Sessions) {
+//     //   // Create a sample articles array that includes the new article
+//     //   var sampleSessions = [mockSession];
 
-      it('should send a POST request with the form input values and then locate to new object URL', inject(function (Articles) {
-        // Set POST response
-        $httpBackend.expectPOST('api/articles', sampleSessionPostData).respond(mockSession);
+//     //   // Set GET response
+//     //   $httpBackend.expectGET('api/user_session').respond(sampleSessions);
 
-        // Run controller functionality
-        scope.create(true);
-        $httpBackend.flush();
+//     //   // Run controller functionality
+//     //   scope.find();
+//     //   $httpBackend.flush();
 
-        // Test form inputs are reset
-        expect(scope.title).toEqual('');
-        expect(scope.content).toEqual('');
+//     //   // Test scope value
+//     //   expect(scope.user_sessions).toEqualData(sampleSessions);
+//     // }));
 
-        // Test URL redirection after the article was created
-        expect($location.path.calls.mostRecent().args[0]).toBe('user_sessions/' + mockSession._id);
-      }));
+//     // it('$scope.findOne() should create an array with one article object fetched from XHR using a articleId URL parameter', inject(function (Articles) {
+//     //   // Set the URL parameter
+//     //   $stateParams.user_sessionId = mockSession._id;
 
-      it('should set scope.error if save error', function () {
-        var errorMessage = 'this is an error message';
-        $httpBackend.expectPOST('api/articles', sampleSessionPostData).respond(400, {
-          message: errorMessage
-        });
+//     //   // Set GET response
+//     //   $httpBackend.expectGET(/api\/user_sessions\/([0-9a-fA-F]{24})$/).respond(mockSession);
 
-        scope.create(true);
-        $httpBackend.flush();
+//     //   // Run controller functionality
+//     //   scope.findOne();
+//     //   $httpBackend.flush();
 
-        expect(scope.error).toBe(errorMessage);
-      });
-    });
+//     //   // Test scope value
+//     //   expect(scope.user_session).toEqualData(mockSession);
+//     // }));
 
-    describe('$scope.update()', function () {
-      beforeEach(function () {
-        // Mock article in scope
-        scope.user_session = mockSession;
-      });
+//     // describe('$scope.create()', function () {
+//     //   var sampleSessionPostData;
 
-      it('should update a valid article', inject(function (Articles) {
-        // Set PUT response
-        $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond();
+//     //   beforeEach(function () {
+//     //     // Create a sample article object
+//     //     sampleSessionPostData = new User_Sessions({
+//     //       test_id: '525a8422f6d0f87f0e407a33',
+//     //       time: 300,
+//     //       complete: false,
+//     //       user_notepad: String[10],
+//     //       user_answer: String[10],
+//     //       review: Boolean[10]
+//     //     });
 
-        // Run controller functionality
-        scope.update(true);
-        $httpBackend.flush();
+//     //     // Fixture mock form input values
+//     //     scope.title = 'An Article about MEAN';
+//     //     scope.content = 'MEAN rocks!';
 
-        // Test URL location to new object
-        expect($location.path()).toBe('/articles/' + mockSession._id);
-      }));
+//     //     spyOn($location, 'path');
+//     //   });
 
-      it('should set scope.error to error response message', inject(function (Articles) {
-        var errorMessage = 'error';
-        $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond(400, {
-          message: errorMessage
-        });
+//     //   it('should send a POST request with the form input values and then locate to new object URL', inject(function (Articles) {
+//     //     // Set POST response
+//     //     $httpBackend.expectPOST('api/articles', sampleSessionPostData).respond(mockSession);
 
-        scope.update(true);
-        $httpBackend.flush();
+//     //     // Run controller functionality
+//     //     scope.create(true);
+//     //     $httpBackend.flush();
 
-        expect(scope.error).toBe(errorMessage);
-      }));
-    });
+//     //     // Test form inputs are reset
+//     //     expect(scope.title).toEqual('');
+//     //     expect(scope.content).toEqual('');
 
-    describe('$scope.remove(article)', function () {
-      beforeEach(function () {
-        // Create new articles array and include the article
-        scope.articles = [mockSession, {}];
+//     //     // Test URL redirection after the article was created
+//     //     expect($location.path.calls.mostRecent().args[0]).toBe('user_sessions/' + mockSession._id);
+//     //   }));
 
-        // Set expected DELETE response
-        $httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
+//     //   it('should set scope.error if save error', function () {
+//     //     var errorMessage = 'this is an error message';
+//     //     $httpBackend.expectPOST('api/articles', sampleSessionPostData).respond(400, {
+//     //       message: errorMessage
+//     //     });
 
-        // Run controller functionality
-        scope.remove(mockSession);
-      });
+//     //     scope.create(true);
+//     //     $httpBackend.flush();
 
-      it('should send a DELETE request with a valid articleId and remove the article from the scope', inject(function (Articles) {
-        expect(scope.user_sessions.length).toBe(1);
-      }));
-    });
+//     //     expect(scope.error).toBe(errorMessage);
+//     //   });
+//     // });
 
-    describe('scope.remove()', function () {
-      beforeEach(function () {
-        spyOn($location, 'path');
-        scope.user_session = mockSession;
+//     // describe('$scope.update()', function () {
+//     //   beforeEach(function () {
+//     //     // Mock article in scope
+//     //     scope.user_session = mockSession;
+//     //   });
 
-        $httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
+//     //   it('should update a valid article', inject(function (Articles) {
+//     //     // Set PUT response
+//     //     $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond();
 
-        scope.remove();
-        $httpBackend.flush();
-      });
+//     //     // Run controller functionality
+//     //     scope.update(true);
+//     //     $httpBackend.flush();
 
-      it('should redirect to articles', function () {
-        expect($location.path).toHaveBeenCalledWith('articles');
-      });
-    });
-  });
-}());
+//     //     // Test URL location to new object
+//     //     expect($location.path()).toBe('/articles/' + mockSession._id);
+//     //   }));
+
+//     //   it('should set scope.error to error response message', inject(function (Articles) {
+//     //     var errorMessage = 'error';
+//     //     $httpBackend.expectPUT(/api\/articles\/([0-9a-fA-F]{24})$/).respond(400, {
+//     //       message: errorMessage
+//     //     });
+
+//     //     scope.update(true);
+//     //     $httpBackend.flush();
+
+//     //     expect(scope.error).toBe(errorMessage);
+//     //   }));
+//     // });
+
+//     // describe('$scope.remove(article)', function () {
+//     //   beforeEach(function () {
+//     //     // Create new articles array and include the article
+//     //     scope.articles = [mockSession, {}];
+
+//     //     // Set expected DELETE response
+//     //     $httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
+
+//     //     // Run controller functionality
+//     //     scope.remove(mockSession);
+//     //   });
+
+//     //   it('should send a DELETE request with a valid articleId and remove the article from the scope', inject(function (Articles) {
+//     //     expect(scope.user_sessions.length).toBe(1);
+//     //   }));
+//     // });
+
+//     // describe('scope.remove()', function () {
+//     //   beforeEach(function () {
+//     //     spyOn($location, 'path');
+//     //     scope.user_session = mockSession;
+
+//     //     $httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
+
+//     //     scope.remove();
+//     //     $httpBackend.flush();
+//     //   });
+
+//     //   it('should redirect to articles', function () {
+//     //     expect($location.path).toHaveBeenCalledWith('articles');
+//     //   });
+//     // });
+//   });
+// }());

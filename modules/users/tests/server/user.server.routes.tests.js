@@ -273,6 +273,8 @@ describe('User CRUD tests', function () {
   });
 
   afterEach(function (done) {
-    User.remove().exec(done);
+    ///UNCOMMENT THIS BEFROE SUBMITTING!!!!!!///////////////////
+
+    //User.remove().exec(done);
   });
 });

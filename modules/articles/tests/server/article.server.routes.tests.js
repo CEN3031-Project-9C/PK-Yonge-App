@@ -315,8 +315,8 @@ describe('Article CRUD tests', function () {
   });
 
   afterEach(function (done) {
-    User.remove().exec(function () {
+    //User.remove().exec(function () {
       Article.remove().exec(done);
-    });
+    //});
   });
 });
