@@ -268,9 +268,6 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.gradeTest = function() {
 			var total = $scope.testQuestions.questions.length;
 			var correct = 0;
-
-			console.log(String(testContainer.answers[0]));
-			console.log(String($scope.getCorrect(0)));
             
 			for (var i = 0; i < $scope.testQuestions.questions.length; i++){
                 if ($scope.getType(i) === "multiple_choice"){
@@ -278,18 +275,39 @@ angular.module('test_portal').controller('QuestionsController', [
 				    	correct++;
 				    }
 			    }
-			    else{
-			    	var totalOptions = 0;
+			    else if ($scope.getType(i) === "check"){
+			    	var checkOptions = 0;
 			    	for (var j = 0; j < $scope.getCorrect(i).length; j++){
 				        if ($scope.getCorrect(i)[j] === "false"){
-				    	    totalOptions++;
+				    	    if (testContainer.answers[i][j] === undefined){
+				    	        checkOptions++;
+				    	    }
+				    	    else if (String(testContainer.answers[i][j]) === "false"){
+				    	    	checkOptions++;
+				    	    }
 				        }
-				        else if (String(testContainer.answers[i][j]) === String($scope.getCorrect(i)[j])){
-                            totalOptions++;
+				        else if ($scope.getCorrect(i)[j] === "true" && testContainer.answers[i] !== undefined) {
+				        	if (String(testContainer.answers[i][j]) === "true"){
+                                checkOptions++;
+                            }
 				        }
 
-				        if (totalOptions === $scope.getCorrect(i).length){
+				        if (checkOptions === $scope.getCorrect(i).length){
+                          correct++;
+				        }
+				    }
+			    }
+			    else{
+			    	var fillOptions = 0;
+			    	for (var k = 0; k < $scope.getCorrect(i).length; k++){
+				        if (testContainer.answers[i] === undefined){
+				        }
+				        else if ($scope.getCorrect(i)[k] === String(testContainer.answers[i][k])) {
+                                fillOptions++;
+				        }
 
+				        if (fillOptions === $scope.getCorrect(i).length){
+                          correct++;
 				        }
 				    }
 			    }
@@ -304,7 +322,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		};
 
 		$scope.timer_running = true;
-		$scope.max_count = 10800;
+		$scope.max_count = 1000;
 
         /*
 		$scope.startProgress = function() {
