@@ -8,6 +8,9 @@ var path = require('path'),
   Question = mongoose.model('Question'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
+//console.log("'path' in 'questions.server.controller.js'");
+//console.log(path);
+
 // Create a question
 /*
 exports.create = function (req, res) {
