@@ -24,7 +24,8 @@ angular.module('review-test').controller('ReviewController', [
 
 		var userQuestions = gradeTestService.getQuestions();
 		var userAnswers = gradeTestService.getUserAnswers();
-
+        $scope.userQuestions = userQuestions;
+        $scope.userAnswers = userAnswers;
 
 		var user_sessionContainer = {
 			user_sessions: []	// we will store retrieved sessions in this array
@@ -43,7 +44,7 @@ angular.module('review-test').controller('ReviewController', [
             
 			for (var i = 0; i < userQuestions.length; i++){
                 if (userQuestions[i].question_type === "multiple_choice"){
-				    if (userAnswers[i] === userQuestions[i].correct_answer){
+				    if (String(userAnswers[i]) === userQuestions[i].correct_answer[0]){
 				    	correct++;
 				    }
 			    }
@@ -84,7 +85,7 @@ angular.module('review-test').controller('ReviewController', [
 				    }
 			    }
 			}
-
+            
 			var result = String(correct)+"/"+String(total);
 			return result;
 		};
