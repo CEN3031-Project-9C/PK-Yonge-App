@@ -274,6 +274,7 @@ describe('User CRUD tests', function () {
 
   afterEach(function (done) {
     ///UNCOMMENT THIS BEFROE SUBMITTING!!!!!!///////////////////
+    done();
 
     //User.remove().exec(done);
   });

@@ -108,9 +108,9 @@ angular.module('choose-test').controller(
 			sessionServiceV3.setSessionObject(user_session);
 			console.log(sessionServiceV3.getSessionObject());
 			
-			sessionServiceV3.setUserNotepad(["4", "number four", "Fore!"]);
+			// sessionServiceV3.setUserNotepad(["4", "number four", "Fore!"]);
 			
-			sessionServiceV3.setUserAnswers(["Answer 1", "Is this right?", "Hmm..."]);
+			// sessionServiceV3.setUserAnswers(["Answer 1", "Is this right?", "Hmm..."]);
 			
 		};
 		
