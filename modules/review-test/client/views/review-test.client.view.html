@@ -30,12 +30,12 @@
       <br/>
 
       <div>
-        Your Answer: {{userAnswers[$index]}}
+        Your Answer: {{handleQuestion(userAnswers[$index], question.question_type, question.correct_answer.length)}}
       </div>
       <br/>
 
       <div>
-        Correct Answer: {{question.correct_answer}}
+        Correct Answer: {{handleQuestion(question.correct_answer, question.question_type, question.correct_answer.length)}}
       </div>
       <br/>
 

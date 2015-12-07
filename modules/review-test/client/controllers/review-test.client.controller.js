@@ -90,22 +90,86 @@ angular.module('review-test').controller('ReviewController', [
 			return result;
 		};
 
-        $scope.convertLetter = function(number) {
-			/*if (number === undefined){
-				return "";
-			}
-			else if (number === 0){
-                return "A"
-			}
-			else if (number === 1){
-                return "A"
-			}
-			else if (number === 2){
-                return "A"
-			}
-			else if (number === 0){
-                return "A"
-			}*/
+        $scope.handleQuestion = function(response, type, length) {
+        	if (type === "multiple_choice"){
+				if (response === undefined){
+					return "";
+				}
+				else if (response === "0"){
+	                return "A";
+				}
+				else if (response === "1"){
+	                return "B";
+				}
+				else if (response === "2"){
+	                return "C";
+				}
+				else if (response === "3"){
+	                return "D";
+				}
+				else if (response[0] === "0"){
+	                return "A";
+				}
+				else if (response[0] === "1"){
+	                return "B";
+				}
+				else if (response[0] === "2"){
+	                return "C";
+				}
+				else if (response[0] === "3"){
+	                return "D";
+				}
+		    }
+		    else if (type === "check"){
+		    	if (response === undefined){
+		    		return "";
+		    	}
+		    	else{
+		    		var returningCheck = "";
+		    		for (var i = 0; i < length; i++){
+		    			if (response[i] === undefined){
+		    				returningCheck += " ";
+		    			}
+		    			else if (response[i] === "false"){
+                            returningCheck += " ";
+		    			}
+		    			else if (String(response[i]) === "true"){
+			    			if (i === 0){
+				                returningCheck += "A ";
+							}
+							else if (i === 1){
+				                returningCheck += "B ";
+							}
+							else if (i === 2){
+				                returningCheck += "C ";
+							}
+							else if (i === 3){
+				                returningCheck += "D ";
+							}
+					    }
+		    		}
+		    		return returningCheck;
+		    	}
+		    }
+		    else{
+		    	var returningFill = "";
+
+		    	if (response === undefined){
+                    return returningFill;
+		    	}
+		    	else{
+		    		for (var j = 0; j < length; j++){
+		    			if (response[j] === undefined){
+		    				returningFill += "nothing was entered!";
+		    			}
+		    			else{
+                            returningFill += response[j];
+                        }
+                        returningFill += " ";
+                    }
+                    return returningFill;
+		    	}
+		    }
 		};		
 
 		//Dealing with question load/display

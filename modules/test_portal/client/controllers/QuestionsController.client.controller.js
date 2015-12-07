@@ -326,7 +326,7 @@ angular.module('test_portal').controller('QuestionsController', [
 		};
 
 		$scope.timer_running = true;
-		$scope.max_count = 10800;
+		$scope.max_count = 1000;
 
         
 		/*$scope.startProgress = function() {
