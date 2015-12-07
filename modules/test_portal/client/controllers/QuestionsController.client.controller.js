@@ -341,14 +341,14 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.timer_running = true;
 		$scope.max_count = 1000;
 
-        /*
-		$scope.startProgress = function() {
+        
+		/*$scope.startProgress = function() {
 			$scope.timer_running = true;
-		 };
+		 };*/
 
 		$scope.stopProgress = function(){
 		    $scope.timer_running = false;
-		};*/
+		};
 
 		//modal stuff
 		$scope.animationsEnabled = true;
