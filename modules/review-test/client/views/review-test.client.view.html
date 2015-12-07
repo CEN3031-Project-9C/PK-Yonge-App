@@ -1,0 +1,56 @@
+<section ng-controller="ReviewController" ng-init="loadSessions()"><!-- Pull All Former User Sessions -->
+  <div class="page-header">
+    <h1 class = "text-center">Test Results</h1>
+  </div>
+		<div class="list-group">
+<!-- 		    <a ng-repeat="previous in tests" ui-sref="previous.view({User???articleId: ???._id})" class="list-group-item">
+		      <small class="list-group-item-text">
+		       		<i class="fa fa-check"></i>
+			        <span ng-bind="article.created | date:'mediumDate'"></span><!-- Number of Correct
+			  		<i class="fa fa-cldose"></i>
+			        <span ng-bind="??? Number of incorrect"></span><!-- Number of InCorrect 
+		      </small>
+		      	<h4 class="list-group-item-heading" ng-bind="previous.test_name"></h4>
+		     <!-- <p class="list-group-item-text" ng-bind="article.content"></p>
+		    </a> -->
+		    <!--<div ng-repeat="test in oldTests.tests">
+				<h2 class="tests">test id: {{test._id}}</h2>
+			</div>
+				<h2 class="tests">test id:</h2>-->
+				<!--<p>{{gradeTest()}}-->
+	  </div>
+
+
+	  <div ng-repeat="question in userQuestions">
+      <h3>{{$index + 1}}. {{question.question_body}}</h3>
+
+      <div ng-repeat="answer_choice in question.answer_choices">
+        {{answer_choice}}
+      </div>
+      <br/>
+
+      <div>
+        Your Answer: {{handleQuestion(userAnswers[$index], question.question_type, question.correct_answer.length)}}
+      </div>
+      <br/>
+
+      <div>
+        Correct Answer: {{handleQuestion(question.correct_answer, question.question_type, question.correct_answer.length)}}
+      </div>
+      <br/>
+
+       <div>
+        Florida State Standard: {{question.standard}}
+      </div>
+      <br/>
+
+    </div>
+
+          <div>
+        <h2>Final Score: {{gradeTest()}}<h2>
+      </div>
+
+<!-- 	  <div class="alert alert-warning text-center" ng-if="articles.$resolved && !articles.length">check if no completed sessions
+	    No previously completed exams!  <a ui-sref="????.create"> Please test your skills</a>?
+	  </div> -->
+</section>

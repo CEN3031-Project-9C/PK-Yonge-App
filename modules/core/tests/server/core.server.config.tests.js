@@ -17,14 +17,14 @@ describe('Configuration tests', function () {
     before(function(done) {
       User.remove(function(err) {
         should.not.exist(err);
-        done();
+         done();
       });
     });
 
     after(function(done) {
       User.remove(function(err) {
         should.not.exist(err);
-        done();
+         done();
       });
     });
 
@@ -55,10 +55,12 @@ describe('Configuration tests', function () {
 
         // There shouldn't be any errors
         should.not.exist(err);
+
         users.should.be.instanceof(Array).and.have.lengthOf(0);
 
         seed.start().then(function() {
           User.find({username: 'admin'}, function(err, users) {
+
             should.not.exist(err);
             users.should.be.instanceof(Array).and.have.lengthOf(1);
 

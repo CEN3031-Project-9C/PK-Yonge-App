@@ -10,11 +10,12 @@ angular.module('test_portal').controller('QuestionsController', [
 	'$modal',
 	'$log', 
 	'Authentication', 
-	'sessionServiceV2',
+	'sessionServiceV3',
 	'questionsService', 
 	'questionsByTestIDService',
 	'takeTestService',
-	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, sessionServiceV2, questionsService, questionsByTestIDService, takeTestService) {
+	'gradeTestService',
+	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, sessionServiceV3, questionsService, questionsByTestIDService, takeTestService, gradeTestService) {
 	  	
 		$scope.authentication = Authentication;
 		
@@ -23,7 +24,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			$location.path('/');
 		}
 
-//Setting up variables				
+		//Setting up variables				
 		$scope.currentPage = 0;
 		
 		$scope.formData = {
@@ -59,14 +60,23 @@ angular.module('test_portal').controller('QuestionsController', [
 			questions: [],
 		};
 
-//Dealing with question load/display
+		$scope.getTestContainer = function(){
+			return testContainer;
+		};
+
+		//Dealing with question load/display
 		$scope.loadQuestions = function() {
-						
 			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
-				{testID: sessionServiceV2.getTestID()},
+				{testID: sessionServiceV3.getTestID()},
 				function() {
 
 					takeTestService.setQuestions(testContainer.questions);		// Save the questions locally
+					gradeTestService.setQuestions(testContainer.questions);
+					// The following two lines are for testing 
+					//console.log('testContainer.questions in QuestionsController.client.controller.js');
+					//console.log(testContainer.questions);
+					//console.log('gradeTestService.getQuestions() contents...');
+					//console.log(gradeTestService.getQuestions());
 					$scope.testQuestions.questions = testContainer.questions;	// Make the questions available to the front-end
 					
 				}
@@ -79,12 +89,17 @@ angular.module('test_portal').controller('QuestionsController', [
 			return testContainer.questions[index].question_type;
 		};
 
-//Methods for navigation
+		$scope.getCorrect = function(index) //Returns the question type
+		{
+			return testContainer.questions[index].correct_answer;
+		};
+
+		//Methods for navigation
 		//Next 2 methods are code in the body of BOTH previousQuestion and nextQuestion, extracted to be their own methods
 		//(if you ever were to edit the code, reduces chance of updating code in one place but not where it's duplicated elsewhere)
 		$scope.saveAnswer = function() {
 			testContainer.answers[$scope.currentPage] = $scope.formData.answer;
-			sessionServiceV2.setUserAnswer(testContainer.answers);
+			sessionServiceV3.setUserAnswers(testContainer.answers);
 
 		    var testingStuff = [];
 
@@ -135,10 +150,11 @@ angular.module('test_portal').controller('QuestionsController', [
 			console.log($scope.formData.answer);
 			*/
 
-			//console.log("My answers: " + sessionServiceV2.getUserAnswer());
+			//console.log("My answers: " + sessionServiceV3.getUserAnswer());
 
 			// To-do, save this answer to the DB on question switch
 		};
+		
 		$scope.reloadSaved = function()
 		{
 			$scope.formData.answer = testContainer.answers[$scope.currentPage];
@@ -179,7 +195,8 @@ angular.module('test_portal').controller('QuestionsController', [
 			$scope.currentPage = num;
 			$scope.reloadSaved();
 		};
-//Marking for review
+		
+		//Marking for review
 		$scope.mark_unmark = function() {
 			if (!testContainer.review[$scope.currentPage])
 			{
@@ -194,9 +211,9 @@ angular.module('test_portal').controller('QuestionsController', [
 				$scope.reviewButtonText = "Mark for Review";
 			}
 
-			sessionServiceV2.setReview(testContainer.review);
+			sessionServiceV3.setReview(testContainer.review);
 
-			//console.log("My Review: " + sessionServiceV2.getReview());
+			//console.log("My Review: " + sessionServiceV3.getReview());
 		};
 
 		$scope.checkForReview = function(index) {
@@ -210,7 +227,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			}
 		};
 
-//Submission-related methods
+		//Submission-related methods
 		$scope.checkUnanswered = function() {
 			var unanswered = ""; //String to represent all of the unanswered questions so they can be reported to the user.
 			for (var i = 0; i < $scope.testQuestions.questions.length; i++)
@@ -243,6 +260,8 @@ angular.module('test_portal').controller('QuestionsController', [
 			}
 		};
 		$scope.submitTest = function() {
+			
+			
 			$scope.saveAnswer(); //If the user has selected an answer for that question, we want it to be stored.
 			
 			var proceed = $scope.checkUnanswered(); //Check whether they have unanswered questions.
@@ -252,31 +271,71 @@ angular.module('test_portal').controller('QuestionsController', [
 			{
 				// do test-ending things(save back to DB?)
 
-				//SWITCH TO POST-TEST MODULE
-				window.location = '/grade';
+				// Save all final answers
+				gradeTestService.setUserAnswers(sessionServiceV3.getUserAnswers());
+				//console.log('gradeTestService.getUserAnswers() contents...');
+				//console.log(gradeTestService.getUserAnswers());
+
+				//SWITCH TO Review-TEST MODULE
+				$location.path('/examHistory');
 			}
 			else
 			{
 				//continue with test
 			}
+			
+			
 		};
 
-//Extra tools (calculator, timer, etc)
+		$scope.gradeTest = function() {
+			var total = $scope.testQuestions.questions.length;
+			var correct = 0;
+
+			//console.log(String(testContainer.answers[0]));
+			//console.log(String($scope.getCorrect(0)));
+            
+			for (var i = 0; i < $scope.testQuestions.questions.length; i++){
+                if ($scope.getType(i) === "multiple_choice"){
+				    if (testContainer.answers[i] === $scope.getCorrect(i)[0]){
+				    	correct++;
+				    }
+			    }
+			    else{
+			    	var totalOptions = 0;
+			    	for (var j = 0; j < $scope.getCorrect(i).length; j++){
+				        if ($scope.getCorrect(i)[j] === "false"){
+				    	    totalOptions++;
+				        }
+				        else if (String(testContainer.answers[i][j]) === String($scope.getCorrect(i)[j])){
+                            totalOptions++;
+				        }
+
+				        if (totalOptions === $scope.getCorrect(i).length){
+
+				        }
+				    }
+			    }
+			}
+			console.log(correct);
+			console.log(total);
+		};
+
+		//Extra tools (calculator, timer, etc)
 		$scope.openCalcWindow = function(){
 			var myWindow = window.open("calculator", "calcWindow", "resizable=0, location=no,menubar=no,status=no,top=200, left=700, width=425, height=450");
 		};
 
 		$scope.timer_running = true;
-		$scope.max_count = 10800;
+		$scope.max_count = 1000;
 
-        /*
-		$scope.startProgress = function() {
+        
+		/*$scope.startProgress = function() {
 			$scope.timer_running = true;
-		 };
+		 };*/
 
 		$scope.stopProgress = function(){
 		    $scope.timer_running = false;
-		};*/
+		};
 
 		//modal stuff
 		$scope.animationsEnabled = true;
@@ -294,14 +353,14 @@ angular.module('test_portal').controller('QuestionsController', [
 
 	   };
 
-//Modal selection options:
+	   //Modal selection options:
 	  $scope.ok = function () {
 	  	$scope.submitTest();
 	  	$scope.stopProgress();
 	    
-	    sessionServiceV2.setComplete(testContainer.complete);
+	    sessionServiceV3.setComplete(testContainer.complete);
 
-	    //console.log("Completed: " + sessionServiceV2.getComplete());
+	    //console.log("Completed: " + sessionServiceV3.getComplete());
 	  };
 
 	  $scope.cancel = function () {
@@ -338,14 +397,14 @@ angular.module('test_portal').controller('QuestionsController', [
 			testContainer.notes[$scope.currentPage] = $scope.Notepad.message;
 			$scope.showNotes = false;
 
-			sessionServiceV2.setUserNotepad(testContainer.notes);
+			sessionServiceV3.setUserNotepad(testContainer.notes);
 
-			//console.log("My Notes: " + sessionServiceV2.getUserNotepad());
+			//console.log("My Notes: " + sessionServiceV3.getUserNotepad());
 		};
 
 
 		 
-//Work in progress: making the notepad moveable
+		//Work in progress: making the notepad moveable
 		$scope.addListeners = function (){
 			alert("Hello6");
 		    //$document.getElementById('dxy').addEventListener('mousedown', mouseDown, false);

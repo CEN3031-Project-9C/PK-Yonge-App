@@ -5,11 +5,8 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  Question = mongoose.model('Question'),
+  User_session = mongoose.model('User_Session'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
-
-//console.log("'path' in 'questions.server.controller.js'");
-//console.log(path);
 
 // Create a question
 /*
@@ -29,9 +26,9 @@ exports.create = function (req, res) {
 };
 */
 
-// Show the current question
+// Show the current session
 exports.read = function (req, res) {
-  res.json(req.question);
+  res.json(req.User_session);
 };
 
 // Update a question
@@ -71,52 +68,52 @@ exports.delete = function (req, res) {
 };
 */
 
-// List of Questions
+// List of Sessions
 exports.list = function (req, res) {
-  Question.find().exec(function (err, questions) {
+  User_session.find().exec(function (err, sessions) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(questions);
+      res.json(sessions);
     }
   });
 };
 
-// Find a question by its Test ID
-exports.allQuestionsWithTestID = function (req, res) {
-
-	Question.find({test_id: req.params.testID}).exec(function (err, questions) {
+// Find a session by its User ID
+exports.allUser_sessionsWithUserID = function (req, res) {
+  console.log("all user sessions with user id");
+	User_session.find({user_id: req.params.userID}).exec(function (err, user_sessions) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.json(questions);
+			res.json(user_sessions);
 		}
 	});
 	
 };
 
-// Question middleware
-exports.questionByID = function (req, res, next, id) {
+// Session middleware
+exports.user_sessionByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Question is invalid'
+      message: 'Session is invalid'
     });
   }
 
-  Question.findById(id).populate('user', 'displayName').exec(function (err, question) { //Populate finds objectId and replaces it with actual info.
+  User_session.findById(id).populate('user', 'displayName').exec(function (err, user_session) { //Populate finds objectId and replaces it with actual info.
     if (err) {
       return next(err);
-    } else if (!question) {
+    } else if (!user_session) {
       return res.status(404).send({
-        message: 'No question with that identifier has been found'
+        message: 'No session with that identifier has been found'
       });
     }
-    req.question = question;
+    req.user_session = user_session;
     next();
   });
 };

@@ -9,14 +9,17 @@ var mongoose = require('mongoose'),
 /**
  * Session Schema
  */
-var User_sessionSchema = new Schema({
+var User_SessionSchema = new Schema({
+	user_id: {
+		type: Schema.ObjectId
+	},
 	test_id: {
 		type: Schema.ObjectId
 	},
-	timer: {
+	time: {
 		type: Number
 	},
-	completed: {
+	complete: {
 		type: Boolean
 	},
 	user_notepad: {
@@ -27,7 +30,10 @@ var User_sessionSchema = new Schema({
 	},
 	review: {
 		type: [Boolean]
+	},
+	correct: {
+		type: [Boolean]
 	}
 });
 
-mongoose.model('User_session', User_sessionSchema);
+mongoose.model('User_Session', User_SessionSchema);

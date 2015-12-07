@@ -254,8 +254,14 @@ describe('User CRUD tests', function () {
             return done(signinErr);
           }
 
+          var userUpdate = {
+            firstName: 'admin_update_first',
+            lastName: 'admin_update_last',
+            roles: ['admin']
+          };
+
           agent.delete('/api/users/' + user._id)
-            //.send(userUpdate)
+            .send(userUpdate)
             .expect(200)
             .end(function (userInfoErr, userInfoRes) {
               if (userInfoErr) {
@@ -273,6 +279,8 @@ describe('User CRUD tests', function () {
   });
 
   afterEach(function (done) {
+    ///UNCOMMENT THIS BEFROE SUBMITTING!!
+
     User.remove().exec(done);
   });
 });

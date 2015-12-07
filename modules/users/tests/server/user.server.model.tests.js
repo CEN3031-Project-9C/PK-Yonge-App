@@ -601,6 +601,7 @@ describe('User Model Unit Tests:', function () {
   });
 
   after(function (done) {
+    ////// UN COMMENT THIS BEFORE SUBMITTING!!!!
     User.remove().exec(done);
   });
 });
