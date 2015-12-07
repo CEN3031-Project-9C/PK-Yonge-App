@@ -24,7 +24,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			$location.path('/');
 		}
 
-//Setting up variables				
+		//Setting up variables				
 		$scope.currentPage = 0;
 		
 		$scope.formData = {
@@ -60,7 +60,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			questions: [],
 		};
 
-//Dealing with question load/display
+		//Dealing with question load/display
 		$scope.loadQuestions = function() {
 			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
 				{testID: sessionServiceV3.getTestID()},
@@ -90,7 +90,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			return testContainer.questions[index].correct_answer;
 		};
 
-//Methods for navigation
+		//Methods for navigation
 		//Next 2 methods are code in the body of BOTH previousQuestion and nextQuestion, extracted to be their own methods
 		//(if you ever were to edit the code, reduces chance of updating code in one place but not where it's duplicated elsewhere)
 		$scope.saveAnswer = function() {
@@ -150,6 +150,7 @@ angular.module('test_portal').controller('QuestionsController', [
 
 			// To-do, save this answer to the DB on question switch
 		};
+		
 		$scope.reloadSaved = function()
 		{
 			$scope.formData.answer = testContainer.answers[$scope.currentPage];
@@ -190,7 +191,8 @@ angular.module('test_portal').controller('QuestionsController', [
 			$scope.currentPage = num;
 			$scope.reloadSaved();
 		};
-//Marking for review
+		
+		//Marking for review
 		$scope.mark_unmark = function() {
 			if (!testContainer.review[$scope.currentPage])
 			{
@@ -221,7 +223,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			}
 		};
 
-//Submission-related methods
+		//Submission-related methods
 		$scope.checkUnanswered = function() {
 			var unanswered = ""; //String to represent all of the unanswered questions so they can be reported to the user.
 			for (var i = 0; i < $scope.testQuestions.questions.length; i++)
@@ -267,11 +269,10 @@ angular.module('test_portal').controller('QuestionsController', [
 
 				// Save all final answers
 				gradeTestService.setUserAnswers(sessionServiceV3.getUserAnswers());
-				console.log('gradeTestService.getUserAnswers() contents...');
-				console.log(gradeTestService.getUserAnswers());
+				//console.log('gradeTestService.getUserAnswers() contents...');
+				//console.log(gradeTestService.getUserAnswers());
 
 				//SWITCH TO Review-TEST MODULE
-				//window.location = '/examHistory';
 				$location.path('/examHistory');
 			}
 			else
@@ -285,6 +286,9 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.gradeTest = function() {
 			var total = $scope.testQuestions.questions.length;
 			var correct = 0;
+
+			//console.log(String(testContainer.answers[0]));
+			//console.log(String($scope.getCorrect(0)));
             
 			for (var i = 0; i < $scope.testQuestions.questions.length; i++){
                 if ($scope.getType(i) === "multiple_choice"){
@@ -292,39 +296,18 @@ angular.module('test_portal').controller('QuestionsController', [
 				    	correct++;
 				    }
 			    }
-			    else if ($scope.getType(i) === "check"){
-			    	var checkOptions = 0;
+			    else{
+			    	var totalOptions = 0;
 			    	for (var j = 0; j < $scope.getCorrect(i).length; j++){
 				        if ($scope.getCorrect(i)[j] === "false"){
-				    	    if (testContainer.answers[i][j] === undefined){
-				    	        checkOptions++;
-				    	    }
-				    	    else if (String(testContainer.answers[i][j]) === "false"){
-				    	    	checkOptions++;
-				    	    }
+				    	    totalOptions++;
 				        }
-				        else if ($scope.getCorrect(i)[j] === "true" && testContainer.answers[i] !== undefined) {
-				        	if (String(testContainer.answers[i][j]) === "true"){
-                                checkOptions++;
-                            }
+				        else if (String(testContainer.answers[i][j]) === String($scope.getCorrect(i)[j])){
+                            totalOptions++;
 				        }
 
-				        if (checkOptions === $scope.getCorrect(i).length){
-                          correct++;
-				        }
-				    }
-			    }
-			    else{
-			    	var fillOptions = 0;
-			    	for (var k = 0; k < $scope.getCorrect(i).length; k++){
-				        if (testContainer.answers[i] === undefined){
-				        }
-				        else if ($scope.getCorrect(i)[k] === String(testContainer.answers[i][k])) {
-                                fillOptions++;
-				        }
+				        if (totalOptions === $scope.getCorrect(i).length){
 
-				        if (fillOptions === $scope.getCorrect(i).length){
-                          correct++;
 				        }
 				    }
 			    }
@@ -333,13 +316,13 @@ angular.module('test_portal').controller('QuestionsController', [
 			console.log(total);
 		};
 
-//Extra tools (calculator, timer, etc)
+		//Extra tools (calculator, timer, etc)
 		$scope.openCalcWindow = function(){
 			var myWindow = window.open("calculator", "calcWindow", "resizable=0, location=no,menubar=no,status=no,top=200, left=700, width=425, height=450");
 		};
 
 		$scope.timer_running = true;
-		$scope.max_count = 1000;
+		$scope.max_count = 10800;
 
         
 		/*$scope.startProgress = function() {
@@ -366,7 +349,7 @@ angular.module('test_portal').controller('QuestionsController', [
 
 	   };
 
-//Modal selection options:
+	   //Modal selection options:
 	  $scope.ok = function () {
 	  	$scope.submitTest();
 	  	$scope.stopProgress();
@@ -417,7 +400,7 @@ angular.module('test_portal').controller('QuestionsController', [
 
 
 		 
-//Work in progress: making the notepad moveable
+		//Work in progress: making the notepad moveable
 		$scope.addListeners = function (){
 			alert("Hello6");
 		    //$document.getElementById('dxy').addEventListener('mousedown', mouseDown, false);
