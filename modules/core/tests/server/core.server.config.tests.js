@@ -15,17 +15,17 @@ describe('Configuration tests', function () {
 
   describe('Testing default seedDB:', function () {
     before(function(done) {
-      // User.remove(function(err) {
-      //   should.not.exist(err);
+      User.remove(function(err) {
+        should.not.exist(err);
          done();
-      // });
+      });
     });
 
     after(function(done) {
-      // User.remove(function(err) {
-      //   should.not.exist(err);
+      User.remove(function(err) {
+        should.not.exist(err);
          done();
-      // });
+      });
     });
 
     it('should not be an admin user to begin with', function(done) {
@@ -70,10 +70,10 @@ describe('Configuration tests', function () {
             // Restore original NODE_ENV environment variable
             process.env.NODE_ENV = nodeEnv;
 
-            // User.remove(function(err) {
-            //   should.not.exist(err);
-            //   return done();
-            // });
+            User.remove(function(err) {
+              should.not.exist(err);
+              return done();
+            });
           });
         });
       });
@@ -111,10 +111,10 @@ describe('Configuration tests', function () {
               // Restore original NODE_ENV environment variable
               process.env.NODE_ENV = nodeEnv;
 
-              /*User.remove(function(err) {
+              User.remove(function(err) {
                 should.not.exist(err);
                 return done();
-              });*/
+              });
             });
           });
         });

@@ -348,8 +348,8 @@ describe('User Session CRUD tests', function () {
   // });
 
   afterEach(function (done) {
-    //User.remove().exec(function () {
+    User.remove().exec(function () {
       User_Session.remove().exec(done);
-    //});
+    });
   });
 });

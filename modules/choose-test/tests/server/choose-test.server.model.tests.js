@@ -71,14 +71,10 @@ describe('User_Session Model Unit Tests:', function () {
     //   });
     // });
   });
-
+  
   afterEach(function (done) {
-    User_Session.remove().exec(done);
+    User_Session.remove().exec(function () {
+      User.remove().exec(done);
+    });
   });
-
-  // afterEach(function (done) {
-  //   User_Session.remove().exec(function () {
-  //     User.remove().exec(done);
-  //   });
-  // });
 });
