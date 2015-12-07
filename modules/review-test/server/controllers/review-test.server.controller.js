@@ -5,7 +5,7 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  User_session = mongoose.model('User_session'),
+  User_session = mongoose.model('User_Session'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 // Create a question
