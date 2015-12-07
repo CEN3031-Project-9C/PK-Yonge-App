@@ -1,0 +1,31 @@
+<section ng-controller="ReviewController" ng-init="loadSession()">
+  <div class="page-header">
+    <h1 class = "text-center">{{testName}}</h1>
+
+    <div ng-repeat="question in Questions">
+      {{$index + 1}} {{question.question_body}}
+
+      <div ng-repeat="answer_choice in question.answer_choices">
+        {{answer_choice}}
+      </div>
+
+      <div>
+        {{user_sessions.user_answer}}
+      </div>
+
+      <div>
+        {{question.correct_answer}}
+      </div>
+
+       <div>
+        {{question.standard}}
+      </div>
+    </div>
+
+    <!--
+      something like:
+      correct answers/total answers 
+    -->
+   
+  </div>
+</section>

@@ -33,7 +33,7 @@
 				        </div>
 				    </script>
 					
-				    <button class="btn btn-default" ng-click="openFormula('lg')"><i class="fa fa-list-ol"></i>Formula Sheet</button>
+				    <button class="btn btn-default" ng-click="openFormula('lg')"><i class="fa fa-list-ol"></i> Formula Sheet</button>
 				<!--</div> -->
 
 				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span></button>
@@ -118,7 +118,7 @@
 					            </ul>
 					        </div>
 					        <div class="modal-footer">
-					            <a ui-sref="finished-test" button class="btn btn-warning" ng-click="submitTest();stopProgress">SUBMIT TEST NOW</button></a>
+					            <a ui-sref="view-specific-test" button class="btn btn-warning" ng-click="submitTest()">SUBMIT TEST NOW</button></a>
 					            <button class="btn btn-primary" id="cancel" ng-click="cancel()">Resume Test</button>
 					        </div>
 					    </script>
@@ -133,7 +133,7 @@
 						-->
 						
 					    <button class="btn btn-default" ng-click="saveTestSession()">Save Test</button>
-						<button class="btn btn-default" ng-click="submitTest();stopProgress()">SUBMIT TEST</button>
+						<button class="btn btn-default" ng-click="submitTest()">SUBMIT TEST</button>
 
 					</div>
 

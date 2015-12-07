@@ -1,6 +1,25 @@
-<section ng-controller="ReviewController" ng-init="find()">
+<section ng-controller="ReviewController" ng-init="loadTests()"><!-- Pull All Former User Sessions -->
   <div class="page-header">
-    <h1 class = "text-center">You have completed the test!</h1>
-    <center><a ui-sref="home" class="btn btn-default btn-lg">Return to Homepage.</a></center>
+    <h1 class = "text-center">Previous Tests</h1>
   </div>
+		<div class="list-group">
+<!-- 		    <a ng-repeat="previous in tests" ui-sref="previous.view({User???articleId: ???._id})" class="list-group-item">
+		      <small class="list-group-item-text">
+		       		<i class="fa fa-check"></i>
+			        <span ng-bind="article.created | date:'mediumDate'"></span><!-- Number of Correct
+			  		<i class="fa fa-cldose"></i>
+			        <span ng-bind="??? Number of incorrect"></span><!-- Number of InCorrect 
+		      </small>
+		      	<h4 class="list-group-item-heading" ng-bind="previous.test_name"></h4>
+		     <!-- <p class="list-group-item-text" ng-bind="article.content"></p>
+		    </a> -->
+		    <div ng-repeat="test in oldTests.tests">
+				<h2 class="tests">test id: {{test._id}}</h2>
+			</div>
+				<h2 class="tests">test id:</h2>
+	  </div>
+
+<!-- 	  <div class="alert alert-warning text-center" ng-if="articles.$resolved && !articles.length">check if no completed sessions
+	    No previously completed exams!  <a ui-sref="????.create"> Please test your skills</a>?
+	  </div> -->
 </section>
