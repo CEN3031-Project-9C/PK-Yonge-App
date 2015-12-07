@@ -1,6 +1,6 @@
 <section ng-controller="ReviewController" ng-init="loadSessions()"><!-- Pull All Former User Sessions -->
   <div class="page-header">
-    <h1 class = "text-center">Previous Tests</h1>
+    <h1 class = "text-center">Test Results</h1>
   </div>
 		<div class="list-group">
 <!-- 		    <a ng-repeat="previous in tests" ui-sref="previous.view({User???articleId: ???._id})" class="list-group-item">
@@ -13,37 +13,42 @@
 		      	<h4 class="list-group-item-heading" ng-bind="previous.test_name"></h4>
 		     <!-- <p class="list-group-item-text" ng-bind="article.content"></p>
 		    </a> -->
-		    <div ng-repeat="test in oldTests.tests">
+		    <!--<div ng-repeat="test in oldTests.tests">
 				<h2 class="tests">test id: {{test._id}}</h2>
 			</div>
-				<h2 class="tests">test id:</h2>
+				<h2 class="tests">test id:</h2>-->
 				<!--<p>{{gradeTest()}}-->
 	  </div>
 
 
-	  <!--<div ng-repeat="question in userQuestions">
-      {{$index + 1}}. {{question.question_body}}
+	  <div ng-repeat="question in userQuestions">
+      <h3>{{$index + 1}}. {{question.question_body}}</h3>
 
       <div ng-repeat="answer_choice in question.answer_choices">
         {{answer_choice}}
       </div>
+      <br/>
 
       <div>
-        {{userAnswers[$index]}}
+        Your Answer: {{userAnswers[$index]}}
       </div>
+      <br/>
 
       <div>
-        {{question.correct_answer}}
+        Correct Answer: {{question.correct_answer}}
       </div>
+      <br/>
 
        <div>
-        {{question.standard}}
+        Florida State Standard: {{question.standard}}
       </div>
+      <br/>
+
     </div>
 
           <div>
-        {{gradeTest()}}
-      </div>-->
+        <h2>Final Score: {{gradeTest()}}<h2>
+      </div>
 
 <!-- 	  <div class="alert alert-warning text-center" ng-if="articles.$resolved && !articles.length">check if no completed sessions
 	    No previously completed exams!  <a ui-sref="????.create"> Please test your skills</a>?

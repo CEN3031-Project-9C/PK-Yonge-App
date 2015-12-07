@@ -90,6 +90,24 @@ angular.module('review-test').controller('ReviewController', [
 			return result;
 		};
 
+        $scope.convertLetter = function(number) {
+			/*if (number === undefined){
+				return "";
+			}
+			else if (number === 0){
+                return "A"
+			}
+			else if (number === 1){
+                return "A"
+			}
+			else if (number === 2){
+                return "A"
+			}
+			else if (number === 0){
+                return "A"
+			}*/
+		};		
+
 		//Dealing with question load/display
 		$scope.loadSessions = function() {
 			user_sessionContainer.user_sessions = user_sessionsByUserIDService.query( // Use query() instead of get() because result will be an array
