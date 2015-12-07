@@ -4,6 +4,7 @@ angular.module('choose-test').factory('sessionServiceV2', function() {
   
   var sessionContainer = {
     _id: 0,
+    user_id: "",
     test_id: "",
     timer: 0,
     completed: false,
@@ -27,7 +28,7 @@ angular.module('choose-test').factory('sessionServiceV2', function() {
     sessionContainer.user_id = theID;
   };
   
-  sessionContainer.getUserID = function(theID) {
+  sessionContainer.getUserID = function() {
     return sessionContainer.user_id;
   };
 

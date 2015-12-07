@@ -83,7 +83,7 @@ exports.list = function (req, res) {
 
 // Find a session by its User ID
 exports.allUser_sessionsWithUserID = function (req, res) {
-
+  console.log("all user sessions with user id");
 	User_session.find({user_id: req.params.userID}).exec(function (err, user_sessions) {
 		if (err) {
 			return res.status(400).send({

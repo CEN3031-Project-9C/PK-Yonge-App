@@ -1,7 +1,6 @@
 'use strict';
 
 // Setting up route
-
 angular.module('review-test').config(['$stateProvider',
   function ($stateProvider) {
     //state routing
