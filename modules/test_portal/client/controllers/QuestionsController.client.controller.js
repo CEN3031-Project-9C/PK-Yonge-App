@@ -78,6 +78,11 @@ angular.module('test_portal').controller('QuestionsController', [
 			return testContainer.questions[index].question_type;
 		};
 
+		$scope.getCorrect = function(index) //Returns the question type
+		{
+			return testContainer.questions[index].correct_answer;
+		};
+
 //Methods for navigation
 		//Next 2 methods are code in the body of BOTH previousQuestion and nextQuestion, extracted to be their own methods
 		//(if you ever were to edit the code, reduces chance of updating code in one place but not where it's duplicated elsewhere)
@@ -258,6 +263,39 @@ angular.module('test_portal').controller('QuestionsController', [
 			{
 				//continue with test
 			}
+		};
+
+		$scope.gradeTest = function() {
+			var total = $scope.testQuestions.questions.length;
+			var correct = 0;
+
+			console.log(String(testContainer.answers[0]));
+			console.log(String($scope.getCorrect(0)));
+            
+			for (var i = 0; i < $scope.testQuestions.questions.length; i++){
+                if ($scope.getType(i) === "multiple_choice"){
+				    if (testContainer.answers[i] === $scope.getCorrect(i)[0]){
+				    	correct++;
+				    }
+			    }
+			    else{
+			    	var totalOptions = 0;
+			    	for (var j = 0; j < $scope.getCorrect(i).length; j++){
+				        if ($scope.getCorrect(i)[j] === "false"){
+				    	    totalOptions++;
+				        }
+				        else if (String(testContainer.answers[i][j]) === String($scope.getCorrect(i)[j])){
+                            totalOptions++;
+				        }
+
+				        if (totalOptions === $scope.getCorrect(i).length){
+
+				        }
+				    }
+			    }
+			}
+			console.log(correct);
+			console.log(total);
 		};
 
 //Extra tools (calculator, timer, etc)
