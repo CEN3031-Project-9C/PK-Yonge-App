@@ -22,6 +22,10 @@ angular.module('review-test').controller('ReviewController', [
 			$location.path('/');
 		}
 
+		var userQuestions = gradeTestService.getQuestions();
+		var userAnswers = gradeTestService.getUserAnswers();
+
+
 		var user_sessionContainer = {
 			user_sessions: []	// we will store retrieved sessions in this array
 			// answers: [],	// we will store the user's answers in this array
@@ -31,6 +35,58 @@ angular.module('review-test').controller('ReviewController', [
 		
 		$scope.oldTests = {
 			tests: []
+		};
+
+		$scope.gradeTest = function() {
+			var total = userQuestions.length;
+			var correct = 0;
+            
+			for (var i = 0; i < userQuestions.length; i++){
+                if (userQuestions[i].question_type === "multiple_choice"){
+				    if (userAnswers[i] === userQuestions[i].correct_answer){
+				    	correct++;
+				    }
+			    }
+			    else if (userQuestions[i].question_type === "check"){
+			    	var checkOptions = 0;
+			    	for (var j = 0; j < userQuestions[i].correct_answer.length; j++){
+				        if (userQuestions[i].correct_answer[j] === "false"){
+				    	    if (userAnswers[i][j] === undefined){
+				    	        checkOptions++;
+				    	    }
+				    	    else if (String(userAnswers[i][j]) === "false"){
+				    	    	checkOptions++;
+				    	    }
+				        }
+				        else if (userQuestions[i].correct_answer[j] === "true" && userAnswers[i] !== undefined) {
+				        	if (String(userAnswers[i][j]) === "true"){
+                                checkOptions++;
+                            }
+				        }
+
+				        if (checkOptions === userQuestions[i].correct_answer.length){
+                          correct++;
+				        }
+				    }
+			    }
+			    else{
+			    	var fillOptions = 0;
+			    	for (var k = 0; k < userQuestions[i].correct_answer.length; k++){
+				        if (userAnswers[i] === undefined){
+				        }
+				        else if (userQuestions[i].correct_answer[k] === String(userAnswers[i][k])) {
+                                fillOptions++;
+				        }
+
+				        if (fillOptions === userQuestions[i].correct_answer.length){
+                          correct++;
+				        }
+				    }
+			    }
+			}
+
+			var result = String(correct)+"/"+String(total);
+			return result;
 		};
 
 		//Dealing with question load/display

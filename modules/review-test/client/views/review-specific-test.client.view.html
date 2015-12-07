@@ -1,8 +1,8 @@
-<section ng-controller="ReviewController" ng-init="loadSession()">
+<section ng-controller="ReviewController" ng-init="loadSessions()">
   <div class="page-header">
-    <h1 class = "text-center">{{testName}}</h1>
+    <!--<h1 class = "text-center">{{_id}}</h1>-->
 
-    <div ng-repeat="question in Questions">
+    <div ng-repeat="question in userQuestions">
       {{$index + 1}} {{question.question_body}}
 
       <div ng-repeat="answer_choice in question.answer_choices">
@@ -10,7 +10,7 @@
       </div>
 
       <div>
-        {{user_sessions.user_answer}}
+        {{user_answers[$index]}}
       </div>
 
       <div>
