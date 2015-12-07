@@ -60,6 +60,10 @@ angular.module('test_portal').controller('QuestionsController', [
 			questions: [],
 		};
 
+		$scope.getTestContainer = function(){
+			return testContainer;
+		};
+
 		//Dealing with question load/display
 		$scope.loadQuestions = function() {
 			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
