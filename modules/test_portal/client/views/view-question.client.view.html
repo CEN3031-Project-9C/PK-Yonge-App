@@ -36,7 +36,7 @@
 				    <button class="btn btn-default" ng-click="openFormula('lg')"><i class="fa fa-list-ol"></i> Formula Sheet</button>
 				<!--</div> -->
 
-				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span></button>
+				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion(); gradeTest()"><span class="glyphicon glyphicon-arrow-left"></span></button>
 
 				 <div class="btn-group" dropdown keyboard-nav>
 			        <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" dropdown-toggle>
@@ -49,7 +49,7 @@
 			        </ul>
 			    </div>
 
-				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="nextQuestion()"><span class="glyphicon glyphicon-arrow-right"></span></button>
+				<button class="btn btn-default" ng-disabled="currentPage >= testQuestions.questions.length - 1" ng-click="nextQuestion(); gradeTest()"><span class="glyphicon glyphicon-arrow-right"></span></button>
 				<button class="btn btn-default" ng-click="showTextArea()"><span class="glyphicon glyphicon-pencil"></span> Notepad</button>
 				<button class="btn {{marked}}" ng-click="mark_unmark()"><span class="glyphicon glyphicon-flag"></span> {{reviewButtonText}}</button>
 				
@@ -108,20 +108,6 @@
 					</form>
 
 					<div>
-					    <script type="text/ng-template" id="myModalContent.html">
-					        <div class="modal-header">
-					            <h3 class="modal-title">Your Test is Paused!</h3>
-					        </div>
-					        <div class="modal-body">
-					            <ul>
-					                <h3>Your Test is Paused!</h3>
-					            </ul>
-					        </div>
-					        <div class="modal-footer">
-					            <a ui-sref="view-specific-test" button class="btn btn-warning" ng-click="submitTest()">SUBMIT TEST NOW</button></a>
-					            <button class="btn btn-primary" id="cancel" ng-click="cancel()">Resume Test</button>
-					        </div>
-					    </script>
 
 					    <!--
 					    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>

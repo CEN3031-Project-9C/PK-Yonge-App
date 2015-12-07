@@ -2,13 +2,14 @@
 
 angular.module('review-test').factory('reviewTestService', function() {
   
-  var user_sessionContainer = {
-    user_sessions: []
+  var sessionContainer = {
+    sessions: []
   };
   
-  user_sessionContainer.setUser_sessions = function(arrayOfUser_sessions) {
+  sessionContainer.setUser_sessions = function(arrayOfUser_sessions) {
+
     if(arrayOfUser_sessions !== null) {
-      user_sessionContainer.user_sessions = arrayOfUser_sessions;
+      sessionContainer.sessions = arrayOfUser_sessions;
     } else {
       console.log("The provided array was invalid");
       return;
@@ -24,10 +25,10 @@ angular.module('review-test').factory('reviewTestService', function() {
   //   }
   // };
   
-  user_sessionContainer.retrieveUser_sessions = function() {
-    return user_sessionContainer.user_sessions;
+  sessionContainer.retrieveUser_sessions = function() {
+    return sessionContainer.user_sessions;
   };
   
-  return (user_sessionContainer);
+  return (sessionContainer);
   
 });

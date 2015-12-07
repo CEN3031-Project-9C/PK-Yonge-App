@@ -18,7 +18,7 @@ angular.module('choose-test').factory('sessionServiceV3', function() {
 	
 	// Update the ID of this user session - this should only be used during testing
 	sessionContainer.setSessionID = function(newSessionId) {
-		sessionContainer.sessoin._id = newSessionId;
+		sessionContainer.session._id = newSessionId;
 	};
 	
 	// Retrieve the ID of this user session
