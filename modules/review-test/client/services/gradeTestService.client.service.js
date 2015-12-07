@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('choose-test').factory('gradeTestService', function(sessionServiceV3, takeTestService) {
+angular.module('review-test').factory('gradeTestService', function(sessionServiceV3, takeTestService) {
 	
 	var gradingContainer = {
 		testQuestions: {},
