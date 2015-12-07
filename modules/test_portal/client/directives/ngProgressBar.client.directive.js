@@ -42,7 +42,7 @@ angular.module('test_portal')
 		link : function (scope, elem, attrs, ctrl) {
 
 			attrs.$observe('start', function(value) {
-				console.log('observe start change');
+				//console.log('observe start change');
 				if(value === 'true') {
 					scope.startAt = 0;
 					//scope.startAt = scope.current;

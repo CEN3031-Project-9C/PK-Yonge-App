@@ -13,7 +13,8 @@ angular.module('review-test').controller('ReviewController', [
 	'reviewTestService',
 	'user_sessionsService', 
 	'user_sessionsByUserIDService',
-	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, reviewTestService, user_sessionsService, user_sessionsByUserIDService) {
+	'gradeTestService',
+	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, reviewTestService, user_sessionsService, user_sessionsByUserIDService, gradeTestService) {
 		$scope.authentication = Authentication;
 		
 		// If user is not signed in then redirect them back home

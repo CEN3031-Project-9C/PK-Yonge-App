@@ -14,7 +14,8 @@ angular.module('test_portal').controller('QuestionsController', [
 	'questionsService', 
 	'questionsByTestIDService',
 	'takeTestService',
-	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, sessionServiceV3, questionsService, questionsByTestIDService, takeTestService) {
+	'gradeTestService',
+	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, sessionServiceV3, questionsService, questionsByTestIDService, takeTestService, gradeTestService) {
 	  	
 		$scope.authentication = Authentication;
 		
@@ -66,6 +67,12 @@ angular.module('test_portal').controller('QuestionsController', [
 				function() {
 
 					takeTestService.setQuestions(testContainer.questions);		// Save the questions locally
+					gradeTestService.setQuestions(testContainer.questions);
+					// The following two lines are for testing 
+					//console.log('testContainer.questions in QuestionsController.client.controller.js');
+					//console.log(testContainer.questions);
+					//console.log('gradeTestService.getQuestions() contents...');
+					//console.log(gradeTestService.getQuestions());
 					$scope.testQuestions.questions = testContainer.questions;	// Make the questions available to the front-end
 					
 				}
@@ -247,6 +254,8 @@ angular.module('test_portal').controller('QuestionsController', [
 			}
 		};
 		$scope.submitTest = function() {
+			
+			
 			$scope.saveAnswer(); //If the user has selected an answer for that question, we want it to be stored.
 			
 			var proceed = $scope.checkUnanswered(); //Check whether they have unanswered questions.
@@ -256,13 +265,21 @@ angular.module('test_portal').controller('QuestionsController', [
 			{
 				// do test-ending things(save back to DB?)
 
+				// Save all final answers
+				gradeTestService.setUserAnswers(sessionServiceV3.getUserAnswers());
+				console.log('gradeTestService.getUserAnswers() contents...');
+				console.log(gradeTestService.getUserAnswers());
+
 				//SWITCH TO Review-TEST MODULE
-				window.location = '/examHistory';
+				//window.location = '/examHistory';
+				$location.path('/examHistory');
 			}
 			else
 			{
 				//continue with test
 			}
+			
+			
 		};
 
 		$scope.gradeTest = function() {

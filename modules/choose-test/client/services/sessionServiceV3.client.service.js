@@ -96,6 +96,16 @@ angular.module('choose-test').factory('sessionServiceV3', function() {
 		return sessionContainer.session.user_notepad;
 	};
 	
+	// Update the "correct" flags (i.e. the array of booleans that indicate whether the user got each question correct)
+	sessionContainer.setCorrectFlags = function(correctFlags) {
+		sessionContainer.session.correct = correctFlags;
+	};
+	
+	// Retrieve the "correct" flags
+	sessionContainer.getCorrectFlags = function() {
+		return sessionContainer.session.correct;
+	};
+	
 	// Make the properties and functions of this service available
 	return (sessionContainer);
   
