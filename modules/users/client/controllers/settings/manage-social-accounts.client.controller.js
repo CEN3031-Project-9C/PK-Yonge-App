@@ -1,5 +1,5 @@
 'use strict';
-
+//managing accounts
 angular.module('users').controller('SocialAccountsController', ['$scope', '$http', 'Authentication',
   function ($scope, $http, Authentication) {
     $scope.user = Authentication.user;

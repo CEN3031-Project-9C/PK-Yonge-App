@@ -1,7 +1,9 @@
+<!-- sign in page for registered users -->
 <div ng-controller="AuthenticationController">
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
     <form name="userForm" ng-submit="signin(userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
+        <!-- student id, required field -->
         <div class="form-group" show-errors>
           <label for="username">Student ID</label>
           <input type="text" id="username" name="username" class="form-control" ng-model="credentials.username" placeholder="Student ID" lowercase required>
@@ -9,6 +11,7 @@
             <p class="help-block error-text" ng-message="required">Student ID is required.</p>
           </div>
         </div>
+        <!-- password, required field -->
         <div class="form-group" show-errors>
           <label for="password">Password</label>
           <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" required>
@@ -16,6 +19,7 @@
             <p class="help-block error-text" ng-message="required">Password is required.</p>
           </div>
         </div>
+        <!-- sign in -->
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Sign in</button>
           &nbsp; or&nbsp;

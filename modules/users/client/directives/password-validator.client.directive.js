@@ -1,5 +1,5 @@
 'use strict';
-
+//validating password
 angular.module('users')
   .directive('passwordValidator', ['PasswordValidator', function(PasswordValidator) {
     return {
@@ -25,7 +25,7 @@ angular.module('users')
 
           scope.strengthColor = strengthMeter[strengthIdx].color;
           scope.strengthProgress = strengthMeter[strengthIdx].progress;
-
+          
           if (result.errors.length) {
             scope.popoverMsg = PasswordValidator.getPopoverMsg();
             scope.passwordErrors = result.errors;

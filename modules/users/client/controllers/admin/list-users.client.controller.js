@@ -1,5 +1,5 @@
 'use strict';
-
+//list of all the users
 angular.module('users.admin').controller('UserListController', ['$scope', '$filter', 'Admin',
   function ($scope, $filter, Admin) {
     Admin.query(function (data) {

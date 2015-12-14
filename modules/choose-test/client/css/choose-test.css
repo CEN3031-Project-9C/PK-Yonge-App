@@ -1,8 +1,4 @@
-/*
-html {
-	background: none !important;
-	background-color: #fafafa !important;
-}*/
+/* CSS for pretty tests */
 
 section#choose-test h1, section#confirm-test h1 {
 	color: #fafafa;

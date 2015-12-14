@@ -1,5 +1,5 @@
 'use strict';
-
+//dragging capabilities for notepad
 angular.module('test_portal')
 	.directive('draggable', function () {
 	return {

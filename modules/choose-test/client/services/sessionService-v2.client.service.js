@@ -1,5 +1,5 @@
 'use strict';
-
+//initializes session container
 angular.module('choose-test').factory('sessionServiceV2', function() {
   
   var sessionContainer = {

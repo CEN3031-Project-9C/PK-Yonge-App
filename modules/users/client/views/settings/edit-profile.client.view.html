@@ -1,7 +1,9 @@
+<!-- user profile editor -->
 <section class="row" ng-controller="EditProfileController">
   <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
     <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
+        <!-- required first name -->
         <div class="form-group" show-errors>
           <label for="firstName">First Name</label>
           <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" required>
@@ -9,6 +11,7 @@
             <p class="help-block error-text" ng-message="required">First name is required.</p>
           </div>
         </div>
+        <!-- required last name -->
         <div class="form-group" show-errors>
           <label for="lastName">Last Name</label>
           <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required>
@@ -16,6 +19,7 @@
             <p class="help-block error-text" ng-message="required">Last name is required.</p>
           </div>
         </div>
+        <!-- required email -->
         <div class="form-group" show-errors>
           <label for="email">Email</label>
           <input type="email" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email" lowercase required>
@@ -24,6 +28,7 @@
             <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
           </div>
         </div>
+        <!-- required student id -->
         <div class="form-group" show-errors>
           <label for="username">StudentID</label>
           <input type="text" id="username" name="username" class="form-control" ng-model="user.username" placeholder="Username" lowercase required>
@@ -31,6 +36,7 @@
             <p class="help-block error-text" ng-message="required">StudentID is required.</p>
           </div>
         </div>
+        <!-- save -->
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Save Profile</button>
         </div>
