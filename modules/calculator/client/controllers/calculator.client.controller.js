@@ -1,8 +1,4 @@
 'use strict';
-//<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type ="text/javascript"></script>
-/*global $:false */
-/* eslint no-eval: 0 */
-//angular.module('calculator').directive("bnDocumentKeypress", function($document, $parse) {
 //credit to Tom Porter
 var Calc;
 
@@ -130,7 +126,6 @@ Calc.controller("CalcController", function($scope,$location,Authentication) {
       write = '0';
     }
     $scope.calcInput = write.toString();
-    //return $scope.calcInput;
 
     if ($scope.isOperator(n)) {
       write = n === '/' ? '&divide;' : n === '*' ? '&times;' : n === '+' ? '&plus;' : n === '-' ? '&minus;' : void 0;
@@ -140,7 +135,6 @@ Calc.controller("CalcController", function($scope,$location,Authentication) {
     } else {
       $scope.calcInput += write.toString();
     }
-    //return this;
     return $scope.calcInput;
 
   };
@@ -161,10 +155,7 @@ Calc.controller("CalcController", function($scope,$location,Authentication) {
     }
     job = $scope.stuff.join('');
     x = 0;
-    /* jshint ignore:start */
     eval('x = ' + job + ';');
-    /* jshint ignore:end */
-    //eval('x = ' + job + ';');
     return x;
   };
   $scope.handleKeypress = function(event) {

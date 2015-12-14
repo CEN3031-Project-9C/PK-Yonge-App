@@ -13,10 +13,5 @@ angular.module('calculator').config(['$stateProvider',
           roles: ['user', 'admin']
         }
       });
-
-      //.state('calculator.confirm', {
-      //  url: '/calculator/select/:testSubject',
-      //  templateUrl: 'modules/calculator/client/views/confirm-test.client.view.html'
-      //});
   }
 ]);
