@@ -15,7 +15,23 @@ The group working on this project consists of:
 
 ### Features
 Currently, there are a few things you can do on this application, including:
+- Properly having users signing-in and have a method of retrieving forgotten password.
+- Test portal and its sub-features are only accessible once the users are logged in.
+- Test Taking
+- Grade test
 
+####Test Portal Features
+- A basic four function calculator
+- Formula Sheet
+- Navigation between different questions 
+- Notepad that properly stores notes for every individual question
+- Mark for review and that will be reflected in the drop down navigation, and on the individual questions.
+- Pop-up warnings when navigating between questions without answering. 
+- Pop-up warnings when there are questions unanswered when submitting the test. 
+- Pop-up warnings when time is up. 
+
+
+### Screenshots 
 Perusing a homepage.
 
 ![Homepage](modules/core/client/img/screenshots/homepage.PNG?raw=true)
@@ -32,4 +48,10 @@ Taking a practice test.
 
 ![Test](modules/core/client/img/screenshots/basicTest.PNG?raw=true)
 
-More features and improvements will be added in the coming weeks.
+Grading a test.
+
+![Test](modules/core/client/img/screenshots/gradeTest.PNG?raw=true)
+
+##Suggested Features to be implemented
+- Implement posted issues/ffeatures on Github 
+- Use WolframAlpha API to show algebric expression 

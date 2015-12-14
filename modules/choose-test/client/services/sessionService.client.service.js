@@ -1,4 +1,9 @@
 'use strict';
+
+/**
+	THIS SERVICE MAY NO LONGER BE NECESSARY AS THERE IS NOW A "V3" VERSION. PLEASE COMMENT THIS FILE OUT AND TEST TO SEE IF THIS IS TRUE - REMOVE IT FROM THE MODULE IF SO. WE DID NOT HAVE TIME TO TEST THIS OUT.
+**/
+
 //original session service, modfied in v2
 angular.module('choose-test').factory('sessionService', function() {
 	
