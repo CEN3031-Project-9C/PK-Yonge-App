@@ -38,9 +38,7 @@ exports.read = function (req, res) {
  * Update a user_session
  */
 exports.update = function (req, res) {
-  	var user_session = req.user_session;
-
-  	//user_session.tests_id = req.body.tests_id;
+  var user_session = req.user_session;
 	user_session.time = req.body.time;
 	user_session.complete = req.body.complete;
 	user_session.user_notepad = req.body.user_notepad;
@@ -57,25 +55,6 @@ exports.update = function (req, res) {
 		}
 	});
 };
-
-/**
- * Delete a user_session
- */
-/*
-exports.delete = function (req, res) {
-  var user_session = req.user_session;
-
-  user_session.remove(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(user_session);
-    }
-  });
-};
-*/
 
 /**
  * List of user_Sessions

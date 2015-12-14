@@ -123,53 +123,5 @@
       // Test URL redirection after the article was created
       expect(sessionServiceV3.getUserAnswers()).toEqualData(sampleAnswers);
     }));
-
-    // it('$scope.submitTest() should save and redirect', inject(function () {
-    //   var sampleAnswers = [1, 2, 3];
-
-    //   // Run controller functionality
-    //   sessionServiceV3.setSessionObject(user_session);
-    //   sessionServiceV3.setTestID('561d199f41c840c42134a825');
-    //   sessionServiceV3.setUserAnswers(sampleAnswers);
-    //   scope.loadQuestions();
-
-    //   scope.submitTest();
-
-    //   // Test URL location to new object
-    //   expect($location.path.calls.mostRecent().args[0]).toBe('/examHistory');
-    // }));
-
-    // describe('$scope.remove(article)', function () {
-    //   beforeEach(function () {
-    //     // Create new articles array and include the article
-    //     scope.articles = [mockArticle, {}];
-
-    //     // Set expected DELETE response
-    //     $httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
-
-    //     // Run controller functionality
-    //     scope.remove(mockArticle);
-    //   });
-
-    //   it('should send a DELETE request with a valid articleId and remove the article from the scope', inject(function (Articles) {
-    //     expect(scope.articles.length).toBe(1);
-    //   }));
-    // });
-
-    // describe('scope.remove()', function () {
-    //   beforeEach(function () {
-    //     spyOn($location, 'path');
-    //     scope.article = mockArticle;
-
-    //     $httpBackend.expectDELETE(/api\/articles\/([0-9a-fA-F]{24})$/).respond(204);
-
-    //     scope.remove();
-    //     $httpBackend.flush();
-    //   });
-
-    //   it('should redirect to articles', function () {
-    //     expect($location.path).toHaveBeenCalledWith('articles');
-    //   });
-    // });
   });
 }());

@@ -8,68 +8,11 @@ var path = require('path'),
   Question = mongoose.model('Question'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-//console.log("'path' in 'questions.server.controller.js'");
-//console.log(path);
-
-// Create a question
-/*
-exports.create = function (req, res) {
-  var question = new Question(req.body);
-  question.user = req.user;
-
-  question.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(question);
-    }
-  });
-};
-*/
-
 // Show the current question
 exports.read = function (req, res) {
   res.json(req.question);
 };
 
-// Update a question
-/*
-exports.update = function (req, res) {
-  var question = req.question;
-
-  question.title = req.body.title;
-  question.content = req.body.content;
-
-  question.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(question);
-    }
-  });
-};
-*/
-
-// Delete a question
-/*
-exports.delete = function (req, res) {
-  var question = req.question;
-
-  question.remove(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(question);
-    }
-  });
-};
-*/
 
 // List of Questions
 exports.list = function (req, res) {

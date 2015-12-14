@@ -72,11 +72,6 @@ angular.module('test_portal').controller('QuestionsController', [
 
 					takeTestService.setQuestions(testContainer.questions);		// Save the questions locally
 					gradeTestService.setQuestions(testContainer.questions);
-					// The following two lines are for testing 
-					//console.log('testContainer.questions in QuestionsController.client.controller.js');
-					//console.log(testContainer.questions);
-					//console.log('gradeTestService.getQuestions() contents...');
-					//console.log(gradeTestService.getQuestions());
 					$scope.testQuestions.questions = testContainer.questions;	// Make the questions available to the front-end
 					
 				}
@@ -138,21 +133,6 @@ angular.module('test_portal').controller('QuestionsController', [
 			{
 				return true;
 			}	
-
-
-			/*
-			// For testing purposes
-			console.log("testContainer...");
-			console.log(testContainer);
-			console.log("testContainer.answers...");
-			console.log(testContainer.answers);
-			console.log("$scope.formData.answer...");
-			console.log($scope.formData.answer);
-			*/
-
-			//console.log("My answers: " + sessionServiceV3.getUserAnswer());
-
-			// To-do, save this answer to the DB on question switch
 		};
 		
 		$scope.reloadSaved = function()
@@ -212,8 +192,6 @@ angular.module('test_portal').controller('QuestionsController', [
 			}
 
 			sessionServiceV3.setReview(testContainer.review);
-
-			//console.log("My Review: " + sessionServiceV3.getReview());
 		};
 
 		$scope.checkForReview = function(index) {
@@ -273,8 +251,6 @@ angular.module('test_portal').controller('QuestionsController', [
 
 				// Save all final answers
 				gradeTestService.setUserAnswers(sessionServiceV3.getUserAnswers());
-				//console.log('gradeTestService.getUserAnswers() contents...');
-				//console.log(gradeTestService.getUserAnswers());
 
 				//SWITCH TO Review-TEST MODULE
 				$location.path('/examHistory');
@@ -290,9 +266,6 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.gradeTest = function() {
 			var total = $scope.testQuestions.questions.length;
 			var correct = 0;
-
-			//console.log(String(testContainer.answers[0]));
-			//console.log(String($scope.getCorrect(0)));
             
 			for (var i = 0; i < $scope.testQuestions.questions.length; i++){
                 if ($scope.getType(i) === "multiple_choice"){
@@ -328,7 +301,6 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.timer_running = true;
 		$scope.max_count = 1000;
 
-        
 		/*$scope.startProgress = function() {
 			$scope.timer_running = true;
 		 };*/
@@ -342,11 +314,9 @@ angular.module('test_portal').controller('QuestionsController', [
 		$scope.open = function (size) {
 
 		  	$scope.animationsEnabled = true;
-		    //var modalInstance = 
 		    $modal.open({
 		      animation: $scope.animationsEnabled,
 		      templateUrl: 'myModalContent.html',
-		      //controller: 'ModalInstanceCtrl',
 		      size: size,
 		      
 		    });
@@ -359,8 +329,6 @@ angular.module('test_portal').controller('QuestionsController', [
 	  	$scope.stopProgress();
 	    
 	    sessionServiceV3.setComplete(testContainer.complete);
-
-	    //console.log("Completed: " + sessionServiceV3.getComplete());
 	  };
 
 	  $scope.cancel = function () {
@@ -398,8 +366,6 @@ angular.module('test_portal').controller('QuestionsController', [
 			$scope.showNotes = false;
 
 			sessionServiceV3.setUserNotepad(testContainer.notes);
-
-			//console.log("My Notes: " + sessionServiceV3.getUserNotepad());
 		};
 
 
@@ -407,8 +373,6 @@ angular.module('test_portal').controller('QuestionsController', [
 		//Work in progress: making the notepad moveable
 		$scope.addListeners = function (){
 			alert("Hello6");
-		    //$document.getElementById('dxy').addEventListener('mousedown', mouseDown, false);
-		    //var ele = angular.element('#dxy');
 		   var ele=  angular.element( document.querySelector( '#dxy' ) );
 		    alert("Hello");
 		    ele.addEventListener('onmousedown', mouseDown, false);
@@ -418,31 +382,24 @@ angular.module('test_portal').controller('QuestionsController', [
 
 		};
 
-		//$scope.mouseUp = function ()
-		 function mouseUp()
+		function mouseUp()
 		{
 			alert("Hello1");
 		    $window.removeEventListener('mousemove', divMove, true);
 		}
-
-		//$scope.mouseDown = function (e){
-			 function mouseDown(e){
-		alert("Hello2");
-		  $window.addEventListener('mousemove', divMove, true);
+		
+		function mouseDown(e){
+			alert("Hello2");
+		  	$window.addEventListener('mousemove', divMove, true);
 		}
-
-		//$scope.divMove = function (e){
-			  function divMove(e){
+		
+		function divMove(e){
 			alert("Hello3");
-		    //var div = $document.getElementById('dxy');
 		    var div = angular.element('#dxy');
-		  //div.style.position = 'absolute';
-		  //div.style.top = e.clientY + 'px';
-		  //div.style.left = e.clientX + 'px';
-		  div.css("position", 'absolute');
-		  div.css("top", e.clientY + 'px');
-		  div.css("left", e.clientX + 'px');
-			}
+			  div.css("position", 'absolute');
+			  div.css("top", e.clientY + 'px');
+			  div.css("left", e.clientX + 'px');
+		}
 
 
 	}

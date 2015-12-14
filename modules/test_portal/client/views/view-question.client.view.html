@@ -18,23 +18,20 @@
 
 				<a ng-click="openCalcWindow()" class="btn btn-default"><i class="fa fa-calculator"></i> <span class="network-name">Calculator</span></a>
 
-
-				<!--<div>-->
-				    <script type="text/ng-template" id="formulaModal.html">
-				        <div class="modal-header">
-				            <h3 class="modal-title">Formula Sheet</h3>
-				        </div>
-				        <div class="modal-body">
-				            <ul>
-				                <div>
-				                <iframe class="pdfSize" align="center" src="modules/core/client/img/formulaSheet.png"></iframe>
-				                </div>
-				            </ul>
-				        </div>
-				    </script>
-					
-				    <button class="btn btn-default" ng-click="openFormula('lg')"><i class="fa fa-list-ol"></i> Formula Sheet</button>
-				<!--</div> -->
+			    <script type="text/ng-template" id="formulaModal.html">
+			        <div class="modal-header">
+			            <h3 class="modal-title">Formula Sheet</h3>
+			        </div>
+			        <div class="modal-body">
+			            <ul>
+			                <div>
+			                <iframe class="pdfSize" align="center" src="modules/core/client/img/formulaSheet.png"></iframe>
+			                </div>
+			            </ul>
+			        </div>
+			    </script>
+				
+			    <button class="btn btn-default" ng-click="openFormula('lg')"><i class="fa fa-list-ol"></i> Formula Sheet</button>
 
 				<button class="btn btn-default" ng-disabled="currentPage == 0" ng-click="previousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span></button>
 
@@ -53,20 +50,6 @@
 				<button class="btn btn-default" ng-click="showTextArea()"><span class="glyphicon glyphicon-pencil"></span> Notepad</button>
 				<button class="btn {{marked}}" ng-click="mark_unmark()"><span class="glyphicon glyphicon-flag"></span> {{reviewButtonText}}</button>
 				
-
-				<!-- DROP DOWN MENU WITH NOTEPAD/MARK FOR REVIEW/TUTORIAL/STRIKETHOUGH/etc/ --
-				<button class='btn btn-default'> <span uib-dropdown on-toggle="toggled(open)"> 
-      <a href id="simple-dropdown" uib-dropdown-toggle>
-        <span class="glyphicon glyphicon-align-justify"></span>
-      </a>
-
-      <ul class="notepad uib-dropdown-menu" aria-labelledby="simple-dropdown">
-        <!--<li ng-repeat="choice in items">
-          <a href>{{choice}}</a>- ->
-          <li class="notepad"><!--<span class="glyphicon glyphicon-align-calendar"></span> - -><a href>Notepad</a></li>
-          <li class="markReview"><a href>Mark for Review</a></li>
-      </ul>
-        </span></button> -->
 				<div ng-repeat="question in testQuestions.questions | startFrom:currentPage | limitTo:1">
 					<h2 class="question-title">{{question.question_body}}</h2>
 
@@ -109,21 +92,11 @@
 
 					<div>
 
-					    <!--
-					    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-					-->
-						
-					  <!--
-					    <button class="btn btn-success" ng-if="!timer_running" ng-click="startProgress()">Start Test</button>
-					    <button class="btn btn-warning" ng-if="timer_running" ng-click="stopProgress();open('lg')">Pause Test</button>
-						-->
-						
-					    <!--<button class="btn btn-default" ng-click="saveTestSession()">Save Test</button>-->
-						<button class="btn btn-default" ng-click="submitTest(); stopProgress()">SUBMIT TEST</button>
+					<button class="btn btn-default" ng-click="submitTest(); stopProgress()">SUBMIT TEST</button>
 
 					</div>
 
-						<div ng-show="showNotes" class='question_notes' id='dxy'> <!-- ng-style="{left: divleft, top: divtop, width: divwidth, height: divheight}" draggable xpos="divleft" ypos="divtop"> -->
+						<div ng-show="showNotes" class='question_notes' id='dxy'>
 							<div class='question_notes2'>
 								<h2 class='notepad_header'>Notepad</h2>
 									<div class='question_notes3'>
