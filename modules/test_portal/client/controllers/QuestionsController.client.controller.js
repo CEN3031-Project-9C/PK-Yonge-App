@@ -394,7 +394,12 @@ angular.module('test_portal').controller('QuestionsController', [
 
 
 		 
-		//WORK IN PROGRESS: making the notepad moveable
+		/*
+		NOTE: AN ATTEMPT TO MOVE THE NOTEPAD DIV BY CHANGING DIV POSITION THROUGH EVENT TRIGGERS WITH JAVASCRIPT.
+		STACKOVERFLOW: http://stackoverflow.com/questions/9334084/moveable-draggable-div
+		JFIDDLE: http://jsfiddle.net/wfbY8/4/
+		
+		*/
 /*
 	   	$scope.divwidth = 400;
   		$scope.divheight = 300;
@@ -405,29 +410,23 @@ angular.module('test_portal').controller('QuestionsController', [
   		$scope.divleft2 = 150;
 
 		$scope.addListeners = function (){
-			alert("Hello6");
 		   var ele=  angular.element( document.querySelector( '#dxy' ) );
-		    alert("Hello");
-		    ele.addEventListener('onmousedown', mouseDown, false);
-		    alert("Hello4");
-		    $window.addEventListener('mouseup', mouseUp);
-		    alert("Hello5");
+		   ele.addEventListener('onmousedown', mouseDown, false);
+		   $window.addEventListener('mouseup', mouseUp);
+		
 
 		};
 
 		function mouseUp()
 		{
-			alert("Hello1");
 		    $window.removeEventListener('mousemove', divMove, true);
 		}
 		
 		function mouseDown(e){
-			alert("Hello2");
 		  	$window.addEventListener('mousemove', divMove, true);
 		}
 		
 		function divMove(e){
-			alert("Hello3");
 		    var div = angular.element('#dxy');
 			  div.css("position", 'absolute');
 			  div.css("top", e.clientY + 'px');

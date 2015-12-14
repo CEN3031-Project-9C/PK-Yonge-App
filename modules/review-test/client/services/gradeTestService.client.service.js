@@ -1,3 +1,4 @@
+//Service used to store grading information for communication with other modules
 'use strict';
 
 angular.module('review-test').factory('gradeTestService', function(sessionServiceV3, takeTestService) {
