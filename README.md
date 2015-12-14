@@ -4,10 +4,7 @@ This application was created for the Introduction to Software Engineering (CEN30
 
 ## Deployment: 
 Our app is deployed through HEROKU. Deployment information can be found [here](https://devcenter.heroku.com/articles/deploying-nodejs). Please contact [@Nicola37] for further deployment questions
-#### Deployed Site: http://pky-eoc.herokuapp.com/
-=======
-### Deployment Site URL: http://pky-eoc.herokuapp.com/
-
+#### Deployed Site URL: http://pky-eoc.herokuapp.com/
 
 ### Group Members
 The group working on this project consists of the following members:
