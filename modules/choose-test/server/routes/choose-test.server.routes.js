@@ -15,10 +15,6 @@ module.exports = function (app) {
   app.route('/api/user_session/:user_sessionId')
     .get(user_sessions.read)
 	  .put(user_sessions.update);
-  //.delete(sessions.delete);
-
- // app.route('/api/user_session:user_sessionId')
- // 	.put(user_sessions.update);
   
   // Finish by binding the article middleware
   app.param('user_sessionId', user_sessions.userSessionById);

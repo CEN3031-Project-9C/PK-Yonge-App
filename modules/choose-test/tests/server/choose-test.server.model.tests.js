@@ -61,15 +61,6 @@ describe('User_Session Model Unit Tests:', function () {
         done();
       });
     });
-
-    // it('should be able to show an error when try to save with a negative time', function (done) {
-    //   user_session.time = -1;
-
-    //   return user_session.save(function (err) {
-    //     should.exist(err);
-    //     done();
-    //   });
-    // });
   });
   
   afterEach(function (done) {

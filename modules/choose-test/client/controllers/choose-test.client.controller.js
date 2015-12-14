@@ -51,16 +51,7 @@ angular.module('choose-test').controller(
 			   correct: userBoolTemp
 			});
 			
-			/*
-			console.log("user_session object (of type User_Sessions) Prior to .$save");
-			console.log(user_session);
-			*/
-			
 			user_session.$save(function (response) {
-				
-				console.log("success portion...");
-				
-				//sessionServiceV3.setSessionObject(user_session); // Cannot assign object reference at this point for some reason
 						
 				sessionServiceV3.setSessionID(user_session._id);	// Make session ID available to other services/controllers
 				sessionServiceV3.setTestID(testID);	// Make the test ID available to other services/controllers
@@ -72,45 +63,9 @@ angular.module('choose-test').controller(
 				console.log("error portion...");
 				$scope.error = errorResponse.data.message;
 			});
-		
-			/*
-			console.log("sessionContainer.session following initial assignment");
-			console.log(sessionServiceV3.getSessionObject());
-
-			user_session.complete = true;
-			user_session.user_notepad = ["nothing", "something else"];
-
-			console.log("user_session object (of type User_Sessions) post notepad and complete update");
-			console.log(user_session);
-
-			user_session.user_notepad.push("My 3rd note!");
-		
-			console.log("user_session object (of type User_Sessions) post second notepad update");
-			console.log(user_session);
-		
-			sessionServiceV3.setSessionObject(user_session);
-			console.log("sessionContainer.session following re-assignment");
-			console.log(sessionServiceV3.getSessionObject());
-			*/
-			
-			//console.log("setting notepad in user_session...");
-			//user_session.user_notepad = ["hello", "this is a test...", "AGAIN."];
-			
-			//console.log("setting notepad in sessionServiceV3...");
-			//sessionServiceV3.setSessionNotepad(["hello", "again", "this is a test"]);
-			
-			//console.log("user_session contents:");
-			//console.log(user_session);
-			
-			//console.log("setting review flags in sessionServiceV3...");
-			//sessionServiceV3.setReviewFlags([true, false, false, true, true, true, true]);
 			
 			sessionServiceV3.setSessionObject(user_session);
 			console.log(sessionServiceV3.getSessionObject());
-			
-			// sessionServiceV3.setUserNotepad(["4", "number four", "Fore!"]);
-			
-			// sessionServiceV3.setUserAnswers(["Answer 1", "Is this right?", "Hmm..."]);
 			
 		};
 		
