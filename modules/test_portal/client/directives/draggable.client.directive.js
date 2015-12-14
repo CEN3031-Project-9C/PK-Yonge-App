@@ -1,5 +1,9 @@
 'use strict';
 //dragging capabilities for notepad
+// SITE LOCATION: http://jsfiddle.net/mrajcok/5Mzda/
+// CREATOR: 	  Arun P Johny
+// CONTACT:       http://stackoverflow.com/users/114251/arun-p-johny
+ 
 angular.module('test_portal')
 	.directive('draggable', function () {
 	return {
