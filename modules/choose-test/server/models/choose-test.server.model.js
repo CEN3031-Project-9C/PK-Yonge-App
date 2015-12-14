@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
- * Session Schema
+ * User_Session Schema
  */
 var User_SessionSchema = new Schema({
 	user_id: {
