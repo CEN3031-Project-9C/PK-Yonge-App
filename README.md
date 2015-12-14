@@ -26,6 +26,43 @@ $ grunt
 
 ```
 
+## Completed Features
+- Allow a user to **create an account**, **modify their profile information**, **log in**, and **log out**.
+    - We used the default MEAN application's functionality in the "users" module for this, located in `modules/users/`.
+    - User details are saved in the `users` collection in MongoDB.
+- Allow a user to **select a test** they'd like to take.
+    - Accomplished via custom functionality in the "choose-test" module, located in `modules/choose-test/`.
+    - The user's test choice is stored within a templated object that is created and then saved as a document in the `user_sessions` collection in MongoDB (in `modules/choose-test/choose-test.client.controller.js`). This specific document (as each user_session is associated with a different testing session) should be updated as the user takes the test  in order to save their answers, notes, mark-for-review flags, etcetera, but as described below in the "Buggy Features" section, this functionality is not working.
+- Allow the user to **take a test** (view questions specific to their chosen test, select answers, and save those answers).
+    - The user_session object (that is first instantiated and then stored in the `user_sessions` collection in MongoDB via `$scope.startTest` function in `modules/choose-test/choose-test.client.controller.js`) is updated as the user takes the test (i.e. if the user selects an answer for question 1, then the value is updated in slot 0 in the `user_answers' array - this array is a property of the `user_session` object in the aforementioned controller  as well as a property of the document in the `user_sessions` collection in MongoDB); this is done for all properties:
+        - `time`
+        - `complete`
+        - `user_notepad`
+        - `user_answer`
+        - `review`
+        - `correct`
+    - Please note how the aforementioned property names and types are consistent across the application in the MongoDB collections and the Mongoose Schema "Models" found throughout the application. Some of the aforementioned propeties are updated explicity as the user takes the test (i.e. user_notepad if user updates a question's notes, user_answer if they select or change an answer to a question, review if they mark a question for a review) but time, completed, and correct, are updated in the background (time is counted down as the user takes the test, complete is marked true if the user has answered the question, and correct is marked true if the user got the question correct during the grading process).
+- Allow the user to **review test performance** for a previously-taken test.
+    - The user can see how they did on a test they just submitted, but this information is only stored locally and there is no page for the user to review ALL of their previous tests (see "Buggy Features" section).
+
+## Buggy Features
+- **Saving the user's test information to the database**. This information is currently being stored locally on the user's computer and is lost after the user exits the application.
+- **Allowing the user to view their previous tests via the "Review Tests" page**. This page is supposed to display all of the user's previous tests and allow them to review each test (i.e. their answers for each question, the correct answer for each question, the standard being tested for each question, and their overall grade on the test)
+    - The user should also be able to **resume paused tests** from this page (i.e. hop back into a previous testing session), if this functionality is desired
+- The **test timer**, which is displayed when a user is taking a test and offers them a visual cue as to how much time they have remaining for their test, does not pause and resume correctly.
+
+These bugs are explained further on the *Issues* page (https://github.com/CEN3031-Project-9C/PK-Yonge-App/issues).
+
+## Unstarted Features
+- Test question types
+    - Drag-and-drop
+    - Graphing
+- Test-taking features
+    - Line reader
+    - Zoom in and out
+- Allow the user to take the test as a guest
+    - This may only require a "guest" account that the user is automatically logged in to after select to take a test as a guest
+- Administrative panel for teachers and faculty to create tests, add questions, and manage testing sessions (i.e. provide access to specific students, start and begin the test session, hide/display grades, etc.)
 
 ### Features
 Currently, there are a few things you can do on this application, including:
