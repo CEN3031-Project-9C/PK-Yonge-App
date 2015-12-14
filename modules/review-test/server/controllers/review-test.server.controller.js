@@ -8,65 +8,10 @@ var path = require('path'),
   User_session = mongoose.model('User_Session'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-// Create a question
-/*
-exports.create = function (req, res) {
-  var question = new Question(req.body);
-  question.user = req.user;
-
-  question.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(question);
-    }
-  });
-};
-*/
-
 // Show the current session
 exports.read = function (req, res) {
   res.json(req.User_session);
 };
-
-// Update a question
-/*
-exports.update = function (req, res) {
-  var question = req.question;
-
-  question.title = req.body.title;
-  question.content = req.body.content;
-
-  question.save(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(question);
-    }
-  });
-};
-*/
-
-// Delete a question
-/*
-exports.delete = function (req, res) {
-  var question = req.question;
-
-  question.remove(function (err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(question);
-    }
-  });
-};
-*/
 
 // List of Sessions
 exports.list = function (req, res) {

@@ -16,15 +16,6 @@ angular.module('review-test').factory('reviewTestService', function() {
     }
   };
   
-  // questionContainer.updateQuestions = function(index, singleQuestion) {
-  //   if(index <= questionContainer.questions.length) {
-  //     questionContainer.questions[index] = singleQuestion;
-  //   } else {
-  //     console.log("index ("+ index + ") was out of bounds!");
-  //     return;
-  //   }
-  // };
-  
   sessionContainer.retrieveUser_sessions = function() {
     return sessionContainer.user_sessions;
   };

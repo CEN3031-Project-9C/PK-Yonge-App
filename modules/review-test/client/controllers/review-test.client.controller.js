@@ -29,9 +29,6 @@ angular.module('review-test').controller('ReviewController', [
 
 		var user_sessionContainer = {
 			user_sessions: []	// we will store retrieved sessions in this array
-			// answers: [],	// we will store the user's answers in this array
-			// review: [],		// we will store whether or not questions are marked for review in this array
-			// notes: []		// we will store the notes for the selected question in this array
 		};
 		
 		$scope.oldTests = {
