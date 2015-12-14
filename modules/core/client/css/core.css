@@ -35,7 +35,7 @@ a:hover .header-profile-image {
   display: block;
 }
 .has-error .help-inline.error-text {
-  color:!important;
+  color:white!important;
   display: inline;
 }
 html {
