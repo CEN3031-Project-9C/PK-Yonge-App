@@ -1,3 +1,4 @@
+//Currently this service is used for displaying all user sessions associated with a user on the review-test.client.view.html. not currently in use bc we couldn't finish its functionality.
 'use strict';
 
 // questionsService, a service used for communicating with the questions REST endpoints

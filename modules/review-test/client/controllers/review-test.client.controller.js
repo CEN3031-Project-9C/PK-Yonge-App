@@ -14,31 +14,32 @@ angular.module('review-test').controller('ReviewController', [
 	'user_sessionsService', 
 	'user_sessionsByUserIDService',
 	'gradeTestService',
+	//Pass these parameters in the same order into the below function
 	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, reviewTestService, user_sessionsService, user_sessionsByUserIDService, gradeTestService) {
-		$scope.authentication = Authentication;
 		
+		//Allows access to the current signed-in instance
+		$scope.authentication = Authentication;
 		// If user is not signed in then redirect them back home
 		if (!Authentication.user) {
 			$location.path('/');
 		}
 
+		//(these were set to the Service object in the test_portal module's QuestionsController.client.controller.js)
 		var userQuestions = gradeTestService.getQuestions(); //RETRIEVE THE QUESTIONS IN THE USER'S TESTING SESSION
 		var userAnswers = gradeTestService.getUserAnswers(); //RETRIEVE THE ANSWERS FROM THE USER'S TESTING SESSION
+		//set variables that can be accessed by the view
         $scope.userQuestions = userQuestions;
         $scope.userAnswers = userAnswers;
 
+		//used to find & display previous tests/sessions that a user has taken (for review-test.client.view.html, which is not currently in use bc we couldn't finish its functionality.)
 		var user_sessionContainer = {
 			user_sessions: []	// we will store retrieved sessions in this array
 		};
-		
 		$scope.oldTests = { 
 			tests: []
 		};
 
-
-
 		/*
-
 		GRADE THE LOADED TESTING SESSION FUNCTION
 		TOTAL === NUMBER OF QUESTIONS FOR THE EXAM
 		CORRECT === NUMBER OF CORRECT ANSWERS
@@ -192,21 +193,25 @@ angular.module('review-test').controller('ReviewController', [
                     return returningFill;
 		    	}
 		    }
-		};																					/*DOES NOT CHECK FOR DRAG-N-DROP (INPUT TYPE TEXT); GRAPHING QUESTIONS*/
+		};	
+		/*DOES NOT CHECK FOR DRAG-N-DROP (INPUT TYPE TEXT); GRAPHING QUESTIONS*/
 
-		//Dealing with question load/display
+		//To load all previous sessions completed by a user (for review-test.client.view.html, which is not currently in use bc we couldn't finish its functionality.)
+		//communicates a lot with user_sessionsByUserIDService
 		$scope.loadSessions = function() {
 			user_sessionContainer.user_sessions = user_sessionsByUserIDService.query( // Use query() instead of get() because result will be an array
-				{userID: Authentication.user._id},
+				{userID: Authentication.user._id}, //passes current signed-in user into the query method
 				function() {
-				//console.log("user_sessionContainer sessions inside: " + user_sessionContainer.user_sessions);
-					reviewTestService.setUser_sessions(user_sessionContainer.user_sessions);		// Save the questions locally
-				//console.log("user_sessionContainer sessions inside after: " + user_sessionContainer.user_sessions);
-					$scope.oldTests.tests = user_sessionContainer.user_sessions;	// Make the questions available to the front-end
-					//^^^^^^^^^^^^^^^^^^^^^^^^^CHANGE THIS LINE TO BE THE NAMES OF THE TESTS ASSOCIATED WITH SESSIONS
+					reviewTestService.setUser_sessions(user_sessionContainer.user_sessions);		// Save the sessions locally
+					$scope.oldTests.tests = user_sessionContainer.user_sessions;	//RIGHT NOW, IT DISPLAYS SESSION IDS, NOT TEST NAMES.
 				}
 			);
 		};
 
+		/*NEXT STEPS WITH THIS: 
+		1) find out how to perform another query that will: use the session IDs that ^this method returns to query for the associated test names. (session document stores test_id, so you'd grab value from that field and query that test_id for the field of the corresponding document that holds its name)
+			This would just be for displaying tests in a more user-friendly format than session ID #s.
+		2) when user clicks on a test, set appropriate information and reroute them to review-specific-test.client.view.html so that they will see the specific test page for the correct test that they chose.
+		*/
 	}
 ]);
