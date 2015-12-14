@@ -3,7 +3,7 @@ A web-based application that allows students at [PK Yonge Developmental Research
 This application was created for the Introduction to Software Engineering (CEN3031) class at the University of Florida, using the MEAN stack.
 
 ## Deployment: 
-Our app is deployed through HEROKU. Deployment information can be found [here](https://devcenter.heroku.com/articles/deploying-nodejs). Please contact [@Nicola37] for further deployment questions
+Our app is deployed through HEROKU. Deployment information can be found [here](https://devcenter.heroku.com/articles/deploying-nodejs). Please contact [@Nicola37](https://github.com/Nicola37) for further deployment questions
 #### Deployed Site URL: http://pky-eoc.herokuapp.com/
 
 ### Group Members
@@ -131,11 +131,6 @@ This project incorporates a number of open source projects:
 * [MongoDB](https://www.mongodb.org/) - NoSQL Database 
 * [jQuery] - For basic Javascript functionalities
 * [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [ThomPorter](http://www.thomporter.com/apps/angularjs_calc) - Calculator used in the app
+* [Thom Porter](http://www.thomporter.com/apps/angularjs_calc) - Calculator used in the app
 
-<<<<<<< HEAD
-And of course PK-Yonge-App itself is lives on this [public repository](https://github.com/CEN3031-Project-9C/PK-Yonge-App)
- on GitHub.
-=======
-And of course the PK-Yonge-App repository is located here on GitHub, at the following (self-referencing) URL: https://github.com/CEN3031-Project-9C/PK-Yonge-App
->>>>>>> ef6f96ba4e1661e5a5d1507961dc06cdff689d41
+And of course PK-Yonge-App itself is lives on this [public repository](https://github.com/CEN3031-Project-9C/PK-Yonge-App) on GitHub.
