@@ -1,3 +1,4 @@
+//A session is accessible throughout different modules, so setting and getting information to/from this object is how information is passed between them.
 'use strict';
 
 angular.module('choose-test').factory('sessionServiceV3', function() {

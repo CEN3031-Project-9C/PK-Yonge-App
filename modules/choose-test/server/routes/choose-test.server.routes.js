@@ -8,7 +8,7 @@ var user_sessions = require('../controllers/choose-test.server.controller');
 module.exports = function (app) {
   // Sessions collection routes
   app.route('/api/user_session/')
-    .get(user_sessions.list)
+    .get(user_sessions.list) //methods in choose-test.server.controller.js
     .post(user_sessions.create);
 
   // Single user session routes

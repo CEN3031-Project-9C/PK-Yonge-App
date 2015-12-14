@@ -11,7 +11,7 @@ var mongoose = require('mongoose'),
  */
 var User_SessionSchema = new Schema({
 	user_id: {
-		type: Schema.ObjectId
+		type: Schema.ObjectId //user_id & test_id are references to other objects.
 	},
 	test_id: {
 		type: Schema.ObjectId

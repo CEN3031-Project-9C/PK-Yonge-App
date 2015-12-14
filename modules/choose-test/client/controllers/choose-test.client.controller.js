@@ -1,3 +1,4 @@
+//Pulls appropriate information from database and sets the sessionServiceV3 object so that this information can be read by other modules.
 'use strict';
 
 // Create the 'choose-test' controller
@@ -10,11 +11,12 @@ angular.module('choose-test').controller(
 	'Authentication', 
 	'User_Sessions', 	// Pass REST endpoint service (from userSessions.client.service.js) as a parameter
 	'sessionServiceV3', // Pass sessionServiceV3 service (from sessionServiceV3.client.service.js) as a parameter
+	//Pass these parameters in the same order into the below function
 	function ($scope, $state, $stateParams, $location, Authentication, User_Sessions, sessionServiceV3) {
 		
-		$scope.authentication = Authentication;
-		
-		// If user is not signed in then redirect back home
+		//Allows access to the current signed-in instance
+		$scope.authentication = Authentication;		
+		// If user is not signed in, then redirect back home
 		if (!Authentication.user) {
 			$location.path('/');
 		}
