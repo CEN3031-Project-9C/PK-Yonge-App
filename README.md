@@ -1,11 +1,11 @@
 # PK-Yonge-App
 A web-based application that allows students at [PK Yonge Developmental Research School](http://pkyonge.ufl.edu/) (in Gainesville, FL) to practice for their end-of-course exams.
-This application is being made in an Introduction to Software Engineering (CEN3031) class at the University of Florida, and was created using the MEAN framework.
+This application was created for the Introduction to Software Engineering (CEN3031) class at the University of Florida, using the MEAN stack.
 
-### Deployed Site: http://pky-eoc.herokuapp.com/
+### Deployment Site URL: http://pky-eoc.herokuapp.com/
 
 ### Group Members
-The group working on this project consists of:
+The group working on this project consists of the following members:
 - Bailey Anderson [@baileyanderson](https://github.com/baileyanderson)
 - Cody Fitzpatrick [@CodyFitzpatrick](https://github.com/CodyFitzpatrick)
 - Nicola Frachesen [@Nicola37](https://github.com/Nicola37)
@@ -14,11 +14,9 @@ The group working on this project consists of:
 - Terry Philippe [@tjphilippe](https://github.com/tjphilippe)
 - Xiaoxi Zheng [@XiaoxiZheng](https://github.com/XiaoxiZheng)
 
-### Running the App locally
+### Running the App Locally
 - Install all necessary packages and libraries by following [this installation guide](https://docs.google.com/document/d/1B7aqptx0jsWHLqm7W9BT1oKHYNCKkvwtjjUtsj6C-ks/edit?pli=1) 
-- Running in the terminal by typing: grunt
-
-**Note this app was developed using Node version 0.12.7, newer version of node may cause this app to run differently. 
+- After cloning the remote repository to a local repository on your computer and navigating to the directory in which the app contents are located, you can run the app by using Grunt, "The Javascript Task Runner". Please see the below terminal commands that detail this process. The repository only needs to be cloned once, during the installation of the app.
 
 ```sh
 $ git clone https://github.com/CEN3031-Project-9C/PK-Yonge-App
@@ -26,9 +24,12 @@ $ cd PK-Yonge-App
 $ grunt
 
 ```
+
+**Note!** This app was developed using Node version 0.12.7. A newer version of Node may cause this app to run differently or break altogether. 
+
 ### Updating the database connection
-- In the file C:\PK-Yonge-App\config\env\development.js
-- Change line 6 to 14 to your respective login credentials and mongoLab information
+- In the file `PK-Yonge-App\config\env\development.js`
+- Change lines 6 to 14 to be your respective login credentials and mongoLab information
 
 ## Completed Features
 - Allow a user to **create an account**, **modify their profile information**, **log in**, **log out**, and **retrieve a forgotten password**.
@@ -79,7 +80,7 @@ These bugs are explained further on the *Issues* page (https://github.com/CEN303
 - Administrative panel for teachers and faculty to create tests, add questions, and manage testing sessions (i.e. provide access to specific students, start and begin the test session, hide/display grades, etc.)
 
 ### Screenshots 
-Perusing a homepage.
+The homepage.
 
 ![Homepage](modules/core/client/img/screenshots/homepage.PNG?raw=true)
 
@@ -117,7 +118,7 @@ Grading a test.
 
 ## Credits
 
-This project uses a number of open source projects to work properly:
+This project incorporates a number of open source projects:
 
 * [MEAN Stack](http://mean.io/#!/) - MongoDB, Express, Angular, and Node
 * [AngularJS] - HTML enhanced for web apps!
@@ -128,5 +129,4 @@ This project uses a number of open source projects to work properly:
 * [Twitter Bootstrap] - great UI boilerplate for modern web apps
 * [ThomPorter](http://www.thomporter.com/apps/angularjs_calc) - Calculator used in the app
 
-And of course PK-Yonge-App itself is lives on this [public repository](https://github.com/CEN3031-Project-9C/PK-Yonge-App)
- on GitHub.
+And of course the PK-Yonge-App repository is located here on GitHub, at the following (self-referencing) URL: https://github.com/CEN3031-Project-9C/PK-Yonge-App
