@@ -14,7 +14,7 @@ module.exports = function (app) {
   // Single user session routes
   app.route('/api/user_session/:user_sessionId')
     .get(user_sessions.read)
-	  .put(user_sessions.update);
+	.put(user_sessions.update);
   
   // Finish by binding the article middleware
   app.param('user_sessionId', user_sessions.userSessionById);
