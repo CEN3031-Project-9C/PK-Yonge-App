@@ -2,7 +2,9 @@
 A web-based application that allows students at [PK Yonge Developmental Research School](http://pkyonge.ufl.edu/) (in Gainesville, FL) to practice for their end-of-course exams.
 This application was created for the Introduction to Software Engineering (CEN3031) class at the University of Florida, using the MEAN stack.
 
-### Deployment Site URL: http://pky-eoc.herokuapp.com/
+## Deployment: 
+Our app is deployed through HEROKU. Deployment information can be found [here](https://devcenter.heroku.com/articles/deploying-nodejs). Please contact [@Nicola37](https://github.com/Nicola37) for further deployment questions
+#### Deployed Site URL: http://pky-eoc.herokuapp.com/
 
 ### Group Members
 The group working on this project consists of the following members:
@@ -35,19 +37,21 @@ $ grunt
 - Allow a user to **create an account**, **modify their profile information**, **log in**, **log out**, and **retrieve a forgotten password**.
     - We used the default MEAN application's functionality in the "users" module for this, located in `modules/users/`.
     - User details are saved in the `users` collection in MongoDB.
+    - Email credentials used to send the forgotten password emails are located in `config/env/local.js`.
+    -  Emailing scripts are located in `scripts/reset-password.js/` 
 - Allow a user to **select a test** they'd like to take.
     - Accomplished via custom functionality in the "choose-test" module, located in `modules/choose-test/`.
     - The user's test choice is stored within a templated object that is created and then saved as a document in the `user_sessions` collection in MongoDB (in `modules/choose-test/choose-test.client.controller.js`). This specific document (as each user_session is associated with a different testing session) should be updated as the user takes the test  in order to save their answers, notes, mark-for-review flags, etcetera, but as described below in the "Buggy Features" section, this functionality is not working.
 - Allow the user to **take a test** (view questions specific to their chosen test, select answers, and save those answers).
-	- As follows are various working features that aid in the test-taking process.
-		- A basic four function calculator
-		- Formula Sheet
-		- Navigation between different questions
-		- Notepad that properly stores notes for every individual question
-		- Mark for review and that will be reflected in the drop down navigation, and on the individual questions
-		- Pop-up warnings when navigating between questions without answering
-		- Pop-up warnings when there are questions unanswered when submitting the test
-		- Pop-up warnings when time is up
+    - As follows are various working features that aid in the test-taking process.
+        - A basic four function calculator
+        - Formula Sheet
+        - Navigation between different questions
+        - Notepad that properly stores notes for every individual question
+        - Mark for review and that will be reflected in the drop down navigation, and on the individual questions
+        - Pop-up warnings when navigating between questions without answering
+        - Pop-up warnings when there are questions unanswered when submitting the test
+        - Pop-up warnings when time is up
     - The user_session object (that is first instantiated and then stored in the `user_sessions` collection in MongoDB via `$scope.startTest` function in `modules/choose-test/choose-test.client.controller.js`) is updated as the user takes the test (i.e. if the user selects an answer for question 1, then the value is updated in slot 0 in the `user_answers' array - this array is a property of the `user_session` object in the aforementioned controller  as well as a property of the document in the `user_sessions` collection in MongoDB); this is done for all properties:
         - `time`
         - `complete`
@@ -127,6 +131,6 @@ This project incorporates a number of open source projects:
 * [MongoDB](https://www.mongodb.org/) - NoSQL Database 
 * [jQuery] - For basic Javascript functionalities
 * [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [ThomPorter](http://www.thomporter.com/apps/angularjs_calc) - Calculator used in the app
+* [Thom Porter](http://www.thomporter.com/apps/angularjs_calc) - Calculator used in the app
 
-And of course the PK-Yonge-App repository is located here on GitHub, at the following (self-referencing) URL: https://github.com/CEN3031-Project-9C/PK-Yonge-App
+And of course PK-Yonge-App itself is lives on this [public repository](https://github.com/CEN3031-Project-9C/PK-Yonge-App) on GitHub.
