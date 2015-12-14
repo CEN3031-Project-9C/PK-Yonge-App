@@ -6,11 +6,11 @@
 var user_sessions = require('../controllers/review-test.server.controller');
 
 module.exports = function (app) {
-  // Articles collection routes
+  // User Session collection routes
   app.route('/api/user_sessions/')
     .get(user_sessions.list);
 
-  // Single article routes
+  // Single user session routes
   app.route('/api/user_sessions/:user_sessionId')
     .get(user_sessions.read);
 
