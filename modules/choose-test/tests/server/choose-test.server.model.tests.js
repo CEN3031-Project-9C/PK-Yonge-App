@@ -31,7 +31,7 @@ describe('User_Session Model Unit Tests:', function () {
 
     user.save(function () {
       user_session = new User_Session({
-        user_id: user,
+        user_id: user.id,
         test_id: '525a8422f6d0f87f0e407a33',
         time: 300,
         complete: false,

@@ -1,10 +1,10 @@
-// 'use strict';
+'use strict';
 
-// describe('Articles E2E Tests:', function () {
-//   describe('Test articles page', function () {
-//     it('Should report missing credentials', function () {
-//       browser.get('http://localhost:3001/articles');
-//       expect(element.all(by.repeater('article in articles')).count()).toEqual(0);
-//     });
-//   });
-// });
+describe('Questions E2E Tests:', function () {
+  describe('Test questions page', function () {
+    it('Should report missing credentials', function () {
+      browser.get('http://localhost:3001/questions');
+      expect(element.all(by.repeater('question in questions')).count()).toEqual(0);
+    });
+  });
+});
