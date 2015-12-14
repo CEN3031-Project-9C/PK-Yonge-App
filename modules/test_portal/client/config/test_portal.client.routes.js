@@ -1,6 +1,6 @@
 'use strict';
 
-// Setting up route
+// Setting up routes
 angular.module('test_portal').config(['$stateProvider',
   function ($stateProvider) {
     // Articles state routing

@@ -1,3 +1,6 @@
+//Pulls information from the db and stores it locally on the front end for quicker manipulation and interaction with view.
+//Calls back to update database when appropriate.
+
 'use strict';
 
 // Questions controller
@@ -15,18 +18,20 @@ angular.module('test_portal').controller('QuestionsController', [
 	'questionsByTestIDService',
 	'takeTestService',
 	'gradeTestService',
+	//Pass these parameters in the same order into the below function
 	function ($scope, $window, $document, $stateParams, $location, $modal, $log, Authentication, sessionServiceV3, questionsService, questionsByTestIDService, takeTestService, gradeTestService) {
 	  	
+	  	//Allows access to the current signed-in instance
 		$scope.authentication = Authentication;
-		
 		// If user is not signed in then redirect them back home
 		if (!Authentication.user) {
 			$location.path('/');
 		}
 
-		//Setting up variables				
-		$scope.currentPage = 0;
+	//Setting up variables to represent the test portal in the front end				
+		$scope.currentPage = 0; //Page numbering starts at 0-- view displays "currentPage+1" so that users see pages starting at page # 1
 		
+		//to hold answers filled in by users from the different question forms
 		$scope.formData = {
 			answer: []
 		};
@@ -35,8 +40,10 @@ angular.module('test_portal').controller('QuestionsController', [
 			message: String
 		};
 
-		$scope.marked = "btn-default";
+		//for marking for review
+		$scope.marked = "btn-default"; //view's button appearance is set to this variable, which subs in the appropriate color.
 		$scope.reviewButtonText = "Mark for Review";
+
 		$scope.divwidth = 400;
   		$scope.divheight = 300;
   		$scope.show = true;
