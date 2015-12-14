@@ -26,6 +26,9 @@ $ cd PK-Yonge-App
 $ grunt
 
 ```
+### Updating the database connection
+- In the file C:\PK-Yonge-App\config\env\development.js
+- Change line 6 to 14 to your respective login credentials and mongoLab information
 
 ## Completed Features
 - Allow a user to **create an account**, **modify their profile information**, **log in**, **log out**, and **retrieve a forgotten password**.
@@ -88,9 +91,25 @@ Signing in.
 
 ![Sign in](modules/core/client/img/screenshots/signIn.PNG?raw=true)
 
-Taking a practice test.
+Taking a mutiple choice question.
 
 ![Test](modules/core/client/img/screenshots/basicTest.PNG?raw=true)
+
+Taking a muti-select question.
+
+![Test](modules/core/client/img/screenshots/checkbox.PNG?raw=true)
+
+Taking a fill in the blank question with calculator.
+
+![Test](modules/core/client/img/screenshots/calculator.PNG?raw=true)
+
+Mark for review feature
+
+![Test](modules/core/client/img/screenshots/mark.PNG?raw=true)
+
+Timer Feature
+
+![Test](modules/core/client/img/screenshots/markNTimer.PNG?raw=true)
 
 Grading a test.
 
