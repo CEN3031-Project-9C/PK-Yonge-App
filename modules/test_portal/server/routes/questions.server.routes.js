@@ -11,7 +11,7 @@ module.exports = function (app) {
 	
 	// Articles collection routes
 	app.route('/api/questions/')
-    	.get(questions.list);
+    	.get(questions.list); //method in questions.server.controller
 
 	// Single article routes
 	app.route('/api/questions/:questionId')

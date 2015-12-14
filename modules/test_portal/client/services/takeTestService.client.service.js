@@ -1,3 +1,5 @@
+//For front-end storage of questions that can be accessed by different modules
+
 'use strict';
 //into the test portal
 angular.module('test_portal').factory('takeTestService', function() {
