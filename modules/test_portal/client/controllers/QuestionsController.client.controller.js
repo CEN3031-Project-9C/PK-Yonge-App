@@ -43,19 +43,14 @@ angular.module('test_portal').controller('QuestionsController', [
 		//for marking for review
 		$scope.marked = "btn-default"; //view's button appearance is set to this variable, which subs in the appropriate color.
 		$scope.reviewButtonText = "Mark for Review";
-
-		$scope.divwidth = 400;
-  		$scope.divheight = 300;
-  		$scope.show = true;
-  		$scope.divtop = 80;
-  		$scope.divleft = 50;
-  		$scope.divtop2 = 180;
-  		$scope.divleft2 = 150;
+		//for notepad
+		$scope.showNotes = false;
 		
 		$scope.numberOfPages = function() {
 			return $scope.testQuestions.questions.length;
 		};
 		
+		//not accessible by the view, but holds this information for access & manipulation
 		var testContainer = {
 			questions: [],	// we will store retrieved questions in this array
 			answers: [],	// we will store the user's answers in this array
@@ -63,18 +58,21 @@ angular.module('test_portal').controller('QuestionsController', [
 			notes: []		// we will store the notes for the selected question in this array
 		};
 		
+		//accessible by the view to display questions
 		$scope.testQuestions = {
-			questions: [],
+			questions: []
 		};
 
+		//to access test container in view.
 		$scope.getTestContainer = function(){
 			return testContainer;
 		};
 
-		//Dealing with question load/display
+	//Dealing with question load/display
+		//Populates questions[] array with questions from the appropriate test. Also sets proper parts of Service objects so that other modules can access information.
 		$scope.loadQuestions = function() {
 			testContainer.questions = questionsByTestIDService.query( // Use query() instead of get() because result will be an array
-				{testID: sessionServiceV3.getTestID()},
+				{testID: sessionServiceV3.getTestID()}, //use sessionServiceV3 to get id of stored test and set this to be passed to questionsByTestIDService
 				function() {
 
 					takeTestService.setQuestions(testContainer.questions);		// Save the questions locally
@@ -86,28 +84,27 @@ angular.module('test_portal').controller('QuestionsController', [
 			
 		};
 
-		$scope.getType = function(index) //Returns the question type
+		$scope.getType = function(index) //Returns the question type of a specific numbered question
 		{
 			return testContainer.questions[index].question_type;
 		};
 
-		$scope.getCorrect = function(index) //Returns the question type
+		$scope.getCorrect = function(index) //Returns the question's correct answer
 		{
 			return testContainer.questions[index].correct_answer;
 		};
 
-		//Methods for navigation
-		//Next 2 methods are code in the body of BOTH previousQuestion and nextQuestion, extracted to be their own methods
-		//(if you ever were to edit the code, reduces chance of updating code in one place but not where it's duplicated elsewhere)
+	//Methods for question navigation
+		//called anytime user tries to change questions to save answer & make sure it's ok to move on
 		$scope.saveAnswer = function() {
-			testContainer.answers[$scope.currentPage] = $scope.formData.answer;
-			sessionServiceV3.setUserAnswers(testContainer.answers);
+			testContainer.answers[$scope.currentPage] = $scope.formData.answer; //reads answers from form and stores at proper index of user's answer section of container object
+			sessionServiceV3.setUserAnswers(testContainer.answers); //Updates sessionServiceV3 object that is accessible to other modules
 
-		    var testingStuff = [];
-
-			if (testContainer.answers[$scope.currentPage] === undefined) //if the answer is empty, check if they want to proceed
+			//Checks to move on past unanswered question
+			//multiple choice & fill-in-the-blank (appear as undefined):
+			if (testContainer.answers[$scope.currentPage] === undefined) //if the answer is empty (i.e. there was no data in the MC form when testContainer.answers[i] was set), check if they want to proceed
 			{
-				var proceed = confirm("You haven't saved an answer to this question! Are you sure you want to proceed?");
+				var proceed = confirm("You haven't saved an answer to this question! Are you sure you want to proceed?"); //confirm generates a box with "ok" (returns true) and "cancel" (returns false) options 
 				if (proceed === true) 
 				{
 					return true; //They want to continue
@@ -117,11 +114,12 @@ angular.module('test_portal').controller('QuestionsController', [
 					return false; //They want to cancel & go back
 				}
 			}
-			else if ($scope.getType($scope.currentPage) === "check" || $scope.getType($scope.currentPage) === "fill")
+			//checkbox (appear as empty array):
+			else if ($scope.getType($scope.currentPage) === "check")//at one point we also had || $scope.getType($scope.currentPage) === "fill") ...if the fill-in-the-blanks aren't acting right, try adding this back in
 			{
-				if (testContainer.answers[$scope.currentPage].length === 0)//If the array of answers is empty, ask
+				if (testContainer.answers[$scope.currentPage].length === 0)//If the array of answers is empty, confirmation box
 				{
-					var proceedMultiple = confirm("You haven't put any answers for this question! Are you sure you want to proceed?");
+					var proceedMultiple = confirm("You haven't saved an answer to this question! Are you sure you want to proceed?");
 					if (proceedMultiple === true) 
 					{
 						return true; //They want to continue
@@ -142,10 +140,13 @@ angular.module('test_portal').controller('QuestionsController', [
 			}	
 		};
 		
+		//If user has already worked with a question, display their previous progress anytime user navigates back to the question
 		$scope.reloadSaved = function()
 		{
+			//repopulate form with what's at the corresponding index of container of user-answers
 			$scope.formData.answer = testContainer.answers[$scope.currentPage];
 
+			//set review button's status appropriately
 			if (testContainer.review[$scope.currentPage])
 			{
 				$scope.marked = "btn-danger";
@@ -155,52 +156,59 @@ angular.module('test_portal').controller('QuestionsController', [
 				$scope.reviewButtonText = "Mark for Review";				
 			}
 
+			$scope.showNotes = false; //reset notepad on new question
+			//set notepad contents appropriately
 			$scope.Notepad.message = testContainer.notes[$scope.currentPage];
 		};
 
+		//navigate to previous question
 		$scope.previousQuestion = function() {
-			if ($scope.saveAnswer())
+			if ($scope.saveAnswer()) //save answer. will return "true" if user is clear to move on or "false" if they elected to stay on current page.
 			{
-				$scope.showNotes = false;
 				$scope.currentPage = $scope.currentPage - 1;	// Update pagination (show requested question)	
-				$scope.reloadSaved();
+				$scope.reloadSaved(); //reload saved stuff for that new page
 			}
 		};
 		
+		//navigate to previous question
 		$scope.nextQuestion = function() {
-			if ($scope.saveAnswer())
+			if ($scope.saveAnswer()) //save answer. will return "true" if user is clear to move on or "false" if they elected to stay on current page.
 			{
-				$scope.showNotes = false;
 				$scope.currentPage = $scope.currentPage + 1;	// Update pagination (show requested question)
-				$scope.reloadSaved();	
+				$scope.reloadSaved();	//reload saved stuff for that new page
 			}		
 		};
 
+		//navigate non-sequentially via dropdown menu
 		$scope.jumpTo = function(num){
-			$scope.showNotes = false;
-			$scope.saveAnswer();
-			$scope.currentPage = num;
-			$scope.reloadSaved();
+			if ($scope.saveAnswer()) //save answer. will return "true" if user is clear to move on or "false" if they elected to stay on current page.
+			{
+				$scope.currentPage = num; // Update pagination (show requested question)
+				$scope.reloadSaved(); //reload saved stuff for that new page
+			}
 		};
 		
 		//Marking for review
+		//called when view's Review button is clicked
 		$scope.mark_unmark = function() {
-			if (!testContainer.review[$scope.currentPage])
+			if (!testContainer.review[$scope.currentPage]) //If that position in review array is false (is yet unmarked)
 			{
-				testContainer.review[$scope.currentPage] = true;
-				$scope.marked = "btn-danger";
-				$scope.reviewButtonText = "Unmark";
+				testContainer.review[$scope.currentPage] = true; //change it to true
+				$scope.marked = "btn-danger"; //change color to red
+				$scope.reviewButtonText = "Unmark"; //change text
 			}
-			else
+			else //If review array has true (already marked)
 			{
-				testContainer.review[$scope.currentPage] = false;
-				$scope.marked = "btn-default";
-				$scope.reviewButtonText = "Mark for Review";
+				testContainer.review[$scope.currentPage] = false; //change it to false
+				$scope.marked = "btn-default"; //change color back to default
+				$scope.reviewButtonText = "Mark for Review"; //change text
 			}
 
-			sessionServiceV3.setReview(testContainer.review);
+			sessionServiceV3.setReview(testContainer.review); //update sessionServiceV3 object with this updated state
 		};
 
+		//used by view to see if a flag should appear next to questions that have been marked. 
+		//PROBABLY CAN BE COMBINED WITH PREVIOUS METHOD
 		$scope.checkForReview = function(index) {
 			if (testContainer.review[index])
 			{
@@ -212,19 +220,18 @@ angular.module('test_portal').controller('QuestionsController', [
 			}
 		};
 
-		//Submission-related methods
+	//Submission-related methods
+		//Check whether entire test has any unanswered questions. called from Submit method that begins when view's Submit button clicked
 		$scope.checkUnanswered = function() {
-			var unanswered = ""; //String to represent all of the unanswered questions so they can be reported to the user.
+			var unanswered = ""; //String to represent all of the numbers matching unanswered questions, so they can be reported to the user.
 			for (var i = 0; i < $scope.testQuestions.questions.length; i++)
 			{
-
-				if (testContainer.answers[i] === undefined)
+				//if nothing has been added to the user's answer array at that position, question is unanswered
+				//multiple choice & fill appear as "undefined," checkbox questions appear as empty array
+				if (testContainer.answers[i] === undefined || ($scope.getType(i) === "check" && testContainer.answers[i].length === 0)) 
 				{
 					unanswered += (i+1);
-					if (i !== $scope.testQuestions.questions.length-1)
-					{
-						unanswered += ", ";
-					}
+					unanswered += ", ";  //might want to make the comma happen conditionally as long as it's not the last unanswered question
 				}
 			}
 			if (unanswered !== "") //If the string is not empty, then they DO have unanswered questions.
@@ -244,6 +251,8 @@ angular.module('test_portal').controller('QuestionsController', [
 				return true; //If the string WAS empty, then they don't need the confirmation box. proceed regardless
 			}
 		};
+
+		//function to submit test. called on Submit button click
 		$scope.submitTest = function() {
 			
 			
@@ -254,8 +263,6 @@ angular.module('test_portal').controller('QuestionsController', [
 
 			if (proceed === true) 
 			{
-				// do test-ending things(save back to DB?)
-
 				// Save all final answers
 				gradeTestService.setUserAnswers(sessionServiceV3.getUserAnswers());
 
@@ -264,23 +271,30 @@ angular.module('test_portal').controller('QuestionsController', [
 			}
 			else
 			{
-				//continue with test
+				//don't submit answers or change page. Return to test
+				//this might be the place to restart a timer
 			}
 			
 			
 		};
 
+		//function to check user's answers against correct answers
 		$scope.gradeTest = function() {
 			var total = $scope.testQuestions.questions.length;
-			var correct = 0;
+			var correct = 0; //initially, say they got 0 correct.
             
-			for (var i = 0; i < $scope.testQuestions.questions.length; i++){
-                if ($scope.getType(i) === "multiple_choice"){
-				    if (testContainer.answers[i] === $scope.getCorrect(i)[0]){
+            //grade each appropriately depending on answer type
+			for (var i = 0; i < $scope.testQuestions.questions.length; i++)
+			{
+                if ($scope.getType(i) === "multiple_choice")
+                {
+				    if (testContainer.answers[i] === $scope.getCorrect(i)[0]) //technically a 1D correct answer
+				    {
 				    	correct++;
 				    }
 			    }
-			    else{
+			    else //checkbox and fill-in-the-blank have an array of answers
+			    {
 			    	var totalOptions = 0;
 			    	for (var j = 0; j < $scope.getCorrect(i).length; j++){
 				        if ($scope.getCorrect(i)[j] === "false"){
@@ -296,18 +310,19 @@ angular.module('test_portal').controller('QuestionsController', [
 				    }
 			    }
 			}
-			console.log(correct);
-			console.log(total);
 		};
 
-		//Extra tools (calculator, timer, etc)
+	//Extra tools
+		//calculator
 		$scope.openCalcWindow = function(){
 			var myWindow = window.open("calculator", "calcWindow", "resizable=0, location=no,menubar=no,status=no,top=200, left=700, width=425, height=450");
 		};
 
+		//timer
 		$scope.timer_running = true;
 		$scope.max_count = 1000;
 
+		//For use in future implementing of pausing functionality
 		/*$scope.startProgress = function() {
 			$scope.timer_running = true;
 		 };*/
@@ -316,59 +331,61 @@ angular.module('test_portal').controller('QuestionsController', [
 		    $scope.timer_running = false;
 		};
 
+
 		//modal stuff
 		$scope.animationsEnabled = true;
-		$scope.open = function (size) {
-
+		$scope.open = function (size) 
+		{
 		  	$scope.animationsEnabled = true;
 		    $modal.open({
 		      animation: $scope.animationsEnabled,
 		      templateUrl: 'myModalContent.html',
 		      size: size,
-		      
 		    });
+		};
 
-	   };
+		//Modal selection options:
+		$scope.ok = function () 
+		{
+			$scope.submitTest();
+			$scope.stopProgress();
 
-	   //Modal selection options:
-	  $scope.ok = function () {
-	  	$scope.submitTest();
-	  	$scope.stopProgress();
-	    
-	    sessionServiceV3.setComplete(testContainer.complete);
-	  };
+			sessionServiceV3.setComplete(testContainer.complete);
+		};
 
-	  $scope.cancel = function () {
-	  	$scope.startProgress();
-	    $modal.close();
-	    $modal.dismiss('cancel');
-	    //$modal.('hide');
-	  };
+		$scope.cancel = function () 
+		{
+			$scope.startProgress();
+			$modal.close();
+			$modal.dismiss('cancel');
+			//$modal.('hide');
+		};
 
-      $scope.openFormula = function (size) {
-
-	    $scope.animationsEnabled = true;
-
+     	$scope.openFormula = function (size) 
+     	{
+	    	$scope.animationsEnabled = true;
 		    $modal.open({
 		      animation: $scope.animationsEnabled,
 		      templateUrl: 'formulaModal.html',
 		      size: size,
 		    });
+		};
 
-	   };
-
-		$scope.showNotes = false;
-		$scope.showTextArea = function(){
+	   //notepad
+		$scope.showTextArea = function()
+		{
 			$scope.Notepad.message = testContainer.notes[$scope.currentPage];
 
 			$scope.showNotes = true;
 		};
 
-		$scope.cancelNotes = function(){
+		$scope.cancelNotes = function()
+		{
 			$scope.showNotes = false;
 		};
 
-		$scope.saveNotes = function(){
+		$scope.saveNotes = function()
+		{
 			testContainer.notes[$scope.currentPage] = $scope.Notepad.message;
 			$scope.showNotes = false;
 
@@ -377,7 +394,16 @@ angular.module('test_portal').controller('QuestionsController', [
 
 
 		 
-		//Work in progress: making the notepad moveable
+		//WORK IN PROGRESS: making the notepad moveable
+/*
+	   	$scope.divwidth = 400;
+  		$scope.divheight = 300;
+  		$scope.show = true;
+  		$scope.divtop = 80;
+  		$scope.divleft = 50;
+  		$scope.divtop2 = 180;
+  		$scope.divleft2 = 150;
+
 		$scope.addListeners = function (){
 			alert("Hello6");
 		   var ele=  angular.element( document.querySelector( '#dxy' ) );
@@ -407,7 +433,7 @@ angular.module('test_portal').controller('QuestionsController', [
 			  div.css("top", e.clientY + 'px');
 			  div.css("left", e.clientX + 'px');
 		}
-
+*/
 
 	}
 ]);
