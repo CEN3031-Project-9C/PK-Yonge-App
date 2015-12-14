@@ -278,40 +278,6 @@ angular.module('test_portal').controller('QuestionsController', [
 			
 		};
 
-		//function to check user's answers against correct answers
-		$scope.gradeTest = function() {
-			var total = $scope.testQuestions.questions.length;
-			var correct = 0; //initially, say they got 0 correct.
-            
-            //grade each appropriately depending on answer type
-			for (var i = 0; i < $scope.testQuestions.questions.length; i++)
-			{
-                if ($scope.getType(i) === "multiple_choice")
-                {
-				    if (testContainer.answers[i] === $scope.getCorrect(i)[0]) //technically a 1D correct answer
-				    {
-				    	correct++;
-				    }
-			    }
-			    else //checkbox and fill-in-the-blank have an array of answers
-			    {
-			    	var totalOptions = 0;
-			    	for (var j = 0; j < $scope.getCorrect(i).length; j++){
-				        if ($scope.getCorrect(i)[j] === "false"){
-				    	    totalOptions++;
-				        }
-				        else if (String(testContainer.answers[i][j]) === String($scope.getCorrect(i)[j])){
-                            totalOptions++;
-				        }
-
-				        if (totalOptions === $scope.getCorrect(i).length){
-
-				        }
-				    }
-			    }
-			}
-		};
-
 	//Extra tools
 		//calculator
 		$scope.openCalcWindow = function(){

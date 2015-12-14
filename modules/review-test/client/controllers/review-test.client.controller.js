@@ -72,9 +72,9 @@ angular.module('review-test').controller('ReviewController', [
 			    else if (userQuestions[i].question_type === "check"){
 			    	var checkOptions = 0;
 			    	for (var j = 0; j < userQuestions[i].correct_answer.length; j++){
-				        if (userQuestions[i].correct_answer[j] === "false"){
-				    	    if (userAnswers[i][j] === undefined){
-				    	        checkOptions++;
+				        if (userQuestions[i].correct_answer[j] === "false"){			
+				    	    if (userAnswers[i][j] === undefined){						/*THIS IF AND ELSE IF IS NECESSARY, AS A CHECKBOX CAN EITHER BE*/
+				    	        checkOptions++;											/*UNDEFINED IF NEVER SELECTED OR FALSE IF SELECTED THEN UNSELECTED*/
 				    	    }
 				    	    else if (String(userAnswers[i][j]) === "false"){
 				    	    	checkOptions++;
@@ -95,7 +95,7 @@ angular.module('review-test').controller('ReviewController', [
 			    else{
 			    	var fillOptions = 0;
 			    	for (var k = 0; k < userQuestions[i].correct_answer.length; k++){
-				        if (userAnswers[i] === undefined){
+				        if (userAnswers[i] === undefined){									/*A TEXT BOX CAN ALSO BE UNDEFINED IF NOTHING WAS EVER ENTERED IN IT*/
 				        }
 				        else if (userQuestions[i].correct_answer[k] === String(userAnswers[i][k])) {
                                 fillOptions++;
