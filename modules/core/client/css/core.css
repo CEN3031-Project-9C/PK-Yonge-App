@@ -27,12 +27,15 @@ a:hover .header-profile-image {
   padding-bottom: 11px !important;
 }
 .error-text {
+  color:white!important;
   display: none;
 }
 .has-error .help-block.error-text {
+  color:white!important;
   display: block;
 }
 .has-error .help-inline.error-text {
+  color:!important;
   display: inline;
 }
 html {
