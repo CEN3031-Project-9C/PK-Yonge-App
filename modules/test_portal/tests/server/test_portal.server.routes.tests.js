@@ -1,301 +1,75 @@
-// 'use strict';
+'use strict';
 
-// var should = require('should'),
-//   request = require('supertest'),
-//   path = require('path'),
-//   mongoose = require('mongoose'),
-//   User = mongoose.model('User'),
-//   Article = mongoose.model('Article'),
-//   express = require(path.resolve('./config/lib/express'));
+var should = require('should'),
+  request = require('supertest'),
+  path = require('path'),
+  mongoose = require('mongoose'),
+  Question = mongoose.model('Question'),
+  express = require(path.resolve('./config/lib/express'));
 
-// /**
-//  * Globals
-//  */
-// var app, agent, credentials, user, article;
+/**
+ * Globals
+ */
+var app, agent, question;
 
-// /**
-//  * Article routes tests
-//  */
-// describe('Article CRUD tests', function () {
-//   this.timeout(10000);
+/**
+ * Article routes tests
+ */
+describe('Question CRUD tests', function () {
+  this.timeout(100000);
 
-//   before(function (done) {
-//     // Get application
-//     app = express.init(mongoose);
-//     agent = request.agent(app);
+  before(function (done) {
+    // Get application
+    app = express.init(mongoose);
+    agent = request.agent(app);
 
-//     done();
-//   });
+    done();
+  });
 
-//   beforeEach(function (done) {
-//     // Create user credentials
-//     credentials = {
-//       username: 'username',
-//       password: 'M3@n.jsI$Aw3$0m3'
-//     };
-//   });
+  it('should be able to get a list of questions', function (done) {
+    // Request questions
+  	request(app).get('/api/questions')
+    .end(function (req, res) {
+      // Set assertion
+      res.body.should.be.instanceof(Array).and.have.lengthOf(7);
 
-//   // it('should be able to save an article if logged in', function (done) {
-//   //   agent.post('/api/auth/signin')
-//   //     .send(credentials)
-//   //     .expect(200)
-//   //     .end(function (signinErr, signinRes) {
-//   //       // Handle signin error
-//   //       if (signinErr) {
-//   //         return done(signinErr);
-//   //       }
+      // Call the assertion callback
+      done();
+    });
+  });
 
-//   //       // Get the userId
-//   //       var userId = user.id;
+  it('should be able to get a single question', function (done) {
+  	request(app).get('/api/questions/561cb16ae4b060b59d7cc0aa')
+    .end(function (req, res) {
+      // Set assertion
+      res.body.should.be.instanceof(Object).and.have.property('test_id', "561d199f41c840c42134a825");
 
-//   //       // Save a new article
-//   //       agent.post('/api/articles')
-//   //         .send(article)
-//   //         .expect(200)
-//   //         .end(function (articleSaveErr, articleSaveRes) {
-//   //           // Handle article save error
-//   //           if (articleSaveErr) {
-//   //             return done(articleSaveErr);
-//   //           }
+      // Call the assertion callback
+      done();
+    });
+  });
 
-//   //           // Get a list of articles
-//   //           agent.get('/api/articles')
-//   //             .end(function (articlesGetErr, articlesGetRes) {
-//   //               // Handle article save error
-//   //               if (articlesGetErr) {
-//   //                 return done(articlesGetErr);
-//   //               }
+  it('should return proper error for single question with an invalid Id', function (done) {
+    // test is not a valid mongoose Id
+    request(app).get('/api/questions/random')
+      .end(function (req, res) {
+        // Set assertion
+        res.body.should.be.instanceof(Object).and.have.property('message', 'Question is invalid');
 
-//   //               // Get articles list
-//   //               var articles = articlesGetRes.body;
+        // Call the assertion callback
+        done();
+      });
+  });
 
-//   //               // Set assertions
-//   //               (articles[0].user._id).should.equal(userId);
-//   //               (articles[0].title).should.match('Article Title');
+  it('should return proper error for single question which doesnt exist', function (done) {
+    // This is a valid mongoose Id but a non-existent question
+    request(app).get('/api/questions/559e9cd815f80b4c256a8f41')
+      .end(function (req, res) {
+        // Set assertion
+        res.body.should.be.instanceof(Object).and.have.property('message', 'No question with that identifier has been found');
 
-//   //               // Call the assertion callback
-//   //               done();
-//   //             });
-//   //         });
-//   //     });
-//   // });
-
-//   // it('should not be able to save an article if not logged in', function (done) {
-//   //   agent.post('/api/articles')
-//   //     .send(article)
-//   //     .expect(403)
-//   //     .end(function (articleSaveErr, articleSaveRes) {
-//   //       // Call the assertion callback
-//   //       done(articleSaveErr);
-//   //     });
-//   // });
-
-//   // it('should not be able to save an article if no title is provided', function (done) {
-//   //   // Invalidate title field
-//   //   article.title = '';
-
-//   //   agent.post('/api/auth/signin')
-//   //     .send(credentials)
-//   //     .expect(200)
-//   //     .end(function (signinErr, signinRes) {
-//   //       // Handle signin error
-//   //       if (signinErr) {
-//   //         return done(signinErr);
-//   //       }
-
-//   //       // Get the userId
-//   //       var userId = user.id;
-
-//   //       // Save a new article
-//   //       agent.post('/api/articles')
-//   //         .send(article)
-//   //         .expect(400)
-//   //         .end(function (articleSaveErr, articleSaveRes) {
-//   //           // Set message assertion
-//   //           (articleSaveRes.body.message).should.match('Title cannot be blank');
-
-//   //           // Handle article save error
-//   //           done(articleSaveErr);
-//   //         });
-//   //     });
-//   // });
-
-//   // it('should be able to update an article if signed in', function (done) {
-//   //   agent.post('/api/auth/signin')
-//   //     .send(credentials)
-//   //     .expect(200)
-//   //     .end(function (signinErr, signinRes) {
-//   //       // Handle signin error
-//   //       if (signinErr) {
-//   //         return done(signinErr);
-//   //       }
-
-//   //       // Get the userId
-//   //       var userId = user.id;
-
-//   //       // Save a new article
-//   //       agent.post('/api/articles')
-//   //         .send(article)
-//   //         .expect(200)
-//   //         .end(function (articleSaveErr, articleSaveRes) {
-//   //           // Handle article save error
-//   //           if (articleSaveErr) {
-//   //             return done(articleSaveErr);
-//   //           }
-
-//   //           // Update article title
-//   //           article.title = 'WHY YOU GOTTA BE SO MEAN?';
-
-//   //           // Update an existing article
-//   //           agent.put('/api/articles/' + articleSaveRes.body._id)
-//   //             .send(article)
-//   //             .expect(200)
-//   //             .end(function (articleUpdateErr, articleUpdateRes) {
-//   //               // Handle article update error
-//   //               if (articleUpdateErr) {
-//   //                 return done(articleUpdateErr);
-//   //               }
-
-//   //               // Set assertions
-//   //               (articleUpdateRes.body._id).should.equal(articleSaveRes.body._id);
-//   //               (articleUpdateRes.body.title).should.match('WHY YOU GOTTA BE SO MEAN?');
-
-//   //               // Call the assertion callback
-//   //               done();
-//   //             });
-//   //         });
-//   //     });
-//   // });
-
-//   it('should be able to get a list of articles if not signed in', function (done) {
-//     // Create new article model instance
-//     var articleObj = new Article(article);
-
-//     // Save the article
-//     articleObj.save(function () {
-//       // Request articles
-//       request(app).get('/api/articles')
-//         .end(function (req, res) {
-//           // Set assertion
-//           res.body.should.be.instanceof(Array).and.have.lengthOf(1);
-
-//           // Call the assertion callback
-//           done();
-//         });
-
-//     });
-//   });
-
-//   it('should be able to get a single article if not signed in', function (done) {
-//     // Create new article model instance
-//     var articleObj = new Article(article);
-
-//     // Save the article
-//     articleObj.save(function () {
-//       request(app).get('/api/articles/' + articleObj._id)
-//         .end(function (req, res) {
-//           // Set assertion
-//           res.body.should.be.instanceof(Object).and.have.property('title', article.title);
-
-//           // Call the assertion callback
-//           done();
-//         });
-//     });
-//   });
-
-//   it('should return proper error for single article with an invalid Id, if not signed in', function (done) {
-//     // test is not a valid mongoose Id
-//     request(app).get('/api/articles/test')
-//       .end(function (req, res) {
-//         // Set assertion
-//         res.body.should.be.instanceof(Object).and.have.property('message', 'Article is invalid');
-
-//         // Call the assertion callback
-//         done();
-//       });
-//   });
-
-//   it('should return proper error for single article which doesnt exist, if not signed in', function (done) {
-//     // This is a valid mongoose Id but a non-existent article
-//     request(app).get('/api/articles/559e9cd815f80b4c256a8f41')
-//       .end(function (req, res) {
-//         // Set assertion
-//         res.body.should.be.instanceof(Object).and.have.property('message', 'No article with that identifier has been found');
-
-//         // Call the assertion callback
-//         done();
-//       });
-//   });
-
-//   it('should be able to delete an article if signed in', function (done) {
-//     agent.post('/api/auth/signin')
-//       .send(credentials)
-//       .expect(200)
-//       .end(function (signinErr, signinRes) {
-//         // Handle signin error
-//         if (signinErr) {
-//           return done(signinErr);
-//         }
-
-//         // Get the userId
-//         var userId = user.id;
-
-//         // Save a new article
-//         agent.post('/api/articles')
-//           .send(article)
-//           .expect(200)
-//           .end(function (articleSaveErr, articleSaveRes) {
-//             // Handle article save error
-//             if (articleSaveErr) {
-//               return done(articleSaveErr);
-//             }
-
-//             // Delete an existing article
-//             agent.delete('/api/articles/' + articleSaveRes.body._id)
-//               .send(article)
-//               .expect(200)
-//               .end(function (articleDeleteErr, articleDeleteRes) {
-//                 // Handle article error error
-//                 if (articleDeleteErr) {
-//                   return done(articleDeleteErr);
-//                 }
-
-//                 // Set assertions
-//                 (articleDeleteRes.body._id).should.equal(articleSaveRes.body._id);
-
-//                 // Call the assertion callback
-//                 done();
-//               });
-//           });
-//       });
-//   });
-
-//   it('should not be able to delete an article if not signed in', function (done) {
-//     // Set article user
-//     article.user = user;
-
-//     // Create new article model instance
-//     var articleObj = new Article(article);
-
-//     // Save the article
-//     articleObj.save(function () {
-//       // Try deleting article
-//       request(app).delete('/api/articles/' + articleObj._id)
-//         .expect(403)
-//         .end(function (articleDeleteErr, articleDeleteRes) {
-//           // Set message assertion
-//           (articleDeleteRes.body.message).should.match('User is not authorized');
-
-//           // Handle article error error
-//           done(articleDeleteErr);
-//         });
-
-//     });
-//   });
-
-//   afterEach(function (done) {
-//     //User.remove().exec(function () {
-//       Article.remove().exec(done);
-//     //});
-//   });
-// });
+        // Call the assertion callback
+        done();
+      });
+  });
+});

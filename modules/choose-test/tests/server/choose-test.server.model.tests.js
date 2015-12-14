@@ -17,9 +17,11 @@ var user, user_session;
  * Unit tests
  */
 describe('User_Session Model Unit Tests:', function () {
-  this.timeout(10000);
+  this.timeout(100000);
 
   beforeEach(function (done) {
+
+    //make a dumby user and a dumby session
     user = new User({
       firstName: 'Full',
       lastName: 'Name',
@@ -45,14 +47,19 @@ describe('User_Session Model Unit Tests:', function () {
   });
 
   describe('Method Save', function () {
+
+    //Try to save a new user_session
+    //Fail if there's an error
     it('should be able to save without problems', function (done) {
-      this.timeout(10000);
+      this.timeout(100000);
       return user_session.save(function (err) {
         should.not.exist(err);
         done();
       });
     });
 
+    //Try to save without test_id
+    //Fails if it saves successfully
     it('should be able to show an error when try to save without test_id', function (done) {
       user_session.test_id = '';
 
@@ -63,6 +70,7 @@ describe('User_Session Model Unit Tests:', function () {
     });
   });
   
+  //Cleanup the dumby data
   afterEach(function (done) {
     User_Session.remove().exec(function () {
       User.remove().exec(done);

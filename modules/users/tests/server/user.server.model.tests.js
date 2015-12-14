@@ -16,7 +16,7 @@ var user1, user2, user3;
  * Unit tests
  */
 describe('User Model Unit Tests:', function () {
-  this.timeout(10000);
+  this.timeout(100000);
 
   before(function () {
     user1 = {
@@ -601,7 +601,6 @@ describe('User Model Unit Tests:', function () {
   });
 
   after(function (done) {
-    ////// UN COMMENT THIS BEFORE SUBMITTING!!!!
     User.remove().exec(done);
   });
 });

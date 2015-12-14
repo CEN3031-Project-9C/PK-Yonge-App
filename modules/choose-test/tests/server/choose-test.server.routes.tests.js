@@ -17,7 +17,7 @@ var app, agent, credentials, user, user_session;
  * User_Session routes tests
  */
 describe('User Session CRUD tests', function () {
-  this.timeout(10000);
+  this.timeout(100000);
 
   before(function (done) {
     // Get application
@@ -27,6 +27,7 @@ describe('User Session CRUD tests', function () {
     done();
   });
 
+  //Create dumby data before each test
   beforeEach(function (done) {
 
     // Create user credentials
@@ -62,6 +63,7 @@ describe('User Session CRUD tests', function () {
     });
   });
 
+
   it('should be able to save a user_session', function (done) {
     // Get the userId
     var userId = user.id;
@@ -76,7 +78,7 @@ describe('User Session CRUD tests', function () {
           return done(userSessionSaveErr);
         }
 
-        // Get a list of articles
+        // Get a list of user_sessions
         agent.get('/api/user_session')
           .end(function (userSessionGetErr, userSessionGetRes) {
             // Handle user_session save error
@@ -84,7 +86,7 @@ describe('User Session CRUD tests', function () {
               return done(userSessionGetErr);
             }
 
-            // Get articles list
+            // Get user_session list (there should only be 1)
             var user_sessions = userSessionGetRes.body;
 
             // Set assertions
@@ -140,7 +142,7 @@ describe('User Session CRUD tests', function () {
 
     // Save the user_session
     userSessionObj.save(function () {
-      // Request articles
+      // Request user_sessions
       request(app).get('/api/user_session')
         .end(function (req, res) {
           // Set assertion

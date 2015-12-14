@@ -16,7 +16,7 @@ var app, agent, credentials, user, _user, admin;
  * User routes tests
  */
 describe('User CRUD tests', function () {
-  this.timeout(10000);
+  this.timeout(100000);
 
   before(function (done) {
     // Get application
@@ -279,8 +279,6 @@ describe('User CRUD tests', function () {
   });
 
   afterEach(function (done) {
-    ///UNCOMMENT THIS BEFROE SUBMITTING!!
-
     User.remove().exec(done);
   });
 });

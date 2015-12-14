@@ -4,6 +4,7 @@
 var mongoose = require('mongoose');
 
 // Question Schema
+//Consider changing test_id to be ObjectId instead of string
 var QuestionSchema = new mongoose.Schema({
 	test_id: String,
 	question_body: String,

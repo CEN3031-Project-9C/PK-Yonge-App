@@ -75,6 +75,7 @@
     describe('$scope.startTest()', function () {
       var sampleSessionPostData;
 
+      //make some mock data
       beforeEach(function () {
 
         var numberOfQuestions = 10;

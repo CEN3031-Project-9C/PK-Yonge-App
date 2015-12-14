@@ -55,7 +55,7 @@
       User_Sessions = _User_Sessions_;
       sessionServiceV3 = _sessionServiceV3_;
 
-      // create mock article
+      // create mock question
       mockQuestion = new QuestionsService({
         _id: '56393091e4b00a58422fede3',
         test_id: '561d199f41c840c42134a825',
