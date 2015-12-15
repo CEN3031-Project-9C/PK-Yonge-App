@@ -2,12 +2,7 @@
 A web-based application that allows students at [PK Yonge Developmental Research School](http://pkyonge.ufl.edu/) (in Gainesville, FL) to practice for their end-of-course exams.
 This application was created for the Introduction to Software Engineering (CEN3031) class at the University of Florida, using the MEAN stack.
 
-## Deployment: 
-Our app is deployed through HEROKU. Deployment information can be found [here](https://devcenter.heroku.com/articles/deploying-nodejs). Please contact [@Nicola37](https://github.com/Nicola37) for further deployment questions
-#### Deployed Site URL: http://pky-eoc.herokuapp.com/
-
-### Group Members
-The group working on this project consists of the following members:
+The group working on this project (as of Fall 2015) consists of the following members:
 - Bailey Anderson [@baileyanderson](https://github.com/baileyanderson)
 - Cody Fitzpatrick [@CodyFitzpatrick](https://github.com/CodyFitzpatrick)
 - Nicola Frachesen [@Nicola37](https://github.com/Nicola37)
@@ -15,6 +10,11 @@ The group working on this project consists of the following members:
 - Sara Lichtenstein [@saralich](https://github.com/saralich)
 - Terry Philippe [@tjphilippe](https://github.com/tjphilippe)
 - Xiaoxi Zheng [@XiaoxiZheng](https://github.com/XiaoxiZheng)
+
+## Deployment
+
+#### Site URL: http://pky-eoc.herokuapp.com/
+Our app is deployed through HEROKU. Deployment information can be found [here](https://devcenter.heroku.com/articles/deploying-nodejs). Please contact [@Nicola37](https://github.com/Nicola37) for further deployment questions.
 
 ### Running the App Locally
 - Install all necessary packages and libraries by following [this installation guide](https://docs.google.com/document/d/1B7aqptx0jsWHLqm7W9BT1oKHYNCKkvwtjjUtsj6C-ks/edit?pli=1) 
@@ -83,7 +83,7 @@ These bugs are explained further on the *Issues* page (https://github.com/CEN303
 - Use WolframAlpha API to render algebric expressions (rather than in plain text)
 - Administrative panel for teachers and faculty to create tests, add questions, and manage testing sessions (i.e. provide access to specific students, start and begin the test session, hide/display grades, etc.)
 
-### Screenshots 
+## Screenshots 
 The homepage.
 
 ![Homepage](modules/core/client/img/screenshots/homepage.PNG?raw=true)
@@ -133,4 +133,4 @@ This project incorporates a number of open source projects:
 * [Twitter Bootstrap] - great UI boilerplate for modern web apps
 * [Thom Porter](http://www.thomporter.com/apps/angularjs_calc) - Calculator used in the app
 
-And of course PK-Yonge-App itself is lives on this [public repository](https://github.com/CEN3031-Project-9C/PK-Yonge-App) on GitHub.
+And of course the PK-Yonge-App lives here on GitHub, in [this public repository](https://github.com/CEN3031-Project-9C/PK-Yonge-App).
